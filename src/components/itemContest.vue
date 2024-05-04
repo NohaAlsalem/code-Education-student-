@@ -9,7 +9,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
-                                    class="img-fluid rounded" alt="...">
+                                    class="img-fluid rounded" style="max-width: 100%;" alt="...">
                             </div>
                             <div class="col-md-8 ps-3">
                                 <h5>
@@ -74,6 +74,7 @@ p {
 .card .img-fluid {
     height: 5rem;
     width: 10rem;
+    max-width: 100%;
 
 }
 

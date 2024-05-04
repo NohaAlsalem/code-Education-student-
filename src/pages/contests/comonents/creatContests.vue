@@ -90,9 +90,12 @@
             <tbody>
                 <tr>
                     <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
                         <p>
                             Matrix Similarity After Cyclic Shifts
                         </p>
+                        </router-link>
                     </td>
                     <!-- <th scope="row">1</th>
       <td>Mark</td>
@@ -101,22 +104,31 @@
                 </tr>
                 <tr>
                     <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
                         <p>
                             Count Beautiful Substring |
                         </p>
+                        </router-link>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        
+                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
                         <p>
                             Make Lexicographically Smallest Array by Swapping Elements
                         </p>
+                        </router-link>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        
+                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
                         <p> Count Beautiful Substring ||
                         </p>
+                        </router-link>
                     </td>
                 </tr>
                 <tr>
@@ -145,18 +157,24 @@
                 <tr>
                     <th scope="col">
                         <h6>
-                            Problem list
+                            Student
                         </h6>
                     </th>
-
+                    <th scope="col">
+                        <!-- <h6>
+                            Student
+                        </h6> -->
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <!--       
-      <th scope="row">1</th> -->
+                    
                     <td>mohamad</td>
-                    <td>+ Add</td>
+                    <td> <router-link to="/students" style="text-decoration: none; color: inherit;">
+                        <p> + Add
+                        </p>
+                        </router-link></td>
 
                 </tr>
                 <tr>

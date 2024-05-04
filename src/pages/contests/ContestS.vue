@@ -1,13 +1,13 @@
 <template>
     <div>
         <NavBar></NavBar>
-        <div class="screen h-100">
+        <div class="screen w-100 h-100">
             <div class="sub_screen">
                 <!-- ms-5 -->
                 <div class="row mt-0  text-center justify-content-center align-items-center">
                     <div class="col-md-3 ps-5 pe-5  m-0" v-on:click="componente = 'my_contests' " >
-                        <h4 v-on:click="componente = choosecomponent(1)" v-bind:class="{ choosed  : MyContests }"> My Contests</h4>
-                        <!-- <h4 v-on:click="componente = 'my_contests'" > My Contests</h4> -->
+                        <h4 v-on:click="componente = choosecomponent(1)" v-bind:class="{ choosed  : MyContests }"  > My Contests</h4>
+                     
                     </div>
 
                     <div class="col-md-3 ps-5 pe-5  m-0" v-on:click="componente = 'join_Contest'">
@@ -108,14 +108,21 @@ h4 {
 }
 
 .choosed {
+    background: var(--darkwhite);
+    border: 1px solid ;
+    border-radius: 5px;
+    min-height: 40px; /* Ensure a minimum height */
+    color: var(--GreenColor);
+}
+/* .choosed {
 background: var(--darkwhite);
 border: 1px solid ;
 border-radius: 5px;
 height: 40px;
-/* width: 200px; */
+
 color: var(--GreenColor);
 
-}
+} */
 
 
 </style>

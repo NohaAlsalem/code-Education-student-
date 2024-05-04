@@ -42,82 +42,85 @@
               <td><p>{{ level }}</p></td>
               <td><p>{{ Num of solutions }}</p></td>
             </tr> -->
+    
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
+              <th scope="row"></th>
+              <td><router-link to="/detailsP" class="text-primary fw-bold">doloremque</router-link></td>
+              <td>$46</td>
+              <td class="fw-bold">98</td>
+              <td>$4,508</td>
+            </tr>
+           
+            <tr>
+              <!-- <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th> -->
+              <th scope="row"></th>
+              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
+              <td>$46</td>
+              <td class="fw-bold">98</td>
+              <td>$4,508</td>
+            </tr>  <tr>
+              <th scope="row"></th>
+              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
+              <td>$46</td>
+              <td class="fw-bold">98</td>
+              <td>$4,508</td>
+            </tr>  <tr>
+              <th scope="row"></th>
+              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
+              <td>$46</td>
+              <td class="fw-bold">98</td>
+              <td>$4,508</td>
+            </tr>  <tr>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
               <td>$46</td>
               <td class="fw-bold">98</td>
               <td>$4,508</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
-              <td>$46</td>
-              <td class="fw-bold">98</td>
-              <td>$4,508</td>
-            </tr>  <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
-              <td>$46</td>
-              <td class="fw-bold">98</td>
-              <td>$4,508</td>
-            </tr>  <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
-              <td>$46</td>
-              <td class="fw-bold">98</td>
-              <td>$4,508</td>
-            </tr>  <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-              <td><a href="#" class="text-primary fw-bold">doloremque</a></td>
-              <td>$46</td>
-              <td class="fw-bold">98</td>
-              <td>$4,508</td>
-            </tr>
-            <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold">tationem</a></td>
               <td>$59</td>
               <td class="fw-bold">74</td>
               <td>$4,366</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold"> rerum error</a></td>
               <td>$32</td>
               <td class="fw-bold">63</td>
               <td>$2,016</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold"> repellendus</a></td>
               <td>$79</td>
               <td class="fw-bold">41</td>
               <td>$3,239</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold">s repellendus</a></td>
               <td>$79</td>
               <td class="fw-bold">41</td>
               <td>$3,239</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold">repellendus</a></td>
               <td>$79</td>
               <td class="fw-bold">41</td>
               <td>$3,239</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold">epellendus</a></td>
               <td>$79</td>
               <td class="fw-bold">41</td>
               <td>$3,239</td>
             </tr>
             <tr>
-              <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+              <th scope="row"></th>
               <td><a href="#" class="text-primary fw-bold"> repellendus</a></td>
               <td>$79</td>
               <td class="fw-bold">41</td>

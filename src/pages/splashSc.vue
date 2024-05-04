@@ -3,11 +3,11 @@
       <div>
   <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img  src="@/assets/images/logo.jpg" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
-      <codeEdu></codeEdu>
-    </a>
-    
+    <div class="d-flex">
+                    <img src="@/assets/images/logo.png" alt="Logo" width="40" height="40"
+                        class="d-inline-block align-text-top ps-0 ms-0">
+                        <codeEdu class="mt-1"></codeEdu>
+                </div>
   </div>
   
   </nav></div>

@@ -2,8 +2,10 @@
    <!-- start i need it -->
 		<div class="container">
         <div class="row mt-0">
+           
             <div class="col-8"> <!-- start Card -->
                 <div class="container d-flex mt-4 p-4 pb-2 pt-0">
+                    <router-link to="/detaileContest" style="text-decoration: none; color: inherit;">
                     <div class="card">
                         <!-- <div class="card mb-3" style="max-width:540px;">  -->
                         <div class="row g-0">
@@ -23,12 +25,14 @@
                             </div>
                         </div>
                     </div>
+                </router-link>
                 </div>
             </div>
             <div class="col-4 container d-flex mt-4 p-4 pt-0">
                 <p class="font-c">Contest Writer :</p>
                 <p>  Noha</p>
             </div>
+          
         </div>
 <div class="Divider"></div>
         
@@ -73,6 +77,7 @@
  <div class="row mt-0">
             <div class="col-8"> <!-- start Card -->
                 <div class="container d-flex mt-4 p-4 pb-2 pt-0">
+                    <router-link to="/detaileContest" style="text-decoration: none; color: inherit;">
                     <div class="card">
                         <!-- <div class="card mb-3" style="max-width:540px;">  -->
                         <div class="row g-0">
@@ -92,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
             </div>
             <div class="col-4 container d-flex mt-4 p-4 pt-0">
