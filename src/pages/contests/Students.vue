@@ -162,6 +162,7 @@ p {
 
 .table th {
     background: var(--GreenColor);
+    color: white;
 }
 
 .table td {

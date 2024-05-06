@@ -1,21 +1,22 @@
 
 import { createRouter, createWebHistory } from "vue-router"
+import splashSc from "../pages/splashSc.vue";
 import TopBar from '@/components/TopBar.vue';
 import NavBar from '@/components/NavBar.vue';
-import splashSc from "../pages/splashSc.vue";
+import logIn from "../pages/logIn.vue";
 import signup from "../pages/signup.vue";
 import ProblemS from "../pages/problems/ProblemS.vue";
+import detailsProblem from "@/pages/problems/detailsProblem.vue";
+import detailSolution from "@/pages/problems/detailSolution.vue";
 import ContestS from "../pages/contests/ContestS.vue";
 import detaileContest from "../pages/contests/detaileContest.vue";
 import Students from "../pages/contests/Students.vue";
 import ExamS from "../pages/ExamS.vue";
 import ClasseS from "../pages/ClasseS.vue";
-import ProfilE from "../pages/Profile/ProfilE.vue";
-import logIn from "../pages/logIn.vue";
 import myContests from "../pages/contests/comonents/myContests.vue";
 import joinContets from "../pages/contests/comonents/joinContests.vue";
 import createContests from "../pages/contests/comonents/creatContests.vue";
-import detailsProblem from "@/pages/problems/detailsProblem.vue";
+import ProfilE from "../pages/Profile/ProfilE.vue";
 
 
 
@@ -57,6 +58,11 @@ const routes = [
         name: 'detailProblem',
         path: '/detailsP',
         component: detailsProblem,
+    },
+    {
+        name:'detailSolution',
+        path:'/detailSolution',
+        component:detailSolution,
     },
     {
         name: 'contests',

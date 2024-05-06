@@ -66,20 +66,40 @@
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Change The Class</h5>
-                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                                    <!-- <div class="modal-header">
+                                        <h6 class="modal-title" id="exampleModalLongTitle">Change The Class</h6>
+                                      
+                                    </div> -->
                                     <div class="modal-body">
+                                        <h6 class="modal-title" id="exampleModalLongTitle">Change The Class</h6>
                                         <P>Enter the reason you are changing the class</P>
+                                        <input type="text" style="width: 100%;border: none;" />
+                                        <div class="d-flex mt-2">
+                                            <p>Choose the subject name :</p>
+                                            <select class="drop ms-2" id="lnag" name="lang" v-model="material"
+                                                placeholder="Lnguage" autocomplete="country-name">
+                                                <option class="opt ">programming1</option>
+                                                <option class="opt ">programming2</option>
+                                            </select>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            <p>Choose the class number :</p>
+                                            <select class="drop ms-2" id="lnag" name="lang" v-model="numberc"
+                                                placeholder="Lnguage" autocomplete="country-name">
+                                                <option class="opt ">1</option>
+                                                <option class="opt ">2</option>
+                                            </select>
+                                        </div>
+                                        <div style="justify-content: center; justify-items: center;">
+                                            <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Change</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <!-- <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -105,6 +125,8 @@ export default {
             SubjectName: 'programming',
             MySubjectName: 'programming',
             MyNumberOfClass: 'class22',
+            material: 'programming1',
+            numberc:1,
         }
     }
 }
@@ -119,10 +141,31 @@ h6 {
     color: var(--GreenColor);
 }
 
+.modal .modal-dialog .modal-content {
+    background: var(--WhiteColor);
+    border: 1px solid var(--borderColor);
+}
+
 .backg {
     background: var(--WhiteColor);
     padding: 10px;
     border-radius: 10px;
+}
+
+.drop {
+    background: var(--darkwhite);
+    border: none;
+    color: var(--GreenColor);
+    border-radius: 5px;
+
+}
+
+.opt {
+    background: var(--WhiteColor);
+}
+
+.modal-body p {
+    color: var(--GreenColor);
 }
 
 .btn {
