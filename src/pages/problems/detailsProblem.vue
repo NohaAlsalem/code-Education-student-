@@ -20,7 +20,7 @@
                         <Description v-if="description"> </Description>
                         <Solution v-else></Solution>
                     </div>
-                    <div class="choose mt-4">
+                    <div v-if="description" class="choose mt-4">
                         <h6>2.Choose the correct answer</h6>
                         <p>1-What is the correct way to declare a variable in java?</p>
                         <div class="radios ">
@@ -139,6 +139,7 @@ h6 {
     color: white;
     padding: 0 20px;
     border-radius: 10px;
+    border: none;
 }
 p {
     color: var(--GreenColor);

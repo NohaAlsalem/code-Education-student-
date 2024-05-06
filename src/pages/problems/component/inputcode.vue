@@ -6,19 +6,17 @@
           <select class="drop" id="lnag" name="lang" v-model="Language" placeholder="Lnguage" autocomplete="country-name">
             <option class="opt">Java</option>
             <option class="opt">C++</option>
-                  <!-- <option v-for="star in stars" :key="star.id" :value="star.id" >{{ star.name }}
-                  </option> -->
-                  <!-- <p>The selected fruit IDs are {{ selectedstarId }}.</p> -->
+                  
                 </select>
-          <!-- <button @click="switchLanguage('java')">Java</button> -->
+
         </div>
         <div class="card-body">
           <textarea class="form-control" id="javaCode" rows="10" v-model="code" @input="highlightCode"></textarea>
           <pre v-html="highlightedCode"></pre>
         </div>
-        <div class="card-footer text-muted">
-            <!-- Footer content goes here -->
-            This is the footer of the card.
+        <div class="card-footer text-muted " style="justify-content: end;display: flex;">
+          <button class="bttn m-1 mr-4" style="background: var( --WhiteColor); color: var(--GreenColor); padding: 1px 20px;">Run</button>
+          <button class="bttn m-1">Submit</button>
         </div>
       </div>
     </div>
@@ -64,15 +62,33 @@
   }
   .card-body {
     border: 1px solid var(--GreenOpacity);
-    height: 100vh;
+    height: 93vh;
   }
   .custom-button {
     color: var(--GreenColor);
     font-weight: bold;
   }
-  .Divider {
-  border-top: 1px solid var(--LightGreen) !important;
-
+  /* .btn {
+    background: var( --LightGreen);
+    padding: 0px 2px;
+} */
+.bttn {
+    background: var(--GreenColor);
+    color: white;
+    padding: 0 20px;
+    border-radius: 10px;
+    border: none;
+}
+.custom-button,
+.btn:hover
+{
+    color: var(--GreenColor);
+    font-weight: bold;
+}
+.bttn:hover {
+    /* color: var(--GreenColor); */
+    font-weight: bold;
+    /* color: aliceblue; */
 }
   </style>
   
