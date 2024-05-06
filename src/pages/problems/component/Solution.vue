@@ -1,20 +1,87 @@
 <template>
-  <div class="card-body" >
+  <div class="card-body overflow-auto" style="overflow-y: auto" >
+    <table class="table table-bordered    narrow-table me-0">
+         
+            <tbody>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;display: flex;">
+                        <p>
+                            Matrix Similarity After Cyclic Shifts
+                        </p>
+                        <div style="justify-content: end;text-align: end;">
+                        <font-awesome-icon :icon="['far', 'circle-check']" />
+                      </div>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;display: flex;">
+                        <p>
+                            Matrix Similarity After Cyclic Shifts
+                        </p>
+                        <div style="justify-content: end;text-align: end;">
+                        <font-awesome-icon :icon="['far', 'circle-check']" />
+                      </div>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;display: flex;">
+                        <p>
+                            Matrix Similarity After Cyclic Shifts
+                        </p>
+                        <div style="justify-content: end;text-align: end;">
+                        <font-awesome-icon :icon="['far', 'circle-check']" />
+                      </div>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
+                        <p>
+                            Count Beautiful Substring |
+                        </p>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
+                        <p>
+                            Make Lexicographically Smallest Array by Swapping Elements
+                        </p>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        
+                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
+                        <p> Count Beautiful Substring ||
+                        </p>
+                        </router-link>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            Make Lexicographically Smallest Array by Swapping Elements
+                        </p>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
 
-    <!-- <h5 class="card-title">1. Two Sum</h5>
-        <h6 class="card-title" style="color: var(--GreenColor)">Easy</h6> -->
-    <p class="card-text">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
-      dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
-      necessitatibus, consequuntur nisi dolorem? Dolor accusamus vero autem, sit
-      culpa nam repellendus minima optio rerum dolore qui a deleniti minus illo
-      iure sed facilis et veritatis recusandae consequuntur! Itaque omnis
-      voluptas modi facere, enim, non, maxime rem obcaecati exercitationem quasi
-      suscipit placeat doloremque. Ut, quis quasi? Hic enim distinctio sequi
-      perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
-      quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
-      a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
-    </p>
   </div>
 </template>
 
@@ -27,6 +94,7 @@ export default {};
 <style scoped>
 .card-body{
   border: 1px solid var(--GreenOpacity);
-  height: 100vh;
+  height: 40%;
+  max-height:40;
 }
 </style>

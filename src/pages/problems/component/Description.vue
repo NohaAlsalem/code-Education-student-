@@ -1,7 +1,7 @@
 <template>
   <div class="card-body" style="height:100vh; overflow-y: auto">
     <h5 class="card-title">1. Two Sum</h5>
-    <h6 class="card-title" style="color: var(--GreenColor)">Easy</h6>
+    <h6 class="card-title">Easy</h6>
     <p class="card-text">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
       dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
@@ -13,49 +13,150 @@
       perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
       quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
       a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
-
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
-      dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
-      necessitatibus, consequuntur nisi dolorem? Dolor accusamus vero autem, sit
-      culpa nam repellendus minima optio rerum dolore qui a deleniti minus illo
-      iure sed facilis et veritatis recusandae consequuntur! Itaque omnis
-      voluptas modi facere, enim, non, maxime rem obcaecati exercitationem quasi
-      suscipit placeat doloremque. Ut, quis quasi? Hic enim distinctio sequi
-      perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
-      quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
-      a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
-
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
-      dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
-      necessitatibus, consequuntur nisi dolorem? Dolor accusamus vero autem, sit
-      culpa nam repellendus minima optio rerum dolore qui a deleniti minus illo
-      iure sed facilis et veritatis recusandae consequuntur! Itaque omnis
-      voluptas modi facere, enim, non, maxime rem obcaecati exercitationem quasi
-      suscipit placeat doloremque. Ut, quis quasi? Hic enim distinctio sequi
-      perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
-      quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
-      a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
-      dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
-      necessitatibus, consequuntur nisi dolorem? Dolor accusamus vero autem, sit
-      culpa nam repellendus minima optio rerum dolore qui a deleniti minus illo
-      iure sed facilis et veritatis recusandae consequuntur! Itaque omnis
-      voluptas modi facere, enim, non, maxime rem obcaecati exercitationem quasi
-      suscipit placeat doloremque. Ut, quis quasi? Hic enim distinctio sequi
-      perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
-      quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
-      a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
     </p>
+    <div class="ex mt-4">
+      <h6 class="card-title">Examble1</h6>
+      <div class="d-flex">
+        <p class="title">Input:</p>
+        <p>nums=[2,7,11,15] ,target=9</p>
+      </div>
+      <div class="d-flex">
+        <p class="title">Output:</p>
+        <p>[0,1]</p>
+      </div>
+      <div class="d-flex">
+        <p class="title">Explanation:</p>
+        <p>nums=[2,7,11,15] ,target=9</p>
+      </div>
+    </div>
+    <div class="ex mt-4">
+      <h6 class="card-title">Examble2</h6>
+      <div class="d-flex">
+        <p class="title">Input:</p>
+        <p>nums=[2,7,11,15] ,target=9</p>
+      </div>
+      <div class="d-flex">
+        <p class="title">Output:</p>
+        <p>[0,1]</p>
+      </div>
+      <div class="d-flex">
+        <p class="title">Explanation:</p>
+        <p>nums=[2,7,11,15] ,target=9</p>
+      </div>
+
+    </div>
+
+
+    <div class="Divider"></div>
+    <div class="row mb-3">
+      <div class="col d-flex">
+        <font-awesome-icon :icon="['fas', 'tag']" class="i m-1" />
+        <p style="color: var(--GreenColor);">tags:</p>
+      </div>
+      <div class=" col mt-0" style="text-align: end;">
+        <p>
+          <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+        </p>
+        </div>
+        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+          <div class="d-flex">
+            <div class="spans me-4">array</div>
+            <div class="spans ">Hash Table</div>
+          </div>
+      </div>
+
+    </div>
+    <div class="Divider"></div>
+    <div class="row mb-3">
+      <div class="col d-flex">
+        <font-awesome-icon :icon="['far', 'lightbulb']" class="i m-1" />
+        <p style="color: var(--GreenColor);">Hints 1:</p>
+      </div>
+      <div class=" col mt-0" style="text-align: end;">
+        <p>
+          <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+        </p>
+        </div>
+        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+          <div class="d-flex">
+            <div class="spans me-4">array</div>
+            <div class="spans ">Hash Table</div>
+          </div>
+      </div>
+    </div>
+    <div class="Divider"></div>
+    <div class="row mb-3">
+      <div class="col d-flex">
+        <font-awesome-icon :icon="['far', 'lightbulb']" class="i m-1"/>
+        <p style="color: var(--GreenColor);">Hints 2:</p>
+      </div>
+      <div class=" col mt-0" style="text-align: end;">
+        <p>
+          <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+        </p>
+        </div>
+        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+          <div class="d-flex">
+            <div class="spans me-4">array</div>
+            <div class="spans ">Hash Table</div>
+          </div>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toggleCollapse() {
+      const collapseElement = document.getElementById('collapseExample');
+      const isExpanded = collapseElement.getAttribute('aria-expanded') === 'true';
+      collapseElement.setAttribute('aria-expanded', !isExpanded);
+    }
+  }
+};
 </script>
 
 <style scoped>
-.card-body{
+.title {
+  color: var(--GreenOpacity);
+  margin-right: 10px;
+}
+
+p {
+  margin: 0;
+}
+
+h6 {
+  color: var(--GreenColor);
+  font-weight: bold;
+}
+
+.i {
+  color: var(--GreenColor);
+}
+
+.spans {
+  background: var(--LightGreen);
+  color: var(--GreenColor);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 15px;
+}
+
+.card-body {
   border: 1px solid var(--GreenOpacity);
   height: 100vh;
+}
+
+.Divider {
+  border-top: 1px solid var(--LightGreen) !important;
+  /* border-bottom: 1px solid  var(--LightGreen)!important; */
+  /* height: 0.5px; */
+  /* margin: 0px 100px; */
 }
 </style>

@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-4">
                     <h6>My test</h6>
-                  
+
 
                     <div class="backg mt-5">
                         <!-- this -->
@@ -44,16 +44,46 @@
                             <div class="col me-5">{{ MySubjectName }}</div>
                             <div class="col ms-5">{{ MyNumberOfClass }}</div>
                         </div>
-                        <!-- end this -->        
-                            <div>
+                        <!-- end this -->
+                        <div>
 
-                            </div>            
+                        </div>
                     </div>
                     <div class="backg mt-2">
-                        <p>if you want to change your class you can send a request to the admin to change the class by entering the subject and number of the class </p>
-                        <button type="button" class="btn btn-success ms-5 mt-0 fw-b">
+                        <p>if you want to change your class you can send a request to the admin to change the class by
+                            entering the subject and number of the class </p>
+                        <!-- <button type="button" class="btn btn-success ms-5 mt-0 fw-b">
                             change class
+                        </button> -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success ms-5 mt-0 fw-b" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenter">
+                            Change Class
                         </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Change The Class</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <P>Enter the reason you are changing the class</P>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -73,8 +103,8 @@ export default {
             NumberOfClass: 'class2',
             TecherName: 'noha',
             SubjectName: 'programming',
-            MySubjectName:'programming',
-            MyNumberOfClass:'class22',
+            MySubjectName: 'programming',
+            MyNumberOfClass: 'class22',
         }
     }
 }
@@ -94,6 +124,7 @@ h6 {
     padding: 10px;
     border-radius: 10px;
 }
+
 .btn {
     background: var(--GreenColor);
 }

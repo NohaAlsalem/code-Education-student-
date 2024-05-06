@@ -1,9 +1,8 @@
 <template>
     <div class="container text-center col-md-12" style="margin-top: 10px; margin-bottom: 10px">
       <div class="card text-start">
-        <div class="card-header d-flex">
-          <h6 class="custom-button me-2">Language Information:</h6>
-
+        <div class="card-header d-flex ">
+          <h6 class="custom-button m-2">Language Information:</h6>
           <select class="drop" id="lnag" name="lang" v-model="Language" placeholder="Lnguage" autocomplete="country-name">
             <option class="opt">Java</option>
             <option class="opt">C++</option>
@@ -47,6 +46,9 @@
   </script>
   
   <style scoped>
+  .card{
+    border: 1px solid var(--GreenOpacity);
+  }
   .drop{
     background: var(--darkwhite);
     border: none;
@@ -64,5 +66,9 @@
     color: var(--GreenColor);
     font-weight: bold;
   }
+  .Divider {
+  border-top: 1px solid var(--LightGreen) !important;
+
+}
   </style>
   

@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div >
     <NavBar></NavBar>
-    <div class="card-body" style="height:100%;margin-top: 40px;margin-left: 20px; ">
+    <div class="card-body container" style="height:100%;margin-top: 40px;margin-left: 20px; ">
       <div class="row">
         <div class="col-6">
           <h6 class="card-title m-3">Contest Name:</h6>
           <h5 class="card-title m-3">{{ ContestName }}</h5>
-          <h6 class="card-title m-3 mt-5 ">Contest Description</h6>
+          <h6 class="card-title m-3 mt-5 ">Contest Description:
+          </h6>
         </div>
         <div class="col-2"></div>
         <div class="col-4">

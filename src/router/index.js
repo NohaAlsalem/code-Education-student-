@@ -10,7 +10,7 @@ import detaileContest from "../pages/contests/detaileContest.vue";
 import Students from "../pages/contests/Students.vue";
 import ExamS from "../pages/ExamS.vue";
 import ClasseS from "../pages/ClasseS.vue";
-import ProfilE from "../pages/ProfilE.vue";
+import ProfilE from "../pages/Profile/ProfilE.vue";
 import logIn from "../pages/logIn.vue";
 import myContests from "../pages/contests/comonents/myContests.vue";
 import joinContets from "../pages/contests/comonents/joinContests.vue";

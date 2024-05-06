@@ -90,11 +90,11 @@
             <tbody>
                 <tr>
                     <td>
-                        
+
                         <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                        <p>
-                            Matrix Similarity After Cyclic Shifts
-                        </p>
+                            <p>
+                                Matrix Similarity After Cyclic Shifts
+                            </p>
                         </router-link>
                     </td>
                     <!-- <th scope="row">1</th>
@@ -104,30 +104,30 @@
                 </tr>
                 <tr>
                     <td>
-                        
+
                         <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                        <p>
-                            Count Beautiful Substring |
-                        </p>
+                            <p>
+                                Count Beautiful Substring |
+                            </p>
                         </router-link>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        
+
                         <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                        <p>
-                            Make Lexicographically Smallest Array by Swapping Elements
-                        </p>
+                            <p>
+                                Make Lexicographically Smallest Array by Swapping Elements
+                            </p>
                         </router-link>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        
+
                         <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                        <p> Count Beautiful Substring ||
-                        </p>
+                            <p> Count Beautiful Substring ||
+                            </p>
                         </router-link>
                     </td>
                 </tr>
@@ -169,11 +169,11 @@
             </thead>
             <tbody>
                 <tr>
-                    
+
                     <td>mohamad</td>
                     <td> <router-link to="/students" style="text-decoration: none; color: inherit;">
-                        <p> + Add
-                        </p>
+                            <p> + Add
+                            </p>
                         </router-link></td>
 
                 </tr>
