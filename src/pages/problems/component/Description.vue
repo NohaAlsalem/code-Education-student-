@@ -47,7 +47,7 @@
     </div>
 
 
-    <div class="Divider"></div>
+    <div class="Divider mt-4"></div>
     <div class="row mb-3">
       <div class="col d-flex">
         <font-awesome-icon :icon="['fas', 'tag']" class="i m-1" />
@@ -56,10 +56,10 @@
       <div class=" col mt-0" style="text-align: end;">
         <p>
           <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
-            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+            data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1" />
         </p>
         </div>
-        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+        <div class="collapse" id="collapse1" style="justify-self: start; text-align: left;">
           <div class="d-flex">
             <div class="spans me-4">array</div>
             <div class="spans ">Hash Table</div>
@@ -76,10 +76,10 @@
       <div class=" col mt-0" style="text-align: end;">
         <p>
           <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
-            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2" />
         </p>
         </div>
-        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+        <div class="collapse" id="collapse2" style="justify-self: start; text-align: left;">
           <div class="d-flex">
             <div class="spans me-4">array</div>
             <div class="spans ">Hash Table</div>
@@ -95,10 +95,10 @@
       <div class=" col mt-0" style="text-align: end;">
         <p>
           <font-awesome-icon :icon="['fas', 'angle-down']" class="i" data-bs-toggle="collapse"
-            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" />
+            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3" />
         </p>
         </div>
-        <div class="collapse" id="collapseExample" style="justify-self: start; text-align: left;">
+        <div class="collapse" id="collapse3" style="justify-self: start; text-align: left;">
           <div class="d-flex">
             <div class="spans me-4">array</div>
             <div class="spans ">Hash Table</div>
@@ -158,5 +158,8 @@ h6 {
   /* border-bottom: 1px solid  var(--LightGreen)!important; */
   /* height: 0.5px; */
   /* margin: 0px 100px; */
+}
+.btn {
+    background: var(--GreenColor);
 }
 </style>

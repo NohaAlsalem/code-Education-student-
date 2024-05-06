@@ -55,7 +55,7 @@
                         </div>
                         <div class="radios mt-2">
                             <div class="form-check mt-0">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
                                     id="flexRadioDefault1">
                                 <!-- <label class="form-check-label" for="flexRadioDefault1">
    privet
@@ -63,17 +63,17 @@
                                 <p>int x=10</p>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
                                     id="flexRadioDefault2" checked>
                                 <p>x=10</p>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
                                     id="flexRadioDefault2" checked>
                                 <p>x=10</p>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
                                     id="flexRadioDefault2" checked>
                                 <p>x=10</p>
                             </div>
@@ -82,7 +82,7 @@
                             <p style="color: brown;margin-right: 2px;">Note:</p>
                             <p>if you click on finish exam, you cannot go back and complete the exam and correct your mistakes.</p>
                         </div>
-                        <button>Finish Exam</button>
+                        <button class="bttn" style="color: aliceblue">Finish Exam</button>
                         <p></p>
                     </div>
                 </div>
@@ -134,7 +134,12 @@ h6 {
     color: var(--GreenColor);
     font-weight: bold;
 }
-
+.bttn {
+    background: var(--GreenColor);
+    color: white;
+    padding: 0 20px;
+    border-radius: 10px;
+}
 p {
     color: var(--GreenColor);
 }
@@ -156,7 +161,8 @@ p {
 }
 
 .custom-button,
-.btn:hover {
+.btn:hover,
+.bttn:hover {
     color: var(--GreenColor);
     font-weight: bold;
 }

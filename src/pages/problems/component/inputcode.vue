@@ -16,6 +16,10 @@
           <textarea class="form-control" id="javaCode" rows="10" v-model="code" @input="highlightCode"></textarea>
           <pre v-html="highlightedCode"></pre>
         </div>
+        <div class="card-footer text-muted">
+            <!-- Footer content goes here -->
+            This is the footer of the card.
+        </div>
       </div>
     </div>
   </template>
