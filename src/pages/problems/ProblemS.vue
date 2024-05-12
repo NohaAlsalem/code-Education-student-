@@ -2,7 +2,7 @@
     <NavBar></NavBar>
     <div>
         <div class="ms-5">
-            <div class="container-fluid">
+            <div class="container-fluid" v-for="problem in problems" :key="problem.id">
             <div class="row">
 
                 <div class="col me-0">
@@ -15,12 +15,9 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Difficulty</a></li>
-                                    <li><a class="dropdown-item" href="#">status</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                    <li><a class="dropdown-item" href="#">Medium</a></li>
+                                    <li><a class="dropdown-item" href="#">Easy</a></li>
+                         
                                 </ul>
                             </div>
                         </div>
@@ -36,10 +33,7 @@
                                     <li><a class="dropdown-item" href="#">Action</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                              
                                 </ul>
                             </div>
                         </div>
@@ -53,14 +47,10 @@
                                     aria-expanded="true">
                                     Tags
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                <ul class="dropdown-menu p-2">
+                                    <li v-for=" tag in problem.tags" >{{ tag.name }}
+                                        <hr class="dropdown-divider"></li>
+                                 
                                 </ul>
                             </div>
                         </div>
@@ -101,8 +91,8 @@
             </div>
 
         </div>
-<div>
-    <Table></Table>
+<div style="height:50vh;">
+    <Table :problems="this.problems" ></Table>
 </div>
         
         <!-- <div class="row m-0">
@@ -153,6 +143,7 @@
 import NavBar from '@/components/NavBar.vue';
 import Pagination from '@/components/Pagination.vue';
 import Table from '@/components/Table.vue';
+import axios from 'axios';
 export default {
     components: {
         NavBar,
@@ -162,13 +153,30 @@ export default {
     data() {
         return {
             currentPage: 1,
+            token: localStorage.getItem('token'),
+            problems:[],
         }
+    },
+    mounted(){
+        this.getAllProblems();
     },
     methods: {
         handlePageChange(page) {
             this.currentPage = page
             // Fetch data for the new page
-        }
+        },
+        getAllProblems() {
+       axios.get('http://127.0.0.1:8000/api/student/problems/',{ headers: {
+                     Authorization: `Bearer ${this.token}`,
+                 }}).then((response) => {
+         this.problems = response.data.data;
+         console
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+     },
+ 
     }
 }
 </script>

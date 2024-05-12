@@ -9,37 +9,42 @@
             <codeEdu></codeEdu>
           </div>
 
+          <form @submit="Register">
           <div class="form-group">
-            <input id="name" name="name" class="form-control _ge_de_ol mb-3" type="text"
+            <input v-model="formData.name" id="name" name="name" class="form-control _ge_de_ol mb-3" type="text"
+              placeholder="Username" required="" aria-required="true">
+          </div>
+          <div class="form-group">
+            <input v-model="formData.email" id="email" name="email" class="form-control _ge_de_ol mb-3" type="email"
               placeholder="Username" required="" aria-required="true">
           </div>
 
           <div class="form-group">
-            <input id="password" type="Password" class="form-control mb-3" name="password" placeholder="password"
+            <input  v-model="formData.password" id="password" type="Password" class="form-control mb-3" name="password" placeholder="password"
               required="required">
             <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
           </div>
           
           <div class="form-group">
-            <input id="password" type="Password" class="form-control mb-3" name="password" placeholder="Confirm Password"
+            <input v-model="formData.password_confirmation" id="password1" type="Password" class="form-control mb-3" name="password" placeholder="Confirm Password"
               required="required">
             <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
           </div>
 
           <div class="form-group">
-            <input id="email" type="email" class="form-control mb-3" name="password" placeholder="E-mail address"
+            <input v-model="formData.phone_number" id="number" type="number" class="form-control mb-3" name="number" placeholder="Phone number"
               required="required">
             <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
           </div>
 
           <div class="form-group">
-            <div class="btn_uy">
-              <routerLink to="/problems">
+            <div class="btn_uy" type="submit" @click="Register">
+              <!-- <routerLink to="/problems"> -->
                 <h5>SignUp</h5>
-              </routerLink>
+              <!-- </routerLink> -->
             </div>
           </div>
-
+        </form>
 
           <div class="txt d-flex justify-content-center">
             <p class="pt-2 me-2">Have an account?</p>
@@ -59,11 +64,46 @@
 import TopBar from '@/components/TopBar.vue';
 import codeEdu from '@/components/codeEdu.vue';
 import { RouterLink } from 'vue-router';
+import axios from'axios';
 export default {
   components: {
     TopBar,
     codeEdu
-  }
+  },
+  data() {
+          return {
+              error: null,
+              mesaage: '',
+              searchText: '',
+              token: '',
+              formData: {
+                name:'',
+                  email: '',
+                  password: '',
+                  password_confirmation:'',
+                  role:'student',
+                  phone_number:'',
+              },
+          };
+      },
+      methods: {
+        Register() {
+              //  if (this.isValidEmail && this.isValidPassword) {
+              axios.post('http://127.0.0.1:8000/api/register', this.formData)
+                  .then((response) => {
+                  this.$router.push('/problems');
+                  this.token = response.data.token;
+                  localStorage.setItem('token', this.token);
+                  this.mesaage = response.data.mesaage;
+                  console.log(this.token + "lknkj");
+                  // <router-link to="/home"></router-link>
+              })
+                  .catch((error) => {
+                  console.log(error);
+                  this.error = error;
+              });
+          },
+      },
 }
 </script>
 
@@ -100,20 +140,14 @@ a {
   display: block;
   margin: 20px auto;
   margin-top: 50px;
-  /* margin:20px auto; */
   background: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  /* background:rgba(0,0,0,0.8); */
   padding: 0px 30px 20px;
 
 }
 
-/* @media screen and (max-width:767px){
-      .form-sub-main{
-        padding: 30px;
-      }
-  } */
+
 
 .form-group .form-control {
   min-height: 50px;
@@ -121,24 +155,18 @@ a {
   border: 1px solid var(--LightGreen);
   border-radius: 3px;
   box-shadow: none;
-  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   padding: 10px 15px;
   background-color: transparent;
-  color: #fff;
+  color: black;
   margin: 10px 0px;
 }
 
 
-/* .form-sub-main{
-    color:#545454;
-    font-size:16px;
-    margin-top: 5%;
-} */
+
 
 .form-sub-main .form-group ::placeholder {
   display: block;
   margin-bottom: 6px;
-  /* color:#fff; */
   color: var(--LightGreen);
 }
 
@@ -157,7 +185,6 @@ a {
   background: transparent;
   box-shadow: none;
   border-color: var(--GreenColor);
-  /* color:#495057; */
 }
 
 
@@ -168,7 +195,7 @@ a {
   margin: 20px 0px;
 }
 
-.btn_uy a {
+.btn_uy h5 {
   padding: 10px 20px;
   background: var(--GreenColor);
   ;
@@ -186,18 +213,5 @@ a {
   cursor: pointer;
 }
 
-/* .form-sub-main ._main_head_as{
-  margin:0;
-  padding:0;
-  display:inline-block;
-  z-index:2;
-  position:relative; 
-}
 
-.form-sub-main ._main_head_as a img{
-  height:60px;
-  width:60px;
-  position:relative;
-  border-radius:50px;
-} */
 </style>

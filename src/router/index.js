@@ -17,11 +17,42 @@ import myContests from "../pages/contests/comonents/myContests.vue";
 import joinContets from "../pages/contests/comonents/joinContests.vue";
 import createContests from "../pages/contests/comonents/creatContests.vue";
 import ProfilE from "../pages/Profile/ProfilE.vue";
-
-
-
+import Astudents from "@/pages/Adminp/Astudents.vue";
+import Subjects from "@/pages/Adminp/Subjects.vue";
+import TeachersAddEdit from "@/pages/Adminp/TeachersAddEdit.vue";
+import StudentsClass from "@/pages/Adminp/StudentsClass.vue";
+import Exams from "@/pages/Adminp/Exams.vue";
 
 const routes = [
+    //to admin
+{
+    name:'students',
+    path:'/n',
+    component:Astudents,
+
+},
+{
+name:'Subjects',
+path:'/er',
+component:Subjects,
+},
+{
+name:'TeachersAddEdit',
+path:'/f',
+component:TeachersAddEdit,
+},
+{
+    name:'StudentsClass',
+    path:'/m',
+    component:StudentsClass,
+},
+{
+    name:'Exams',
+    path:'/',
+    component:Exams,
+},
+
+//
     {
         name: 'topbar',
         path: '/topbar',
@@ -29,11 +60,9 @@ const routes = [
     },
     {
         name: 'splash',
-        path: '/',
+        path: '/f',
         component: splashSc,
     },
-
-
     {
         path: '/NavBar',
         component: NavBar,
@@ -56,8 +85,9 @@ const routes = [
     },
     {
         name: 'detailProblem',
-        path: '/detailsP',
+        path: '/detailProblem/:ProblemId',
         component: detailsProblem,
+        props: true
     },
     {
         name:'detailSolution',

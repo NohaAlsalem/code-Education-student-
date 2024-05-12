@@ -1,18 +1,9 @@
 <template>
   <div class="card-body" style="height:100vh; overflow-y: auto">
-    <h5 class="card-title">1. Two Sum</h5>
-    <h6 class="card-title">Easy</h6>
+    <h5 class="card-title">{{ problem.name }}</h5>
+    <h6 class="card-title">{{ problem.diffculty }}</h6>
     <p class="card-text">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, amet
-      dolor? Ab neque quam reprehenderit vero, fugiat laudantium doloribus unde
-      necessitatibus, consequuntur nisi dolorem? Dolor accusamus vero autem, sit
-      culpa nam repellendus minima optio rerum dolore qui a deleniti minus illo
-      iure sed facilis et veritatis recusandae consequuntur! Itaque omnis
-      voluptas modi facere, enim, non, maxime rem obcaecati exercitationem quasi
-      suscipit placeat doloremque. Ut, quis quasi? Hic enim distinctio sequi
-      perspiciatis molestiae, vel vero. Pariatur, tempora ratione est obcaecati
-      quasi amet magnam veniam temporibus nostrum laboriosam, consectetur, iste
-      a odio et. Laborum quia placeat neque suscipit autem dolores nam ipsam.
+{{  problem.description }}
     </p>
     <div class="ex mt-4">
       <h6 class="card-title">Examble1</h6>
@@ -60,9 +51,9 @@
         </p>
         </div>
         <div class="collapse" id="collapse1" style="justify-self: start; text-align: left;">
-          <div class="d-flex">
-            <div class="spans me-4">array</div>
-            <div class="spans ">Hash Table</div>
+          <div class="d-flex" >
+            <div class="spans me-4" v-for="tag in problem.tags">{{ tag.name }}</div>
+            <!-- <div class="spans ">Hash Table</div> -->
           </div>
       </div>
 
@@ -81,8 +72,8 @@
         </div>
         <div class="collapse" id="collapse2" style="justify-self: start; text-align: left;">
           <div class="d-flex">
-            <div class="spans me-4">array</div>
-            <div class="spans ">Hash Table</div>
+            <div class="spans me-4">{{ problem.hint1 }}</div>
+          
           </div>
       </div>
     </div>
@@ -100,8 +91,8 @@
         </div>
         <div class="collapse" id="collapse3" style="justify-self: start; text-align: left;">
           <div class="d-flex">
-            <div class="spans me-4">array</div>
-            <div class="spans ">Hash Table</div>
+            <div class="spans me-4">{{ problem.hint2 }}</div>
+          
           </div>
       </div>
 
@@ -111,6 +102,14 @@
 
 <script>
 export default {
+  props:{
+    problem:{},
+  },
+  data(){
+    return{
+
+    }
+  },
   methods: {
     toggleCollapse() {
       const collapseElement = document.getElementById('collapseExample');

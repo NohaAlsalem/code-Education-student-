@@ -8,38 +8,38 @@
             <img src="@/assets/images/logo.jpg">
             <codeEdu class="mt-0"></codeEdu>
           </div>
-
-          <div class="form-group">
-            <input id="email" name="email" class="form-control _ge_de_ol mb-3" type="text"
-              placeholder="username or E-mail" required="" aria-required="true">
-          </div>
-
-          <div class="form-group">
-            <input id="password" type="password" class="form-control mb-3" name="password" placeholder="password"
-              required="required">
-            <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
-          </div>
-
-          <div class="form-group">
-            <div class="btn_uy">
-              <routerLink to="/problems">
-                <h5>SignIn</h5>
-              </routerLink>
+          <form @submit.prevent="signIn">
+            <div class="form-group">
+              <input v-model="formData.email"  type="email"  class="form-control _ge_de_ol mb-3"
+                placeholder="username or E-mail" required="" aria-required="true">
             </div>
-          </div>
 
+            <div class="form-group">
+              <input v-model="formData.password" id="password" type="password" class="form-control mb-3" name="password"
+                placeholder="password" required="required">
+              <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
+            </div>
 
-          <div class="txt d-flex ">
-            <p class="pt-2">Forgot Password?</p>
-            <routerLink to="/signup" class="txt-h pt-2 ms-auto">
-              <h5>Sign Up</h5>
-            </routerLink>
+            <div class="form-group">
+              <div class="btn_uy" type="submit" @click="signIn">
+                <!-- <routerLink to="/problems"> -->
+                <h5>SignIn</h5>
+                <!-- </routerLink> -->
+              </div>
+            </div>
 
-          </div>
+          </form>
+            <div class="txt d-flex ">
+              <p class="pt-2">Forgot Password?</p>
+              <routerLink to="/signup" class="txt-h pt-2 ms-auto">
+                <h5>Sign Up</h5>
+              </routerLink>
 
+            </div>
 
+     
 
-          <!-- <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="check_box_main">
                   <a href="#" class="pas-text">Forgot Password</a>
                 </div>
@@ -48,16 +48,16 @@
 
 
         </div>
-      
-        <div class="txt d-flex ">
-            <p class="pt-2"></p>
-            <routerLink to="/signup" class="txt-h pt-0  me-4 ms-auto">
-              <font-awesome-icon icon="fa-solid fa-bell" class="i"/>
-            </routerLink>
 
-          </div>
+        <div class="txt d-flex ">
+          <p class="pt-2"></p>
+          <routerLink to="/signup" class="txt-h pt-0  me-4 ms-auto">
+            <font-awesome-icon icon="fa-solid fa-bell" class="i" />
+          </routerLink>
+
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -66,10 +66,42 @@
 import TopBar from '@/components/TopBar.vue';
 import codeEdu from '@/components/codeEdu.vue';
 import { RouterLink } from 'vue-router';
+import axios from 'axios';
 export default {
   components: {
     TopBar,
     codeEdu
+  },
+  data() {
+    return {
+      error: null,
+      mesaage: '',
+      searchText: '',
+      token: '',
+      formData: {
+        email: '',
+        password: ''
+      },
+    }
+  },
+  methods: {
+    signIn() {
+      //  if (this.isValidEmail && this.isValidPassword) {
+      axios.post('http://127.0.0.1:8000/api/login', this.formData)
+        .then((response) => {
+          this.$router.push('/problems');
+          this.token = response.token;
+          console.log(response.token)
+          localStorage.setItem('token', this.token);
+          this.mesaage = response.data.mesaage;
+          console.log(this.token + "lknkj");
+          // <router-link to="/home"></router-link>
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error;
+        });
+    },
   }
 }
 </script>
@@ -78,12 +110,14 @@ export default {
 .r {
   height: 100vh;
   background: var(--WhiteColor);
-  
+
 }
-.i{
- 
- color: var(--GreenColor);
+
+.i {
+
+  color: var(--GreenColor);
 }
+
 img {
   max-width: 75%;
   margin: 0;
@@ -144,8 +178,9 @@ textarea {
   /* border: 1px solid rgba(255, 255, 255, 0.3); */
   padding: 10px 15px;
   background-color: transparent;
-  color: #fff;
+  color:black;
   margin: 10px 0px;
+
 }
 
 
@@ -193,7 +228,7 @@ textarea {
   margin: 20px 0px;
 }
 
-.btn_uy a {
+.btn_uy h5 {
   padding: 10px 20px;
   background: var(--GreenColor);
   ;

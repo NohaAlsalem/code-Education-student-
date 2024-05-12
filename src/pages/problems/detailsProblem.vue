@@ -1,6 +1,6 @@
 <template>
     <div class="screen w-100 h-100">
-        <div class="row">
+        <div class="row" >
             <div class="col-md-6">
                 <div class="container  col-md-12" style="margin-top: 10px; margin-bottom: 10px">
                     <div class="card text-start ">
@@ -17,7 +17,7 @@
                                 Solution
                             </button>
                         </div>
-                        <Description v-if="description"> </Description>
+                        <Description :problem="this.problem" v-if="description"> </Description>
                         <Solution v-else></Solution>
                     </div>
                     <div v-if="description" class="choose mt-4">
@@ -100,6 +100,7 @@
 import Description from "./component/Description.vue";
 import Solution from "./component/Solution.vue";
 import inputcode from "./component/inputcode.vue";
+import axios from 'axios';
 
 export default {
     components: {
@@ -107,11 +108,19 @@ export default {
         Solution,
         inputcode
     },
+    mounted(){
+        const ProblemId = this.$route.params.ProblemId;
+        console.log(ProblemId);
+        this.getProblem(ProblemId);
+    },
     data() {
         return {
+         
             selectedButton: 1,
             description: true,
             solution: false,
+            problem:{},
+            token: localStorage.getItem('token'),
         };
     },
     methods: {
@@ -125,6 +134,18 @@ export default {
                 this.description = false;
             }
         },
+        getProblem(ProblemId) {
+       axios.get(`http://127.0.0.1:8000/api/student/problems/${ProblemId}`,{ headers: {
+                     Authorization: `Bearer ${this.token}`,
+                 }}).then((response) => {
+         this.problem = response.data;
+         console.log(response.name)
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+     },
+ 
     },
 };
 </script>
