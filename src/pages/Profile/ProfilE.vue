@@ -14,24 +14,23 @@
                                      
                                     </div>
                                     <div>
-                                        <h5 class="my-3 mx-3">John Smith</h5>
+                                        <h5 class="my-3 mx-3">{{ student.name }}</h5>
                                         <div class="mb-1 my-3 mx-3 d-flex" style="color: var(--GreenColor);">
                                             <p>Rank:~</p>
-                                            <p>{{ Rank }}</p>
+                                            <p>{{ info.rate }}</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <button type="button" class="btn"
-                                    style="width: 100%;background: var(--darkwhite); color: var(--GreenColor); font-weight: bold">Edit
-                                    Profile</button>
+                                    style="width: 100%;background: var(--darkwhite); color: var(--GreenColor); font-weight: bold">{{ student.email }}</button>
                                 <div class="Divider mb-1"></div>
                                 <h6 style="color: var(--GreenColor);font-weight: 700;">Community Stats</h6>
                                 <div class="d-flex">
                                     <font-awesome-icon :icon="['fas', 'eye']" class="m-1"
                                         style="color: var(--GreenOpacity);" />
                                     <div>
-                                        <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Views :</h6>
+                                        <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Points :</h6>
                                         <div class="d-flex ms-2">
                                             <p
                                                 style="color: var(--GreenOpacity); font-size: smaller;margin-right: 5px;">
@@ -40,22 +39,22 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <h6 class="me-2" style="color: var(--GreenColor);">{{ views }}</h6>
+                                    <h6 class="me-2" style="color: var(--GreenColor);">{{ info.points }}</h6>
                                 </div>
                                 <div class="d-flex mt-3 mb-5">
                                     <font-awesome-icon :icon="['fas', 'square-check']" class="m-1"
                                         style="color: var(--GreenOpacity);" />
                                     <div>
                                         <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Solution :</h6>
-                                        <div class="d-flex ms-2">
+                                        <!-- <div class="d-flex ms-2">
                                             <p
                                                 style="color: var(--GreenOpacity); font-size: smaller; margin-right: 5px;">
                                                 this week :</p>
                                             <p style="color: var(--GreenOpacity); font-size: smaller;">{{ thisweek }}
                                             </p>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <h6 class=" me-2" style="color: var(--GreenColor);">{{ solution }}</h6>
+                                    <h6 class=" me-2" style="color: var(--GreenColor);">{{ info.solutions }}</h6>
 
                                 </div>
                             </div>
@@ -113,37 +112,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="max-width: 40%;">{{ material }}</td>
+                            <tr v-for="material in materials" :key="material.id">
+                                <td style="max-width: 40%;">{{ material.name }}</td>
 
-                                <td>{{ degree }}</td>
+                                <td>{{ material.degree }}</td>
                                 <td  style="max-width: 40%;" >
-                                    {{ date }}
+                                    {{ material.date }}
                                 </td>
-                               
-
-                            </tr>
-                            <tr>
-                                <td style="max-width: 40%;">{{ material }}</td>
-
-                                <td>{{ degree }}</td>
-                                <td  style="max-width: 40%;" >
-                                    {{ date }}
-                                </td>
-                               
-
-                            </tr>
-                            <tr>
-                                <td style="max-width: 40%;">{{ material }}</td>
-
-                                <td>{{ degree }}</td>
-                                <td  style="max-width: 40%;" >
-                                    {{ date }}
-                                </td>
-                               
-
-                            </tr>
-                           
+                          </tr>
                        
                         </tbody>
                     </table>
@@ -168,6 +144,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import PieChart from './PieChart.vue';
+import axios from 'axios';
 export default {
     components: {
         NavBar,
@@ -175,14 +152,42 @@ export default {
     },
     data() {
         return {
-            Rank: '200.000',
-            views: 0,
-            solution: 0,
-            thisweek: 0,
-            material:'Programming1',
-            degree:30,
-            date:'10/10/2024'
+            Rank: '',
+            views: '',
+            solution: '',
+            thisweek: '',
+           
+            degree:'',
+            date:'',
+            
+            info:{},
+            student:{},
+            materials:[],
+
         }
+    },
+    mounted(){
+        this.getProfile();
+    },
+    methods: {
+        getProfile() {
+       axios.get('http://127.0.0.1:8000/api/student/profile',{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }}).then((response) => {
+                    this.info=response.data;
+                    this.student=response.data.detail;
+                    this.materials = response.data.materials;
+                    console.log(response.data.id);
+                    console.log(response.data.detail.role);
+                    console.log(response.data.materials);
+                           
+         console
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+     },
+ 
     }
 }
 </script>

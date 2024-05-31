@@ -8,6 +8,7 @@ import signup from "../pages/signup.vue";
 import ProblemS from "../pages/problems/ProblemS.vue";
 import detailsProblem from "@/pages/problems/detailsProblem.vue";
 import detailSolution from "@/pages/problems/detailSolution.vue";
+import MySolution from "@/pages/problems/component/mySolution.vue";
 import ContestS from "../pages/contests/ContestS.vue";
 import detaileContest from "../pages/contests/detaileContest.vue";
 import Students from "../pages/contests/Students.vue";
@@ -22,6 +23,7 @@ import Subjects from "@/pages/Adminp/Subjects.vue";
 import TeachersAddEdit from "@/pages/Adminp/TeachersAddEdit.vue";
 import StudentsClass from "@/pages/Adminp/StudentsClass.vue";
 import Exams from "@/pages/Adminp/Exams.vue";
+
 
 const routes = [
     //to admin
@@ -48,7 +50,7 @@ component:TeachersAddEdit,
 },
 {
     name:'Exams',
-    path:'/',
+    path:'/nbv',
     component:Exams,
 },
 
@@ -60,7 +62,7 @@ component:TeachersAddEdit,
     },
     {
         name: 'splash',
-        path: '/f',
+        path: '/',
         component: splashSc,
     },
     {
@@ -89,10 +91,23 @@ component:TeachersAddEdit,
         component: detailsProblem,
         props: true
     },
+    // {
+    //     name:'detailSolution',
+    //     path:'/detailSolution/:SolutionId',
+    //     component:detailSolution,
+    //     props:true,
+    // },
     {
         name:'detailSolution',
         path:'/detailSolution',
         component:detailSolution,
+    
+    },
+    {
+name:'mySolution',
+path:'/mySolution/:SolutionId',
+component:MySolution,
+props:true
     },
     {
         name: 'contests',
@@ -106,8 +121,9 @@ component:TeachersAddEdit,
     },
     {
         name:'detaileContest',
-        path:'/detaileContest',
+        path:'/detaileContest/:ContestId',
         component:detaileContest,
+        props:true
     },
     {
         name: 'joinContets',

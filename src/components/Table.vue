@@ -3,7 +3,7 @@
   <div class="col-12">
     <div class="card ms-5">
       <div class="card-body pb-0">
-        <table class="table table-borderless " v-for="problem in problems" :key="problem.id">
+        <table class="table table-borderless " >
           <thead>
             <tr>
               <th scope="col" class="headt">#</th>
@@ -18,7 +18,7 @@
         
           <tbody>
           
-            <tr>
+            <tr v-for="problem in problems" :key="problem.id">
               <th scope="row">{{ problem.id }}</th>
 
               <td><router-link :to="{ name: 'detailProblem', params: { ProblemId: problem.id } }" class="text-primary fw-bold">{{ problem.name }}</router-link></td>

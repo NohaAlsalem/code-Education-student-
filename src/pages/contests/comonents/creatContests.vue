@@ -7,15 +7,15 @@
                 </div>
             </div>
             <div class="col-4 container  mt-4 p-0  pt-0">
-                <button type="button" class="btn btn-success ms-5 mt-0">
+                <button type="button" class="btn btn-success ms-5 mt-0" @click="createContest">
                     Create
                 </button>
             </div>
         </div>
         <!-- input to contest name -->
         <div class="input-group">
-            <input type="text" class="form-control">
-            <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+            <!-- <input type="text" class="form-control" v-model="formData.name"> -->
+            <input type="text" class="form-control" v-model="formData.name">
         </div>
 
         <div class="container mt-4 p-0">
@@ -23,7 +23,7 @@
         </div>
         <!-- input to contest desicription -->
         <div class="input-group ">
-            <textarea class="form-control" rows="10"></textarea>
+            <textarea class="form-control" rows="10" v-model="formData.description"></textarea>
             <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
         </div>
 
@@ -40,17 +40,12 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                         <p>privet</p>
-                        <!-- <label class="form-check-label" for="flexRadioDefault1">
-   privet
-  </label> -->
+                  
                     </div>
                     <div class="form-check ms-4">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
                             checked>
                         <p>public</p>
-                        <!-- <label class="form-check-label" for="flexRadioDefault2">
-    public
-  </label> -->
                     </div>
                 </div>
             </div>
@@ -59,20 +54,18 @@
         <div class="row mt-0">
             <div class="col-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="dd/mm/yy">
+                    <input v-model="formData.start_at" type="text" class="form-control" placeholder="dd/mm/yy">
                     <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="6:15">
-                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+                    <input v-model="formData.contest_time" type="text" class="form-control" placeholder="6:15">
                 </div>
             </div>
             <div class="col-4 ">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter password">
-                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+                    <input v-model="formData.password" type="text" class="form-control" placeholder="Enter password">
                 </div>
             </div>
         </div>
@@ -148,6 +141,7 @@
             </tbody>
         </table>
 
+
         <div class="container mt-5 p-0">
             <p>you can add student to contest</p>
         </div>
@@ -206,10 +200,78 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import axios from 'axios';
+import { BASE_URL } from "@/assets/config";
 export default {
     components: {
         NavBar
-    }
+    },
+    data(){
+        return{
+            token: localStorage.getItem('token'),
+           
+            // name:localStorage.getItem('nameContest') || '',
+formData:{
+    name:'',
+    description:'',
+    password:'',
+    duration:2,
+    start_at:null,
+    contest_time:'',
+    min_level:5,
+    max_level:8,
+    students:[1,2],
+    houre:2,
+    scoure:0,
+
+}
+        }
+    },
+//     mounted() {
+//     this.loadFormData();
+//   },
+methods:{
+    loadFormData() {
+      const savedFormData = localStorage.getItem("formData");
+      if (savedFormData) {
+        this.formData = JSON.parse(savedFormData);
+      }
+    },
+    saveFormData() {
+      localStorage.setItem("formData", JSON.stringify(this.formData));
+    },
+    clearFormData() {
+      localStorage.removeItem("formData");
+    },
+
+    navigateToStudents() {
+      this.saveFormData();
+      this.$router.push({
+        name: "problemsToaddTotest",
+        params: { id: this.$route.params.id },
+      });
+    },
+
+
+
+    createContest(){
+    axios.post(BASE_URL + 'contests/create',this.formData,{ headers: {
+                     Authorization: `Bearer ${this.token}`,}})
+        .then((response) => {
+          
+         
+          this.$router.push('/problems');
+          this.mesaage = response.data.mesaage;
+          console.log(this.token + "lknkj");
+          // <router-link to="/home"></router-link>
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error;
+        });
+    },
+  
+}
 }
 </script>
 
@@ -252,3 +314,35 @@ h6 {
     color: var(--LightGreen);
 }
 </style>
+
+<!-- 
+addOffice() {
+    let formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('id_gov',this.id_gov);
+    formData.append('branch_id', this.branch_id);
+    formData.append('type_id', 2);
+    formData.append('star_id', this.star_id);
+    formData.append('location', this.location);
+    formData.append('discreption', this.discreption);
+    formData.append('phoneOne', this.phoneOne);
+    formData.append('phoneTwo', this.phoneTwo);
+    formData.append('code', this.code);
+    formData.append('amount', this.amount);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('status', this.status);
+    formData.append('contract', this.file2);
+    formData.append('image', this.file1);
+    formData.append('percent',this.percent)
+
+    axios.post('http://127.0.0.1:8000/api/requestJoin', formData)
+      .then(response => {
+        console.log(response + "lknkj")
+        // handle successful response from server
+      })
+      .catch(error => {
+        console.log(error)
+        // handle error response from server
+      });
+  }, -->

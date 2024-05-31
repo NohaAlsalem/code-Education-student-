@@ -2,140 +2,142 @@
     <NavBar></NavBar>
     <div>
         <div class="ms-5">
-            <div class="container-fluid" v-for="problem in problems" :key="problem.id">
-            <div class="row">
+            <div class="container-fluid">
+                <form>
+                    <div class="row">
 
-                <div class="col me-0">
-                    <div class="d-flex flex-row ms-5">
-                        <div class="p-2">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    Difficulty
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Difficulty</a></li>
-                                    <li><a class="dropdown-item" href="#">Medium</a></li>
-                                    <li><a class="dropdown-item" href="#">Easy</a></li>
-                         
-                                </ul>
+                        <!-- v-for="problem in problems" :key="problem.id" -->
+                        <div class="col me-0">
+                            <div class="d-flex flex-row ms-5">
+                                <div class="p-2">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="true">
+                                            {{
+                                                selectedDifficulty ? selectedDifficulty : "Difficulty"
+                                            }}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" @click="submitDifficulty('Hard')">Hard</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="submitDifficulty('Medium')">Medium</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="submitDifficulty('Easy')">Easy</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="submitDifficulty('')">None</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="btn-group">
+                                        <select class="btn dropdown-toggle" id="lnag" name="lang"
+                                            v-model="formData.diffculty">
+                                            <option class="opt ">Difficulty</option>
+                                            <option class="opt ">Medium</option>
+                                            <option class="opt ">Easy</option>
+                                        </select> 
+                                    </div> -->
+                                </div>
+
+
+                                <div class="p-2">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="true">
+                                            {{ selectedTag ? selectedTag : "Tags" }}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li v-for="tag in tags" :key="tag.id">
+                                                <a class="dropdown-item" @click="submitTag(tag.name)">{{ tag.name }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="submitTag('')">None</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="btn-group">
+                                        <select class="btn  dropdown-toggle" id="lnag" name="lang"
+                                            v-model="formData.tag">
+                                            <option class="opt " v-for=" tag in tags">{{ tag.name }}</option>
+                                        </select>
+
+                                    </div> -->
+                                </div>
+                                <div class="p-2">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="true">
+                                            {{ selectedSort ? selectedSort : "Sort" }}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" @click="submitSort('AES')">AES</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="submitSort('DES')">DES</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="btn-group">
+
+                                        <select class="btn  dropdown-toggle" id="lnag" name="lang"
+                                            v-model="formData.sort">
+                                            <option class="opt">AES</option>
+                                            <option class="opt">DES</option>
+
+                                        </select>
+                                   
+                                    </div> -->
+                                </div>
                             </div>
                         </div>
 
-
-                        <div class="p-2">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    Statuse
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              
-                                </ul>
+                        <div class="col ms-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control search-input" placeholder="Search questions"
+                                    aria-label="Search" aria-describedby="basic-addon1" v-model="searchText"
+                                    @input="onSearchInput" />
+                                <div class="search-icon">
+                                    <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                                </div>
                             </div>
                         </div>
 
-
-
-
-                        <div class="p-2">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    Tags
-                                </button>
-                                <ul class="dropdown-menu p-2">
-                                    <li v-for=" tag in problem.tags" >{{ tag.name }}
-                                        <hr class="dropdown-divider"></li>
-                                 
-                                </ul>
+                        <!-- <div class="col ms-0">
+                            <div class="input-group">
+                                <input v-model="formData.name" type="text" class="form-control"
+                                    placeholder="Search questions" aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2">
                             </div>
+                            <font-awesome-icon :icon="['fas', 'magnifying-glass']" @click="search" />
                         </div>
+                         -->
+                        <div class="col mt-5"></div>
 
-                     
-
-
-                        <div class="p-2">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    sort
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            
-
-
-                <div class="col ms-0">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search questions"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
-                    </div>
-                </div>
-                <div class="col mt-5"></div>
+                </form>
             </div>
+            <div style="height:50vh;">
+                <Table :problems="this.problems"></Table>
+            </div>
+
+
+            <!-- <footer class="page-footer  mt-3   mb-3 ">
+                <div class="p-3">
+                    <pagination :total-items="100" :items-per-page="10" :current-page="currentPage"
+                        @pageChanged="handlePageChange" />
+                </div>
+
+            </footer> -->
+
+
+          
 
         </div>
-<div style="height:50vh;">
-    <Table :problems="this.problems" ></Table>
-</div>
-        
-        <!-- <div class="row m-0">
-                <div class="col col-lg-0 ms-0">
-                    <p> #</p>
-                </div>
-                <div class="col">
-                    <P>Title</P>
-                </div>
-                <div class="col-md-auto">
-                    <P> Statuse</P>
-                </div>
-                <div class="col col-lg-2">
-                    <P>Difficulty</P>
-                </div>
-                <div class="col col-lg-2">
-                    <P>Level</P>
-                </div>
-                <div class="col col-lg-2">
-                    <P>Num of solutions</P>
-                </div>
-            </div>
-        </div>
-        <div class="Divider"></div>
-        here i add lists -->
-
-
-        <footer class="page-footer  mt-3   mb-3 ">
-            <div class="p-3">
-                <pagination :total-items="100" :items-per-page="10" :current-page="currentPage"
-                    @pageChanged="handlePageChange" />
-            </div>
-
-        </footer>
-        <!-- <footer class="page-footer fixed-bottom mt-5  text-center mb-3 ">
-            <div class="text-center p-3 justify-content-cnter align-items-center">
-                <pagination :total-items="100" :items-per-page="10" :current-page="currentPage"
-                    @pageChanged="handlePageChange" />
-            </div>
-
-        </footer> -->
-
-</div>
     </div>
 </template>
 
@@ -153,30 +155,115 @@ export default {
     data() {
         return {
             currentPage: 1,
-            token: localStorage.getItem('token'),
-            problems:[],
+            searchText: "",
+            selectedTag: "",
+            selectedDifficulty: "",
+            selectedSort: "",
+            tags: [],
+            formData: {
+                diffculty: this.selectedDifficulty,
+                sort: this.selectedSort,
+                name: this.searchText,
+                tag: this.selectedTag,
+            },
+            // formData: {
+            //     diffculty: 'Difficulty',
+            //     sort: 'AES',
+            //     tag: 'Tag',
+            //     name: '',
+            // },
+            problems: [],
+            tags: [],
+            searchResults: [],
         }
     },
-    mounted(){
+    mounted() {
+
         this.getAllProblems();
+        this.getTags();
     },
     methods: {
+
         handlePageChange(page) {
             this.currentPage = page
             // Fetch data for the new page
         },
+
         getAllProblems() {
-       axios.get('http://127.0.0.1:8000/api/student/problems/',{ headers: {
-                     Authorization: `Bearer ${this.token}`,
-                 }}).then((response) => {
-         this.problems = response.data.data;
-         console
-       }).catch((error) => {
-         console.log(error)
-         this.errMessage = 'error retrieving data'
-       })
-     },
- 
+            axios.get('http://127.0.0.1:8000/api/student/problems/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                this.problems = response.data.data;
+                console
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
+
+
+
+        getTags() {
+            axios.get('http://127.0.0.1:8000/api/student/problems/tags', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                console.log(this.token);
+                this.tags = response.data;
+                console
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
+        submitTag(name) {
+            this.selectedTag = name;
+            console.log(this.selectedTag);
+            this.Filter();
+        },
+
+        submitDifficulty(diff) {
+            this.selectedDifficulty = diff;
+            this.Filter();
+        },
+
+        submitSort(sort) {
+            this.selectedSort = sort;
+            this.Filter();
+        },
+
+        onSearchInput(event) {
+            this.searchText = event.target.value;
+            this.Filter();
+        },
+        Filter() {
+            this.formData={   
+                    diffculty: this.selectedDifficulty,
+                sort: this.selectedSort,
+                name: this.searchText,
+                tag: this.selectedTag,},
+            axios.post('http://127.0.0.1:8000/api/student/problems/fillter', this.formData, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+                .then((response) => {
+                    this.problems = response.data;
+                    // this.searchResults = response.data;
+                    console.log(response.data)
+                    // <router-link to="/home"></router-link>
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.error = error;
+                });
+        },
+
+      
+
     }
 }
 </script>
@@ -205,7 +292,14 @@ export default {
     /* height: 0.5px; */
     margin: 0px 100px;
 }
-.page-footer{
+
+.page-footer {}
+
+.drop {
+    background: var(--darkwhite);
+    border: none;
+    color: var(--GreenColor);
+    border-radius: 5px;
 
 }
 
@@ -219,5 +313,4 @@ p {
     color: var(--GreenColor);
     background: var(--LightGreen);
 }
-
 </style>

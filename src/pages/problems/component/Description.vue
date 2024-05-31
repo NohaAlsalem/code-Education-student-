@@ -5,22 +5,42 @@
     <p class="card-text">
 {{  problem.description }}
     </p>
+    <div class="d-flex mt-3">
+      <h6 class="card-title me-2">level :</h6>
+      <p >{{ problem.level }}</p>
+      </div>
+    
+      <div class="d-flex mt-1">
+        <h6 class="card-title me-2">Time Limit :</h6>
+        <p>{{ problem.time_limit_ms }}</p>
+      </div>
+    
+      <div class="d-flex mt-1">
+        <h6 class="card-title me-2">Status :</h6>
+        <p>{{ problem.status }}</p>
+      </div>
+
+ 
+
+
+
     <div class="ex mt-4">
       <h6 class="card-title">Examble1</h6>
       <div class="d-flex">
         <p class="title">Input:</p>
-        <p>nums=[2,7,11,15] ,target=9</p>
+        <p>{{ test_case.input}}</p>
       </div>
       <div class="d-flex">
         <p class="title">Output:</p>
-        <p>[0,1]</p>
+        <p >{{ test_case.output}}</p>
       </div>
-      <div class="d-flex">
+      <!-- <div class="d-flex">
         <p class="title">Explanation:</p>
-        <p>nums=[2,7,11,15] ,target=9</p>
-      </div>
+        <p>{{ problem.test_case.input}}</p>
+      </div> -->
     </div>
-    <div class="ex mt-4">
+
+    <!-- <div class="ex mt-4">
       <h6 class="card-title">Examble2</h6>
       <div class="d-flex">
         <p class="title">Input:</p>
@@ -35,7 +55,7 @@
         <p>nums=[2,7,11,15] ,target=9</p>
       </div>
 
-    </div>
+    </div> -->
 
 
     <div class="Divider mt-4"></div>
@@ -104,6 +124,7 @@
 export default {
   props:{
     problem:{},
+    test_case:{},
   },
   data(){
     return{

@@ -18,6 +18,7 @@
                 <div class="col-sm">
                 </div>
             </div>
+
             <!-- start i need it -->
             <div class="container mt-4">
                 <div class="row">
@@ -50,13 +51,14 @@
                             <p class="text-black"> Noha</p>
                         </div>
 
-                        <button type="button" class="btn btn-success ms-5 mt-0">
+                        <button type="button" class="btn btn-success ms-5 mt-0" @click="joinContest">
                             join
                         </button>
                     </div>
                 </div>
                 <div class="Divider"></div>
             </div>
+           
             <!-- end i need it -->
 
 
@@ -70,7 +72,7 @@
                                         Enter your password
                                     </p>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" data-bs-toggle="modal"
+                                        <input v-model="password" type="text" class="form-control" data-bs-toggle="modal"
                                             data-bs-target="#cardModal">
                                     </div>
                             </div>
@@ -96,16 +98,36 @@
 </template>
 
 <script>
+import itemContest from '@/components/itemContest.vue';
+import axios from 'axios';
 export default {
     components: {
-
+itemContest,
     },
     data() {
         return {
             NameContest: 'Cntests Programing 1',
             EndOfContest: 'end',
+            password:'',
         }
     },
+    methods:{
+        joinContest(){
+            axios.post('http://127.0.0.1:8000/api/student/contests/join/1',this.password,{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }})
+        .then((response) => {
+         console.log(response)
+          // <router-link to="/home"></router-link>
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error;
+        });
+    },
+  
+        
+    }
 
 }
 </script>

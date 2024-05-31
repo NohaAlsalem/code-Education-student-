@@ -17,8 +17,8 @@
                                 Solution
                             </button>
                         </div>
-                        <Description :problem="this.problem" v-if="description"> </Description>
-                        <Solution v-else></Solution>
+                        <Description  v-if="description" :problem="this.problem" :test_case="this.testCase"> </Description>
+                        <Solution v-else :problemId="this.problem.id"></Solution>
                     </div>
                     <div v-if="description" class="choose mt-4">
                         <h6>2.Choose the correct answer</h6>
@@ -90,7 +90,7 @@
 
 
             <div class="col-md-6">
-                <inputcode></inputcode>
+                <inputcode :problemId="this.problem.id"></inputcode>
             </div>
         </div>
     </div>
@@ -120,7 +120,8 @@ export default {
             description: true,
             solution: false,
             problem:{},
-            token: localStorage.getItem('token'),
+            testCase:{},
+            
         };
     },
     methods: {
@@ -136,9 +137,10 @@ export default {
         },
         getProblem(ProblemId) {
        axios.get(`http://127.0.0.1:8000/api/student/problems/${ProblemId}`,{ headers: {
-                     Authorization: `Bearer ${this.token}`,
+                     Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }}).then((response) => {
          this.problem = response.data;
+         this.testCase=response.data.test_case;
          console.log(response.name)
        }).catch((error) => {
          console.log(error)

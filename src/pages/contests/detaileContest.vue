@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-6">
           <h6 class="card-title m-3">Contest Name:</h6>
-          <h5 class="card-title m-3">{{ ContestName }}</h5>
+          <h5 class="card-title m-3">{{ contest.name }}</h5>
           <h6 class="card-title m-3 mt-5 ">Contest Description:
           </h6>
         </div>
@@ -23,12 +23,12 @@
                 <h6>Contest Data :</h6>
                 <h6>Contest Time :
                 </h6>
-                <h6>Contest Time :</h6>
+                <h6>Contest ID :</h6>
               </div>
               <div class="col-6">
-                <p>{{ ContestDate }}</p>
-                <p>{{ ContestTime }}</p>
-                <p>{{ ContestTime }}</p>
+                <p>{{ contest.start_at }}</p>
+                <p>{{ contest.contest_time }}</p>
+                <p>{{ contest.id }}</p>
               </div>
             </div>
 
@@ -105,57 +105,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr v-for="problem in contest.problems" :key="problem.id">
                     <td>
-                        
-                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
+                      <router-link :to="{ name: 'detailProblem', params: { ProblemId: problem.id } }" style="  text-decoration: none;
+  outline: none;
+">
                         <p>
-                            Matrix Similarity After Cyclic Shifts
+                          {{ problem.name }}
+                            <!-- Matrix Similarity After Cyclic Shifts -->
                         </p>
                         </router-link>
                     </td>
-                    <!-- <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td> -->
-                </tr>
-                <tr>
-                    <td>
-                        
-                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                        <p>
-                            Count Beautiful Substring |
-                        </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        
-                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                        <p>
-                            Make Lexicographically Smallest Array by Swapping Elements
-                        </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        
-                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                        <p> Count Beautiful Substring ||
-                        </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>
-                            Make Lexicographically Smallest Array by Swapping Elements
-                        </p>
-                    </td>
-                </tr>
-               
+                  </tr>
             </tbody>
         </table>
 
@@ -173,53 +134,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr v-for="student in contest.students" :key="student.id">
                     <td>
                         
                      
                         <p>
-                            abd
+                            <!-- {{ student.pivot.rank }} -->
                         </p>
                        
                     </td>
                 
                 </tr>
-                <tr>
-                    <td>
-                        
-                        <p>
-                            loujain
-                        </p>
-                       
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        
-                        
-                        <p>
-                           moazz
-                        </p>
-                     
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        
-                      
-                        <p>Noha
-                        </p>
-                   
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>
-                            kassem
-                        </p>
-                    </td>
-                </tr>
-                
+              
             </tbody>
         </table>
 
@@ -231,6 +157,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import axios from 'axios';
 export default {
   components: { NavBar },
   data() {
@@ -238,11 +165,29 @@ export default {
       ContestName: 'provide a better contest',
       ContestDate: '12/5/2020',
       ContestTime: '12:00:00',
-      ContestId: '188'
+      ContestId: '188',
+      contest:{},
 
     };
   },
+  mounted(){
+    const ContestId = this.$route.params.ContestId;
+        this.getcontest(ContestId);
+    },
+  
+       
   methods: {
+    getcontest(ContestId) {
+       axios.get(`http://127.0.0.1:8000/api/student/contests/${ContestId}`,{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }}).then((response) => {
+         this.contest = response.data.contest;
+         console
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+    },
     selectButton(buttonNumber) {
       this.selectedButton = buttonNumber;
       if (this.selectedButton === 1) {

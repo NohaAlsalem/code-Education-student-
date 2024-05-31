@@ -35,20 +35,21 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <h6>My test</h6>
+                    <h6>My Classes</h6>
 
-
-                    <div class="backg mt-5">
+<div class="mt-5">
+                    <div class="backg mb-2" v-for="clas in myclasses" :key="clas.id">
                         <!-- this -->
                         <div class="row mb-4">
-                            <div class="col me-5">{{ MySubjectName }}</div>
-                            <div class="col ms-5">{{ MyNumberOfClass }}</div>
+                            <div class="col me-5">{{ clas.name }}</div>
+                            <div class="col ms-5">{{ clas.class }}</div>
                         </div>
                         <!-- end this -->
                         <div>
 
                         </div>
                     </div>
+                </div>
                     <div class="backg mt-2">
                         <p>if you want to change your class you can send a request to the admin to change the class by
                             entering the subject and number of the class </p>
@@ -73,18 +74,18 @@
                                     <div class="modal-body">
                                         <h6 class="modal-title" id="exampleModalLongTitle">Change The Class</h6>
                                         <P>Enter the reason you are changing the class</P>
-                                        <input type="text" style="width: 100%;border: none;" />
+                                        <input v-model="formData.reason" type="text" style="width: 100%;border: none;" />
                                         <div class="d-flex mt-2">
-                                            <p>Choose the subject name :</p>
-                                            <select class="drop ms-2" id="lnag" name="lang" v-model="material"
+                                            <p>Choose the old class :</p>
+                                            <select class="drop ms-2" id="lnag" name="lang" v-model="formData.old_category"
                                                 placeholder="Lnguage" autocomplete="country-name">
-                                                <option class="opt ">programming1</option>
-                                                <option class="opt ">programming2</option>
+                                                <option class="opt ">1</option>
+                                                <option class="opt ">2</option>
                                             </select>
                                         </div>
                                         <div class="d-flex mt-2">
-                                            <p>Choose the class number :</p>
-                                            <select class="drop ms-2" id="lnag" name="lang" v-model="numberc"
+                                            <p>Choose the destination class number :</p>
+                                            <select class="drop ms-2" id="lnag" name="lang" v-model="formData.new_category"
                                                 placeholder="Lnguage" autocomplete="country-name">
                                                 <option class="opt ">1</option>
                                                 <option class="opt ">2</option>
@@ -92,7 +93,7 @@
                                         </div>
                                         <div style="justify-content: center; justify-items: center;">
                                             <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Change</button>
+                                            data-bs-dismiss="modal" @click="changeClass">Change</button>
                                         </div>
                                     </div>
                                     <!-- <div class="modal-footer">
@@ -113,6 +114,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import axios from 'axios';
 export default {
     components: {
         NavBar
@@ -127,8 +129,45 @@ export default {
             MyNumberOfClass: 'class22',
             material: 'programming1',
             numberc:1,
+            myclasses:[],
+            formData:{
+                new_category:1,
+                old_category:1,
+                reason:'',
+            }
         }
+    },
+    mounted(){
+        this.getMyClasses();
+    },
+    methods:{
+         
+        getMyClasses() {
+       axios.get('http://127.0.0.1:8000/api/student/categories/',{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }}).then((response) => {
+                  console.log(response.data.categories);
+         this.myclasses = response.data.categories;
+         console
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+    },
+    changeClass(){
+        axios.post('http://127.0.0.1:8000/api/student/categories/change',this.formData,{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }})
+        .then((response) => {
+         console.log(response)
+          // <router-link to="/home"></router-link>
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error;
+        });
     }
+    },
 }
 </script>
 

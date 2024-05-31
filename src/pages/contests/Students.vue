@@ -20,14 +20,16 @@
   </div>
                         </div>
                         <div class="col">
+                            <router-link to="/Contests" style="text-decoration: none; color: inherit;">
                             <button type="button" class="btn   m-2 fw-b">
                                 Add
                             </button>
+                        </router-link>
                         </div>
                     </div>
                     <table class="table  table-bordered mt-4">
                         <thead>
-                            <tr>
+                            <tr >
                                 <th style="width: 10%;">
                                     <h6>
                                         id
@@ -46,10 +48,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="max-width: 10%;">1nhdcgv35</td>
+                            <tr v-for="student in students" :key="student.id">
+                                <td style="max-width: 10%;">{{ student.id }}</td>
 
-                                <td>mohamad</td>
+                                <td>{{ student.first_name }} {{ student.last_name }}</td>
                                 <td v-if="!chosed" style="width: 10%;" @click="chosed = true">
                                     <font-awesome-icon :icon="['far', 'square-check']" />
                                     <!-- <font-awesome-icon :icon="['fas', 'square-check']" /> -->
@@ -60,51 +62,7 @@
                                 </td>
 
                             </tr>
-                            <tr>
-                                <td>155</td>
-
-                                <td>mohamad</td>
-                                <td>
-                                    <p> check</p>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>155</td>
-
-                                <td>mohamad</td>
-                                <td>
-                                    <p> check</p>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>155</td>
-
-                                <td>mohamad</td>
-                                <td>
-                                    <p> check</p>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>155</td>
-
-                                <td>mohamad</td>
-                                <td>
-                                    <p> check</p>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>155</td>
-
-                                <td>mohamad</td>
-                                <td>
-                                    <p> check</p>
-                                </td>
-
-                            </tr>
+                          
                         </tbody>
                     </table>
                 </div>
@@ -116,7 +74,7 @@
 
 <script>
 import TopBar from '@/components/TopBar.vue';
-
+import axios from 'axios';
 export default {
     components: {
         TopBar,
@@ -125,12 +83,27 @@ export default {
     data() {
         return {
             chosed: false,
+            students:[],
 
         }
 
     },
+    mounted(){
+        this.getStudents();
+    },
     methods: {
-
+        getStudents() {
+       axios.get('http://127.0.0.1:8000/api/student/contests/allStudents',{ headers: {
+                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                 }}).then((response) => {
+                    console.log(this.token);
+         this.students = response.data.data;
+         console.log(response.data);
+       }).catch((error) => {
+         console.log(error)
+         this.errMessage = 'error retrieving data'
+       })
+    },
 
     }
 }
@@ -145,7 +118,7 @@ export default {
 .screen {
     padding: 40px 80px;
     background: var(--WhiteColor);
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     align-items: center;
     text-align: center;

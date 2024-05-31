@@ -78,23 +78,46 @@ export default {
       mesaage: '',
       searchText: '',
       token: '',
+      number_menu:1,
       formData: {
         email: '',
-        password: ''
+        password: '',
+       
       },
     }
   },
+  mounted() {
+    this.loadFormData();
+    console.log(this.problemId);
+    console.log(this.$route.params.id);
+  },
+  watch: {
+    formData: {
+      handler(newFormData) {
+        localStorage.setItem("formData", JSON.stringify(newFormData));
+      },
+      deep: true,
+    },
+  },
+
   methods: {
+    loadFormData() {
+      const savedFormData = localStorage.getItem("formData");
+      if (savedFormData) {
+        this.formData = JSON.parse(savedFormData);
+      }
+    },
     signIn() {
       //  if (this.isValidEmail && this.isValidPassword) {
-      axios.post('http://127.0.0.1:8000/api/login', this.formData)
+      axios.post('http://127.0.0.1:8000/api/login',this.formData)
         .then((response) => {
-          this.$router.push('/problems');
-          this.token = response.token;
-          console.log(response.token)
+          this.token = response.data.token;
+          console.log(response.data.token)
+         
           localStorage.setItem('token', this.token);
+          this.$router.push('/problems');
           this.mesaage = response.data.mesaage;
-          console.log(this.token + "lknkj");
+        
           // <router-link to="/home"></router-link>
         })
         .catch((error) => {

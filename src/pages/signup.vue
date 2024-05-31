@@ -36,6 +36,12 @@
               required="required">
             <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
           </div>
+          <div class="form-group">
+            <input v-model="formData.university_id" id="number" type="number" class="form-control mb-3" name="number" placeholder="university id"
+              required="required">
+            <!-- <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i> -->
+          </div>
+
 
           <div class="form-group">
             <div class="btn_uy" type="submit" @click="Register">
@@ -83,17 +89,19 @@ export default {
                   password_confirmation:'',
                   role:'student',
                   phone_number:'',
+                  university_id:'',
               },
           };
       },
       methods: {
         Register() {
               //  if (this.isValidEmail && this.isValidPassword) {
-              axios.post('http://127.0.0.1:8000/api/register', this.formData)
+              axios.post('http://127.0.0.1:8000/api/student/register', this.formData)
                   .then((response) => {
-                  this.$router.push('/problems');
+                 
                   this.token = response.data.token;
                   localStorage.setItem('token', this.token);
+                  this.$router.push('/problems');
                   this.mesaage = response.data.mesaage;
                   console.log(this.token + "lknkj");
                   // <router-link to="/home"></router-link>
