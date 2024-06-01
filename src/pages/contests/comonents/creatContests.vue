@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="row mt-0">
+        <div class="row mt-0 mb-4">
             <div class="col-4">
                 <div class="input-group">
                     <input v-model="formData.start_at" type="text" class="form-control" placeholder="dd/mm/yy">
@@ -70,82 +70,49 @@
             </div>
         </div>
 
-        <table class="table  table-bordered mt-4">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <h6>
-                            Problem list
-                        </h6>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
+     
+        <div class="container mt-5 p-0">
+            <p>help to generate your problems:</p>
+        </div>
 
-                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                            <p>
-                                Matrix Similarity After Cyclic Shifts
-                            </p>
-                        </router-link>
-                    </td>
-                    <!-- <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td> -->
-                </tr>
-                <tr>
-                    <td>
+        <div class="row">
+            <div class="col-4">
+                <p>Max-level</p>
+            </div>
+            <div class="col-4">
+                <p>Min-level</p>
+            </div>
+            <div class="col-4">
+                <p>Scoure</p>
+            </div>
+        </div>
 
-                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                            <p>
-                                Count Beautiful Substring |
-                            </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                            <p>
-                                Make Lexicographically Smallest Array by Swapping Elements
-                            </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                            <p> Count Beautiful Substring ||
-                            </p>
-                        </router-link>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>
-                            Make Lexicographically Smallest Array by Swapping Elements
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">
-                        <p>
-                            + Add More
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row mt-0">
+            <div class="col-4">
+                <div class="input-group">
+                    <input v-model="formData.max_level" type="text" class="form-control" placeholder="dd/mm/yy">
+                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input v-model="formData. min_level" type="text" class="form-control" placeholder="6:15">
+                </div>
+            </div>
+            <div class="col-4 ">
+                <div class="input-group">
+                    <input v-model="formData.scoure" type="text" class="form-control" placeholder="Enter password">
+                </div>
+            </div>
+        </div>
 
 
         <div class="container mt-5 p-0">
             <p>you can add student to contest</p>
         </div>
 
+
+       
         <table class="table  table-bordered mt-4">
             <thead>
                 <tr>
@@ -163,34 +130,24 @@
             </thead>
             <tbody>
                 <tr>
+                    <td> <router-link to="/students" style="text-decoration: none; color: inherit;">
+                            <p> + Add
+                            </p>
+                        </router-link></td>
+                </tr>
+                <tr v-for="student in selectedStudents" :key="student.id">
 
-                    <td>mohamad</td>
+                    <td >  
+                            {{ student.first_name }} {{ student.last_name }}
+                        </td>
                     <td> <router-link to="/students" style="text-decoration: none; color: inherit;">
                             <p> + Add
                             </p>
                         </router-link></td>
 
                 </tr>
-                <tr>
-                    <td>mohamad</td>
-                    <td>+ Add</td>
-                </tr>
-                <tr>
-                    <td>mohamad</td>
-                    <td>+ Add</td>
-                </tr>
-                <tr>
-                    <td>mohamad</td>
-                    <td>+ Add</td>
-                </tr>
-                <tr>
-                    <td>mohamad</td>
-                    <td>+ Add</td>
-                </tr>
-                <tr>
-                    <td>mohamad</td>
-                    <td>+ Add</td>
-                </tr>
+              
+                
             </tbody>
         </table>
 
@@ -209,7 +166,7 @@ export default {
     data(){
         return{
             token: localStorage.getItem('token'),
-           
+            selectedStudents:[],
             // name:localStorage.getItem('nameContest') || '',
 formData:{
     name:'',
@@ -227,9 +184,27 @@ formData:{
 }
         }
     },
-//     mounted() {
-//     this.loadFormData();
-//   },
+    mounted() {
+    this.loadFormData();
+  },
+  watch: {
+    formData: {
+      handler(newFormData) {
+        localStorage.setItem("formData", JSON.stringify(newFormData));
+      },
+      deep: true,
+    },
+  },
+  created() {
+    const students = this.$route.query.students;
+    if (students) {
+      this.selectedStudents = JSON.parse(students);
+    //   this.formData.students=for (let index = 0; index < array.length; index++) {
+    //     const element = array[index];
+        
+    //   }
+    }
+  },
 methods:{
     loadFormData() {
       const savedFormData = localStorage.getItem("formData");
@@ -346,3 +321,73 @@ addOffice() {
         // handle error response from server
       });
   }, -->
+
+
+
+  <!-- <table class="table  table-bordered mt-4">
+    <thead>
+        <tr>
+            <th scope="col">
+                <h6>
+                    Problem list
+                </h6>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+
+                <router-link to="/problems" style="text-decoration: none; color: inherit;">
+                    <p>
+                        Matrix Similarity After Cyclic Shifts
+                    </p>
+                </router-link>
+            </td>
+          
+        </tr>
+        <tr>
+            <td>
+
+                <router-link to="/problems" style="text-decoration: none; color: inherit;">
+                    <p>
+                        Count Beautiful Substring |
+                    </p>
+                </router-link>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <router-link to="/contests" style="text-decoration: none; color: inherit;">
+                    <p>
+                        Make Lexicographically Smallest Array by Swapping Elements
+                    </p>
+                </router-link>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <router-link to="/contests" style="text-decoration: none; color: inherit;">
+                    <p> Count Beautiful Substring ||
+                    </p>
+                </router-link>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Make Lexicographically Smallest Array by Swapping Elements
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">
+                <p>
+                    + Add More
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table> -->

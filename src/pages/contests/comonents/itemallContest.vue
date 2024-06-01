@@ -37,17 +37,23 @@
                         <h6 class="font-c">Create by :</h6>
                         <p class="text-black"> {{ contest.owner }}</p>
                     </div>
-                    <div class="pt-0 d-flex">
+                    <div class="pt-0 d-flex"  @click="toggleCollapse(contest.id)" >
 
-                        <button type="button" class="btn btn-success ms-5 mt-0" data-bs-toggle="modal"
-                            data-bs-target="#cardModal">
+                        <button type="button" class="btn btn-success ms-5 mt-0" 
+                    aria-expanded="false" :aria-controls="'modal' + contest.id"
+                        
+                        :data-bs-toggle="'modal'"
+                            :data-bs-target="'#cardModal'+contest.id" @click="passcontestid(contest.id)">
                             join
                         </button>
                     </div>
                 </div>
-
-
-                <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel"
+<!-- 
+                id="cardModal" -->
+                <div class="modal fade" 
+                :class="['cardModal', { show: isActive(contest.id) }]"
+                :id="'cardModal' + contest.id"
+                 tabindex="-1" aria-labelledby="cardModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -58,7 +64,7 @@
                                         give you</p>
                                     <p>Enter the contest identification number</p>
                                     <div class="input-group">
-                                        <input v-model="password" type="text" class="form-control">
+                                        <input v-model="formData.password" type="text" class="form-control">
                                     </div>
                                 </div>
 
@@ -70,7 +76,7 @@
                                 </button>
                                 <button type="button" class="btn bg-white" data-bs-dismiss="modal"
                                     @click="joinContest(contest.id)">
-                                    <p>{{ contest.id }}</p>
+                                    <p>Ok</p>
                                 </button>
                             </div>
                         </div>
@@ -105,18 +111,33 @@ export default {
         return {
             NameContest: 'Cntests Programing 1',
             EndOfContest: 'end',
-            password: '',
+           
+            confirmId:null,
+            activeSolutionId: null,
+            formData:{
+                password: '',
+            }
         }
     },
     methods: {
+        toggleCollapse(solutionId) {
+      this.activeSolutionId = this.activeSolutionId === solutionId ? null : solutionId;
+    },
+    isActive(solutionId) {
+      return this.activeSolutionId === solutionId;
+    },
+        passcontestid(id) {
+      this.confirmId = id;
+    },
         joinContest(contestId) {
-            axios.post(`http://127.0.0.1:8000/api/student/contests/join/${contestId}`, this.password, {
+            axios.post(`http://127.0.0.1:8000/api/student/contests/join/${contestId}`, this.formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             })
                 .then((response) => {
-                    console.log(response)
+                    console.log(response);
+                    console.log(this.password)
                     // <router-link to="/home"></router-link>
                 })
                 .catch((error) => {
@@ -180,6 +201,13 @@ small {
 
 .modal-footer {
     border: none;
+}
 
+.cardModal {
+  display: none;
+}
+
+.cardModal.show {
+  display: block;
 }
 </style>

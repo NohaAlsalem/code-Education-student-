@@ -34,29 +34,8 @@
         <p class="title">Output:</p>
         <p >{{ test_case.output}}</p>
       </div>
-      <!-- <div class="d-flex">
-        <p class="title">Explanation:</p>
-        <p>{{ problem.test_case.input}}</p>
-      </div> -->
+   
     </div>
-
-    <!-- <div class="ex mt-4">
-      <h6 class="card-title">Examble2</h6>
-      <div class="d-flex">
-        <p class="title">Input:</p>
-        <p>nums=[2,7,11,15] ,target=9</p>
-      </div>
-      <div class="d-flex">
-        <p class="title">Output:</p>
-        <p>[0,1]</p>
-      </div>
-      <div class="d-flex">
-        <p class="title">Explanation:</p>
-        <p>nums=[2,7,11,15] ,target=9</p>
-      </div>
-
-    </div> -->
-
 
     <div class="Divider mt-4"></div>
     <div class="row mb-3">
