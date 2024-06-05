@@ -9,6 +9,7 @@
       <h6 class="card-title me-2">level :</h6>
       <p >{{ problem.level }}</p>
       </div>
+      
     
       <div class="d-flex mt-1">
         <h6 class="card-title me-2">Time Limit :</h6>

@@ -100,7 +100,7 @@
 import Description from "./component/Description.vue";
 import mySolution from "./component/mySolution.vue";
 import inputcode from "./component/inputcode.vue";
-import axios from "axios";
+
 export default {
     components: {
         Description,

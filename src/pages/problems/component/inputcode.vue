@@ -10,17 +10,7 @@
                 </select>
 
              
-                <!-- <div class="editor">
-	<pre class="lang-html"><code></code></pre>
-	<textarea id="html" spellcheck="false" autocorrect="off" autocapitalize="off" translate="no" @input="highl"></textarea>
-</div> -->
-
-                 <!-- <textarea ref="editor" v-model="query" autocomplete="off" rows="5" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-		<pre><code ref="code" class="syntax-highlight sql">{{ query }}</code></pre> 
- -->
-
-
-
+             
 
 
         </div>
@@ -37,7 +27,8 @@
   </template>
   
   <script>
-  import 'prismjs/components/prism-java'
+  import 'prismjs/components/prism-java';
+  import { BASE_URL } from "@/assets/config";
   import axios from 'axios';
   import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
@@ -52,61 +43,23 @@ import 'highlight.js/styles/default.css';
        formData:{
         code:'',
         lang:1,
-        query: `SELECT 
-  FILTER(
-    COUNT(*),
-    WHERE \`f2-page-url\` LIKE '%st=%'),
-  FILTER(
-    COUNT(*),
-    WHERE \`f2-page-url\` LIKE '%order_success=1%') 
-  FROM Transaction 
-  WHERE \`f2-page-url\` LIKE '%bestellung.html%' AND (\`user-agent\` LIKE '%Edge/12%') 
-  SINCE 14 days AGO TIMESERIES`, 
+     
            }
       }
     },
 
     methods: {
-highl(){
-  // Clone text into pre immediately
-let code = event.target.previousElementSibling.firstChild;
-if (!code) return;
-code.textContent = event.target.value;
-
-// Highlight the syntax
-Prism.highlightElement(code);
-},
 
 
-      highlightSyntax(){
-      $('code').html(this.escapedQuery);
-
-      $('.syntax-highlight').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-    },
-      escapeHtml(unsafe) {
-      return unsafe
-           .replace(/&/g, "&amp;")
-           .replace(/</g, "&lt;")
-           .replace(/>/g, "&gt;")
-           .replace(/"/g, "&quot;")
-           .replace(/'/g, "&#039;");
-    },
         toggleDropdown() {
         this.dropdownOpen = !this.dropdownOpen;
       },
-      highlightCode() {
-        this.highlightedCode = Prism.highlight(this.code, Prism.languages.java, 'java');
-      },
-      switchLanguage(language) {
-      
-      },
+     
 
 
       Solve(problemId) {
       //  if (this.isValidEmail && this.isValidPassword) {
-      axios.post(`http://127.0.0.1:8000/api/student/problems/solve/${problemId}`,this.formData,{ headers: {
+      axios.post( BASE_URL + `problems/solve/${problemId}`,this.formData,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }})
         .then((response) => {

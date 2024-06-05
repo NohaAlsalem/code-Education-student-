@@ -145,6 +145,7 @@
 import NavBar from '@/components/NavBar.vue';
 import Pagination from '@/components/Pagination.vue';
 import Table from '@/components/Table.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
@@ -190,7 +191,7 @@ export default {
         },
 
         getAllProblems() {
-            axios.get('http://127.0.0.1:8000/api/student/problems/', {
+            axios.get(BASE_URL + 'problems/', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }

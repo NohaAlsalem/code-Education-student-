@@ -100,6 +100,7 @@
 import Description from "./component/Description.vue";
 import Solution from "./component/Solution.vue";
 import inputcode from "./component/inputcode.vue";
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 
 export default {
@@ -136,7 +137,7 @@ export default {
             }
         },
         getProblem(ProblemId) {
-       axios.get(`http://127.0.0.1:8000/api/student/problems/${ProblemId}`,{ headers: {
+       axios.get(BASE_URL + `problems/${ProblemId}`,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }}).then((response) => {
          this.problem = response.data;

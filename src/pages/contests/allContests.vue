@@ -14,7 +14,7 @@
 
 <script>
 import itemallContest from './comonents/itemallContest.vue';
-// import itemContest from '@/components/itemContest.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default{
     
@@ -37,7 +37,7 @@ return{
 methods:{
 
 getMycontests() {
-   axios.get('http://127.0.0.1:8000/api/student/contests/all',{ headers: {
+   axios.get( BASE_URL +'contests/all',{ headers: {
                  Authorization: `Bearer ${localStorage.getItem('token')}`,
              }}).then((response) => {
                 console.log(response.data);

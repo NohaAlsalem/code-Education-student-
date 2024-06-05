@@ -96,6 +96,7 @@
 
 <script>
 import itemContest from '@/components/itemContest.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     props: {
@@ -130,7 +131,7 @@ export default {
       this.confirmId = id;
     },
         joinContest(contestId) {
-            axios.post(`http://127.0.0.1:8000/api/student/contests/join/${contestId}`, this.formData, {
+            axios.post(BASE_URL +  `contests/join/${contestId}`, this.formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }

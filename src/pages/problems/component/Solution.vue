@@ -3,13 +3,14 @@
         <table class="table table-bordered    narrow-table me-0 overflow-auto">
 
             <tbody>
-                <tr v-for="solution in solutions" :key="solution.id" >
+                <tr v-for="solution in solutions" :key="solution.id">
                     <td @click="getSolutiondetails(solution.id)">
 
                         <!-- <router-link :to="{ name: 'mySolution', params: { SolutionId: solution.id } }"
                             style="text-decoration: none; color: inherit;"> -->
-                        <div class="row"  @click="toggleCollapse(solution.id)" >
-                            <div class="i" :data-bs-toggle="'collapse'" :data-bs-target="'#collapse' + solution.id" aria-expanded="false" :aria-controls="'collapse' + solution.id">
+                        <div class="row" @click="toggleCollapse(solution.id)">
+                            <div class="i" :data-bs-toggle="'collapse'" :data-bs-target="'#collapse' + solution.id"
+                                aria-expanded="false" :aria-controls="'collapse' + solution.id">
                                 <div class="col">
                                     <p>{{ solution.name }}</p>
                                 </div>
@@ -23,7 +24,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div :class="['collapse', { show: isActive(solution.id) }]" :id="'collapse' + solution.id" style="justify-self: start; text-align: left;">
+                        <div :class="['collapse', { show: isActive(solution.id) }]" :id="'collapse' + solution.id"
+                            style="justify-self: start; text-align: left;">
 
                             <div class="row mb-3 mt-2">
                                 <div class="col d-flex">
@@ -45,12 +47,11 @@
                                 </div>
                             </div>
                             <div class="backg p-4">
-                                <p>
-                                    {{ solve.solve }}
-
-                                </p>
-
+                                <div class="card-text">
+                                    <pre ref="codeContainer"><code>{{ solve.solve }}</code></pre>
+                                </div>
                             </div>
+
                             <h6 style="color: var(--GreenColor);">
                                 Tests :
                             </h6>
@@ -86,7 +87,10 @@
 
 <script>
 import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-css';
+import { BASE_URL } from "@/assets/config";
+
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
 import axios from 'axios';
 export default {
     props: {
@@ -101,19 +105,48 @@ export default {
             activeSolutionId: null,
         }
     },
+    watch: {
+        solve() {
+            this.highlightCode();
+        }
+    },
     mounted() {
+        this.highlightCode();
         this.getSolutions(this.problemId);
+       
     },
+    updated() {
+    this.highlightCode();
+  },
+
     methods: {
+        highlightCode() {
+            this.$nextTick(() => {
+                const codeContainer = this.$refs.codeContainer;
+                console.log('codeContainer:', codeContainer); // Debugging log
+                console.log('Type of codeContainer:', typeof codeContainer); // Debugging log
+                if (codeContainer && codeContainer.querySelector) {
+                    const codeBlock = codeContainer.querySelector('code');
+                    if (codeBlock) {
+                        const result = hljs.highlightAuto(codeBlock.textContent);
+                        codeBlock.innerHTML = result.value;
+                    }
+                } else {
+                    console.error('codeContainer is not an HTML element or does not have querySelector method');
+                }
+            });
+        },
+
+
         toggleCollapse(solutionId) {
-      this.activeSolutionId = this.activeSolutionId === solutionId ? null : solutionId;
-    },
-    isActive(solutionId) {
-      return this.activeSolutionId === solutionId;
-    },
+            this.activeSolutionId = this.activeSolutionId === solutionId ? null : solutionId;
+        },
+        isActive(solutionId) {
+            return this.activeSolutionId === solutionId;
+        },
 
         getSolutions(problemId) {
-            axios.get(`http://127.0.0.1:8000/api/student/problems/solves/${problemId}`, {
+            axios.get(BASE_URL + `problems/solves/${problemId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -126,9 +159,9 @@ export default {
         },
 
         getSolutiondetails(solutionId) {
-            this.solve={};
-            this.testcases=[];
-            axios.get(`http://127.0.0.1:8000/api/student/problems/solution/${solutionId}`, {
+            this.solve = {};
+            this.testcases = [];
+            axios.get(BASE_URL + `problems/solution/${solutionId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -169,11 +202,12 @@ p {
     border: 1px solid var(--borderColor);
     /* height: 40px; */
 }
+
 .collapse {
-  display: none;
+    display: none;
 }
 
 .collapse.show {
-  display: block;
+    display: block;
 }
 </style>

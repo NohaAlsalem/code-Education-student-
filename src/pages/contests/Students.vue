@@ -78,6 +78,7 @@
 
 <script>
 import TopBar from '@/components/TopBar.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
@@ -131,7 +132,7 @@ export default {
         },
 
         getStudents() {
-            axios.get('http://127.0.0.1:8000/api/student/contests/allStudents', {
+            axios.get( BASE_URL + 'contests/allStudents', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }

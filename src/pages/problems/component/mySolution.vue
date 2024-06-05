@@ -51,6 +51,7 @@
 <script>
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-css'
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     data() {
@@ -69,7 +70,7 @@ export default {
     },
     methods: {
         getSolution(solutionId) {
-            axios.get(`http://127.0.0.1:8000/api/student/problems/solution/${solutionId}`, {
+            axios.get( BASE_URL +`problems/solution/${solutionId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }

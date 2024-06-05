@@ -15,7 +15,7 @@
         <!-- input to contest name -->
         <div class="input-group">
             <!-- <input type="text" class="form-control" v-model="formData.name"> -->
-            <input type="text" class="form-control" v-model="formData.name">
+            <input type="text" class="form-control" v-model="name">
         </div>
 
         <div class="container mt-4 p-0">
@@ -23,7 +23,7 @@
         </div>
         <!-- input to contest desicription -->
         <div class="input-group ">
-            <textarea class="form-control" rows="10" v-model="formData.description"></textarea>
+            <textarea class="form-control" rows="10" v-model="description"></textarea>
             <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
         </div>
 
@@ -40,7 +40,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                         <p>privet</p>
-                  
+
                     </div>
                     <div class="form-check ms-4">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
@@ -54,23 +54,23 @@
         <div class="row mt-0 mb-4">
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="formData.start_at" type="text" class="form-control" placeholder="dd/mm/yy">
+                    <input v-model="start_at" type="text" class="form-control" placeholder="dd/mm/yy">
                     <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="formData.contest_time" type="text" class="form-control" placeholder="6:15">
+                    <input v-model="contest_time" type="text" class="form-control" placeholder="6:15">
                 </div>
             </div>
             <div class="col-4 ">
                 <div class="input-group">
-                    <input v-model="formData.password" type="text" class="form-control" placeholder="Enter password">
+                    <input v-model="password" type="text" class="form-control" placeholder="Enter password">
                 </div>
             </div>
         </div>
 
-     
+
         <div class="container mt-5 p-0">
             <p>help to generate your problems:</p>
         </div>
@@ -90,18 +90,18 @@
         <div class="row mt-0">
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="formData.max_level" type="text" class="form-control" placeholder="dd/mm/yy">
+                    <input v-model="max_level" type="text" class="form-control" placeholder="dd/mm/yy">
                     <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="formData. min_level" type="text" class="form-control" placeholder="6:15">
+                    <input v-model="min_level" type="text" class="form-control" placeholder="6:15">
                 </div>
             </div>
             <div class="col-4 ">
                 <div class="input-group">
-                    <input v-model="formData.scoure" type="text" class="form-control" placeholder="Enter password">
+                    <input v-model="scoure" type="text" class="form-control" placeholder="Enter password">
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
         </div>
 
 
-       
+
         <table class="table  table-bordered mt-4">
             <thead>
                 <tr>
@@ -137,17 +137,17 @@
                 </tr>
                 <tr v-for="student in selectedStudents" :key="student.id">
 
-                    <td >  
-                            {{ student.first_name }} {{ student.last_name }}
-                        </td>
+                    <td>
+                        {{ student.first_name }} {{ student.last_name }}
+                    </td>
                     <td> <router-link to="/students" style="text-decoration: none; color: inherit;">
                             <p> + Add
                             </p>
                         </router-link></td>
 
                 </tr>
-              
-                
+
+
             </tbody>
         </table>
 
@@ -163,90 +163,109 @@ export default {
     components: {
         NavBar
     },
-    data(){
-        return{
+    data() {
+        return {
             token: localStorage.getItem('token'),
-            selectedStudents:[],
+            selectedStudents: [],
+            name: '',
+            description: '',
+            password: '',
+            duration: 2,
+            start_at: null,
+            contest_time: '',
+            min_level: 5,
+            max_level: 8,
+            students: [1, 2],
+            houre: 2,
+            scoure: 0,
             // name:localStorage.getItem('nameContest') || '',
-formData:{
-    name:'',
-    description:'',
-    password:'',
-    duration:2,
-    start_at:null,
-    contest_time:'',
-    min_level:5,
-    max_level:8,
-    students:[1,2],
-    houre:2,
-    scoure:0,
 
-}
         }
     },
     mounted() {
-    this.loadFormData();
-  },
-  watch: {
-    formData: {
-      handler(newFormData) {
-        localStorage.setItem("formData", JSON.stringify(newFormData));
-      },
-      deep: true,
+        this.loadFormData();
     },
-  },
-  created() {
-    const students = this.$route.query.students;
-    if (students) {
-      this.selectedStudents = JSON.parse(students);
-    //   this.formData.students=for (let index = 0; index < array.length; index++) {
-    //     const element = array[index];
-        
-    //   }
-    }
-  },
-methods:{
-    loadFormData() {
-      const savedFormData = localStorage.getItem("formData");
-      if (savedFormData) {
-        this.formData = JSON.parse(savedFormData);
-      }
+    watch: {
+        formData: {
+            handler(newFormData) {
+                localStorage.setItem("formData", JSON.stringify(newFormData));
+            },
+            deep: true,
+        },
     },
-    saveFormData() {
-      localStorage.setItem("formData", JSON.stringify(this.formData));
-    },
-    clearFormData() {
-      localStorage.removeItem("formData");
-    },
+    created() {
+        const students = this.$route.query.students;
+        if (students) {
+            this.selectedStudents = JSON.parse(students);
+            //   this.formData.students=for (let index = 0; index < array.length; index++) {
+            //     const element = array[index];
 
-    navigateToStudents() {
-      this.saveFormData();
-      this.$router.push({
-        name: "problemsToaddTotest",
-        params: { id: this.$route.params.id },
-      });
+            //   }
+        }
     },
+    methods: {
+        loadFormData() {
+            const savedFormData = localStorage.getItem("formData");
+            if (savedFormData) {
+                this.formData = JSON.parse(savedFormData);
+            }
+        },
+        saveFormData() {
+            localStorage.setItem("formData", JSON.stringify(this.formData));
+        },
+        clearFormData() {
+            localStorage.removeItem("formData");
+        },
+
+        navigateToStudents() {
+            this.saveFormData();
+            this.$router.push({
+                name: "problemsToaddTotest",
+                params: { id: this.$route.params.id },
+            });
+        },
 
 
 
-    createContest(){
-    axios.post(BASE_URL + 'contests/create',this.formData,{ headers: {
-                     Authorization: `Bearer ${this.token}`,}})
-        .then((response) => {
-          
+        createContest() {
+            let formData = new FormData();
+            formData.append('name', this.name);
+            formData.append('description', this.description);
+            formData.append('password', this.password);
+            formData.append('duration', this.duration);
+            formData.append('start_at', this.start_at);
+            formData.append('contest_time', this.contest_time);
+            formData.append('min_level', this.min_level);
+            formData.append('max_level', this.max_level);
+            formData.append('houre', this.houre);
+            formData.append('scoure', this.scoure);
          
-          this.$router.push('/problems');
-          this.mesaage = response.data.mesaage;
-          console.log(this.token + "lknkj");
-          // <router-link to="/home"></router-link>
-        })
-        .catch((error) => {
-          console.log(error);
-          this.error = error;
-        });
-    },
-  
-}
+
+            this.selectedStudents.forEach((student, index) => {
+                index = index++;
+                formData.append(`students[${index}]`, student.id);
+            });
+            console.log(formData.students);
+            axios.post(BASE_URL + 'contests/create', formData, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                }
+            })
+                .then((response) => {
+
+
+                    this.$router.push('/contests');
+                    this.mesaage = response.data.mesaage;
+                    console.log(this.token + "lknkj");
+                    // <router-link to="/home"></router-link>
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.error = error;
+                });
+        },
+
+    }
 }
 </script>
 
@@ -324,7 +343,7 @@ addOffice() {
 
 
 
-  <!-- <table class="table  table-bordered mt-4">
+<!-- <table class="table  table-bordered mt-4">
     <thead>
         <tr>
             <th scope="col">

@@ -41,6 +41,7 @@
                                     </div>
                                     <h6 class="me-2" style="color: var(--GreenColor);">{{ info.points }}</h6>
                                 </div>
+
                                 <div class="d-flex mt-3 mb-5">
                                     <font-awesome-icon :icon="['fas', 'square-check']" class="m-1"
                                         style="color: var(--GreenOpacity);" />
@@ -70,7 +71,33 @@
                             <div class="col-md-6 ">
                                 <div class="card mb-3">
                                     <div class="card-body">
-
+                                        <div class="d-flex">
+                                            <font-awesome-icon :icon="['far', 'face-surprise']" class="m-1"
+                                        style="color: var(--GreenOpacity);"/>
+                                    <div>
+                                        <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Hard :</h6>
+                                       
+                                    </div>
+                                    <h6 class="me-2" style="color: var(--GreenColor);">{{ info.hard }}</h6>
+                                </div>
+                                <div class="d-flex">
+                                    <font-awesome-icon :icon="['far', 'face-smile']" class="m-1"
+                                        style="color: var(--GreenOpacity);"/>
+                                    <div>
+                                        <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Medium :</h6>
+                                       
+                                    </div>
+                                    <h6 class="me-2" style="color: var(--GreenColor);">{{ info.medium }}</h6>
+                                </div>
+                                <div class="d-flex">
+                                    <font-awesome-icon :icon="['far', 'face-smile-wink']" class="m-1"
+                                        style="color: var(--GreenOpacity);"/>
+                                    <div>
+                                        <h6 class="ms-2 me-2 mb-0" style="color: var(--GreenColor);">Easy :</h6>
+                                       
+                                    </div>
+                                    <h6 class="me-2" style="color: var(--GreenColor);">{{ info.easy }}</h6>
+                                </div>
                                     </div>
                                 </div>
 
@@ -144,6 +171,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import PieChart from './PieChart.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
@@ -152,13 +180,13 @@ export default {
     },
     data() {
         return {
-            Rank: '',
-            views: '',
-            solution: '',
-            thisweek: '',
+            // Rank: '',
+            // views: '',
+            // solution: '',
+            // thisweek: '',
            
-            degree:'',
-            date:'',
+            // degree:'',
+            // date:'',
             
             info:{},
             student:{},
@@ -171,7 +199,7 @@ export default {
     },
     methods: {
         getProfile() {
-       axios.get('http://127.0.0.1:8000/api/student/profile',{ headers: {
+       axios.get(BASE_URL + 'profile',{ headers: {
                      Authorization: `Bearer ${localStorage.getItem('token')}`,
                  }}).then((response) => {
                     this.info=response.data;

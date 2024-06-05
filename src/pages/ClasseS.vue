@@ -119,6 +119,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
@@ -146,7 +147,7 @@ export default {
     },
     methods: {
         getMyClasses() {
-            axios.get('http://127.0.0.1:8000/api/student/categories/', {
+            axios.get(BASE_URL + 'categories/', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -161,7 +162,7 @@ export default {
         },
 
         getMyTests(idtodetail) {
-            axios.get(`http://127.0.0.1:8000/api/student/categories/${idtodetail}`, {
+            axios.get(BASE_URL + `categories/${idtodetail}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -178,7 +179,7 @@ export default {
             })
         },
         changeClass() {
-            axios.post('http://127.0.0.1:8000/api/student/categories/change', this.formData, {
+            axios.post(BASE_URL + 'categories/change', this.formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }

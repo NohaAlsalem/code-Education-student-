@@ -32,16 +32,7 @@
               </div>
             </div>
 
-            <!-- <div class="row m-0">
-              <div class="col"><h6>Contest Data :</h6></div>
-              <div class="col"><p>{{ ContestDate }}</p></div>
-              <div class="w-100"></div>
-              <div class="col "><h6>Contest Time :</h6></div>
-              <div class="col "><p>{{ ContestTime }}</p></div>
-              <div class="w-100 mb-0"></div>
-              <div class="col  "><h6> Id</h6></div>
-              <div class="col  "><p>{{ ContestId }}</p></div>
-            </div> -->
+     
           </div>
         </div>
       </div>
@@ -119,6 +110,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
   components: { NavBar },
@@ -141,7 +133,7 @@ export default {
 
   methods: {
     getcontest(ContestId) {
-      axios.get(`http://127.0.0.1:8000/api/student/contests/${ContestId}`, {
+      axios.get( BASE_URL +`contests/${ContestId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         }

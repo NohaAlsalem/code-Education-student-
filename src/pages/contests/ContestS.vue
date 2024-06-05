@@ -43,7 +43,7 @@
 import NavBar from '@/components/NavBar.vue';
 import MyContests from './comonents/myContests.vue';
 import allConetsts from './allContests.vue';
-// import joinContests from './comonents/joinContests.vue';
+
 import creatContests from './comonents/creatContests.vue';
 
 export default {
