@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavBar></NavBar>
+        <NavBarA></NavBarA>
         <div class="m-5 mt-3">
             <div class="card" style="height:90vh; overflow-y: auto">
                
@@ -47,11 +47,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavBarA from './component/NavBarA.vue';
 
 export default {
     components: {
-        NavBar
+        NavBarA
     },
     data() {
         return {

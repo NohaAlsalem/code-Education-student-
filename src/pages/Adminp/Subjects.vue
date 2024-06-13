@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavBar></NavBar>
+        <NavBarA></NavBarA>
         <div class="container ms-2 mt-4">
             <div class="row">
                 <div class="col-8 ">
@@ -102,11 +102,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavBarA from './component/NavBarA.vue';
 
 export default {
     components: {
-        NavBar
+        NavBarA
     },
     data() {
         return {

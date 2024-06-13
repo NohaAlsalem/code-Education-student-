@@ -49,7 +49,7 @@
                             <div class="backg p-4">
                                 <div class="card-text">
                                     <pre ref="codeContainer"><code>{{ solve.solve }}</code></pre>
-                                </div>
+                                </div>                      
                             </div>
 
                             <h6 style="color: var(--GreenColor);">

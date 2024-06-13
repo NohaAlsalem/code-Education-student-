@@ -29,28 +29,28 @@ const routes = [
     //to admin
 {
     name:'students',
-    path:'/n',
+    path:'/studentsA',
     component:Astudents,
 
 },
 {
 name:'Subjects',
-path:'/er',
+path:'/subjectsA',
 component:Subjects,
 },
 {
 name:'TeachersAddEdit',
-path:'/f',
+path:'/teachersA',
 component:TeachersAddEdit,
 },
 {
     name:'StudentsClass',
-    path:'/m',
+    path:'/',
     component:StudentsClass,
 },
 {
     name:'Exams',
-    path:'/nbv',
+    path:'/examsA',
     component:Exams,
 },
 
@@ -62,7 +62,7 @@ component:TeachersAddEdit,
     },
     {
         name: 'splash',
-        path: '/',
+        path: '/m',
         component: splashSc,
     },
     {

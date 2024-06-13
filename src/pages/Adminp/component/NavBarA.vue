@@ -20,31 +20,31 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-0  mb-lg-0 mt-2">
 
-                        <router-link to="/problems" style="text-decoration: none; color: inherit;">
+                        <router-link to="/teachersA" style="text-decoration: none; color: inherit;">
                             <li class="nav-item">
-                                <h5 class="nav-link p-2 p-lg-3" aria-current="page" :class="{active:$route.path==='/problems'}">Problems</h5>
+                                <h5 class="nav-link p-2 p-lg-3" aria-current="page" :class="{active:$route.path==='/teachersA'}">Teachers</h5>
                                 <!-- <a class="nav-link active" aria-current="page" href="#">Problems</a> -->
                             </li>
                         </router-link>
 
 
-                        <router-link to="/contests" style="text-decoration: none; color: inherit;">
+                        <router-link to="/examsA" style="text-decoration: none; color: inherit;">
                             <li class="nav-item">
-                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/contests'}">Contests</h5>
+                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/examsA'}">Exams</h5>
                                 <!-- <a class="nav-link" href="#">Contests</a> -->
                             </li>
                         </router-link>
 
-                        <router-link to="/classes" style="text-decoration: none; color: inherit;">
+                        <router-link to="/studentsA" style="text-decoration: none; color: inherit;">
                             <li class="nav-item">
-                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/classes'}">Classes</h5>
+                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/studentsA'}">Students</h5>
                                 <!-- <a class="nav-link" href="#">classes</a> -->
                             </li>
                         </router-link>
 
-                        <router-link to="/exams" style="text-decoration: none; color: inherit;">
+                        <router-link to="/subjectsA" style="text-decoration: none; color: inherit;">
                             <li class="nav-item">
-                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/exams'}">Exams</h5>
+                                <h5 class="nav-link p-2 p-lg-3" :class="{active:$route.path==='/subjectsA'}">Subjects</h5>
                                 <!-- <a class="nav-link" href="#">Exams</a> -->
                             </li>
                         </router-link>
@@ -54,10 +54,7 @@
                     <router-link to="/profile" style="text-decoration: none; color: inherit;">
             <font-awesome-icon icon="fa-solid fa-user" class="i"/>
         </router-link>
-                    <!-- <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
+               
                 </div>
             </div>
         </nav>
