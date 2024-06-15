@@ -36,7 +36,7 @@ export default{
         codeEdu
     },
     created(){
-      setTimeout( () => this.$router.push({ path: '/teachersA'}), 2000);
+      setTimeout( () => this.$router.push({ path: '/login'}), 2000);
 
     }
 

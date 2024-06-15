@@ -45,7 +45,7 @@ component:TeachersAddEdit,
 },
 {
     name:'StudentsClass',
-    path:'/',
+    path:'/lm',
     component:StudentsClass,
 },
 {
@@ -62,7 +62,7 @@ component:TeachersAddEdit,
     },
     {
         name: 'splash',
-        path: '/m',
+        path: '/',
         component: splashSc,
     },
     {

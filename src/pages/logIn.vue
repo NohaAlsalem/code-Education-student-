@@ -115,7 +115,7 @@ export default {
           console.log(response.data.token)
          
           localStorage.setItem('token', this.token);
-          this.$router.push('/problems');
+          this.$router.push('/teachersA');
           this.mesaage = response.data.mesaage;
         
           // <router-link to="/home"></router-link>

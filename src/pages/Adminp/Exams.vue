@@ -1,8 +1,8 @@
 <template>
     <div>
         <NavBarA></NavBarA>
-        <div class="container ms-2 mt-4">
-            <div class="row">
+        <div class=" ms-2 mt-4">
+            <div class="row m-0">
                 <div class="col-4 ">
                     <div class="card m-5" >                       
                       
@@ -14,27 +14,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>dd</td>
-                                        <td>gokd</td>
+                                    <tr v-for="exam in exams" :key="exam.id" @click="getDetailExam(exam.id)">
+                                        <td >{{ exam.subject }}
+                                       </td>
+                                        <td>{{ exam.exam_date }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>dd</td>
-                                        <td>gokd</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dd</td>
-                                        <td>gokd</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dd</td>
-                                        <td>gokd</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dd</td>
-                                        <td>gokd</td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                        
@@ -42,7 +26,7 @@
                 </div>
 
                 <div class="col-8">
-<detailProblem></detailProblem>
+<detailProblem :exam="this.exam" :problem="this.problem"  :questions="this.questions" :tests="this.tests" :tags="this.tags"></detailProblem>
                    </div>
             </div>
         </div>
@@ -52,6 +36,8 @@
 <script>
 import NavBarA from './component/NavBarA.vue';
 import detailProblem from '@/pages/Adminp/component/detailProblem.vue';
+import axios from 'axios';
+import { ADMIN_URL } from "@/assets/config";
 
 export default {
     components: {
@@ -60,9 +46,58 @@ export default {
     },
     data() {
         return {
-           
+           exams:[],
+           exam:{},
+           problem:{},
+           tests:[],
+           tags:[],
+           teacher_solve_code:'',
+           questions:[],
         }
-    }
+    },
+    mounted(){
+        this.getExams();
+    },
+    methods:{
+        getExams() {
+       
+            axios.get(ADMIN_URL + 'exams', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                this.exams = response.data.data;
+                console
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
+  
+    getDetailExam(examId) {
+            axios.get(ADMIN_URL + `exams/${examId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                this.exam = response.data.data;
+                this.problem=response.data.data.problem;
+                this.tests=response.data.data.tests;
+                this.tags=response.data.data.tags;
+                this.questions=response.data.data.questions;
+                this.teacher_solve_code=response.data.data.teacher_solve_code;
+
+
+                console.log(this.exam.subject+'ljhujyg')
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
+    },
+    
 }
 </script>
 

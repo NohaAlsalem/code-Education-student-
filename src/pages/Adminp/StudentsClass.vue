@@ -21,7 +21,7 @@
                         </thead>
 
                         <tbody>
-                            <tr>
+                            <tr  v-for="student in students" :key="student.id">
                                 <td >gjnk</td>
                                 <td>
                                     <p>not Solved</p>
@@ -49,6 +49,8 @@
 
 <script>
 import NavBarA from './component/NavBarA.vue';
+import axios from 'axios';
+import { ADMIN_URL } from "@/assets/config";
 export default {
     components: {
         NavBarA
@@ -57,10 +59,31 @@ export default {
         return {
            
             add:true,
-
+            students:[],
 
         }
-    }
+    },
+    mounted(){
+        this.getStudents();
+    },
+    methods :{
+        getStudents() {
+       axios.get(ADMIN_URL + 'students', {
+           headers: {
+               Authorization: `Bearer ${localStorage.getItem('token')}`,
+           }
+       }).then((response) => {
+           console.log(response.data);
+           this.students = response.data.data;
+           console
+       }).catch((error) => {
+           console.log(error)
+           this.errMessage = 'error retrieving data'
+       })
+   },
+
+    },
+
 }
 </script>
 

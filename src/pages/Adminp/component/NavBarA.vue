@@ -51,10 +51,7 @@
 
 
                     </ul>
-                    <router-link to="/profile" style="text-decoration: none; color: inherit;">
-            <font-awesome-icon icon="fa-solid fa-user" class="i"/>
-        </router-link>
-               
+                  
                 </div>
             </div>
         </nav>
