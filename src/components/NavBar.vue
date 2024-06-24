@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <!-- <a class="navbar-brand" href="#">Navbar</a> -->
                 <div class="d-flex">
-                    <img src="@/assets/images/logo.png" alt="Logo" width="40" height="40"
+                    <img src="@/assets/images/logoo.png" alt="Logo" width="40" height="40"
                         class="d-inline-block align-text-top ps-0 ms-0">
                         <codeEdu class="mt-1"></codeEdu>
                 </div>

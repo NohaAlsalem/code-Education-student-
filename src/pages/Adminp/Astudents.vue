@@ -14,10 +14,10 @@
                 <thead>
                   <tr>
                     <th scope="col">#id</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Phone Number</th>
+                    <th scope="col">Student Name</th>
                     <th scope="col">E-mail</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">University_id</th>
                     <th scope="col">password</th>
                   </tr>
 
@@ -26,13 +26,13 @@
                 <tbody>
 
                   <tr v-for="student in students" :key="student.id">
-                    <td scope="row">gjnk</td>
+                    <td scope="row">{{ student.id }}</td>
                     <td>
-                      <p>not Solved</p>
+                      <p>{{ student.student_name }}</p>
                     </td>
-                    <td>dd</td>
-                    <td class="fw-bold">kcj</td>
-                    <td>gokd</td>
+                    <td>{{ student.student_email }}</td>
+                    <td >{{ student.phone_number }}</td>
+                    <td>{{ student.university_id }}</td>
                     <td> <button type="button" class="btn" @click="generatePassword(student.id)">Generate</button>
                     </td>
                   </tr>
@@ -124,54 +124,58 @@
                 </thead>
 
                 <tbody>
-                  <tr v-for="student in change_class_requests" :key="student.id" class="trow"
-                    @click="toggleCollapse(student.id)">
+                  <tr v-for="student1 in change_class_requests" :key="student1.id" class="trow"
+                    @click="toggleCollapse(student1.id)">
                     <!-- <tr v-for="student in change_class_requests" class="trow" data-bs-toggle="modal" data-bs-target="#classModal"> -->
 
-                    <td scope="row" aria-expanded="false" :aria-controls="'modal' + student.id"
-                      :data-bs-toggle="'modal'" :data-bs-target="'#cardModal' + student.id">{{ student.student_name }}
+                    <td scope="row" aria-expanded="false" :aria-controls="'modal' + student1.id"
+                      :data-bs-toggle="'modal'" :data-bs-target="'#cardModal' + student1.id">{{ student1.student_name }}
                     </td>
-                    <td>{{ student.old_class }}</td>
-                    <td>{{ student.new_class }}</td>
+                    <td>{{ student1.old_class }}</td>
+                    <td>{{ student1.new_class }}</td>
 
                     <td>
-                      <div class="pt-0 d-flex" @click="toggleCollapse(student.id)">
+                      <div class="pt-0 d-flex" @click="toggleCollapse(student1.id)">
 
                         <button type="button" class="btn btn-success ms-5 mt-0" aria-expanded="false"
-                          :aria-controls="'modal' + student.id" :data-bs-toggle="'modal'"
-                          :data-bs-target="'#cardModal' + student.id" @click="passcontestid(teacher.id)">
+                          :aria-controls="'modal' + student1.id" :data-bs-toggle="'modal'"
+                          :data-bs-target="'#cardModal' + student1.id" @click="passcontestid(student1.id)">
                           Change
                         </button>
                       </div>
 
-                      <div class="modal fade" :class="['cardModal', { show: isActive(student.id) }]"
-                        :id="'cardModal' + student.id" tabindex="-1" aria-labelledby="cardModalLabel"
+                      <div class="modal fade" :class="['cardModal', { show: isActive(student1.id) }]"
+                        :id="'cardModal' + student1.id" tabindex="-1" aria-labelledby="cardModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="">
                               <div class="m-0" style="text-align: center">
-                                <p class=" pb-1 m-0">{{ student.id }}</p>
+                                <p class=" pb-1 m-0">{{ student1.id }}</p>
 
                                 <div class="modal-body" style="justify-content: center;">
                                   <div class=" d-flex">
                                     <h6 class=" me-2 mt-1">name :</h6>
-                                    <h7>name</h7>
+                                    <h7>{{student1.student_name}}</h7>
                                   </div>
 
                                   <div class=" d-flex ">
                                     <div class="d-flex me-5">
                                       <h6 class=" me-2 mt-1">old class :</h6>
-                                      <h7>old</h7>
+                                      <h7>{{ student1.old_class }}</h7>
                                     </div>
                                     <div class="d-flex ms-5">
                                       <h6 class=" me-2 mt-1">new class :</h6>
-                                      <h7>new</h7>
+                                      <h7>{{ student1.new_class }}</h7>
                                     </div>
                                   </div>
-                                  <h6 class=" mt-1">the reason :</h6>
-                                  <input class="w-100 mb-2">
-                                  <button class="btn" data-bs-dismiss="modal">Agree</button>
+                                  <div class="d-flex me-5">
+                                      <h6 class=" me-2 mt-1">the reason :</h6>
+                                      <h7>{{ student1.reason }}</h7>
+                                    </div>
+                                  <!-- <h6 class=" mt-1">the reason :</h6>
+                                  <input class="w-100 mb-2"> -->
+                                  <button class="btn" @click="changeClass(student1.id)" data-bs-dismiss="modal">Agree</button>
                                 </div>
 
                               </div>
@@ -251,6 +255,23 @@ export default {
       })
         .then((response) => {
           this.newStudentPassword = response.new_password;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error;
+        });
+    },
+
+
+    changeClass(studentId) {
+   
+      axios.post(ADMIN_URL + `change/${studentId}`, '', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+      })
+        .then((response) => {
+          // this.newStudentPassword = response.new_password;
         })
         .catch((error) => {
           console.log(error);

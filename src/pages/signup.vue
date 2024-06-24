@@ -5,7 +5,7 @@
       <div class="col-md-12">
         <div class="form-sub-main">
           <div class="_main_head_as text-center justify-content-cnter align-items-center mb-4">
-            <img src="@/assets/images/logo.jpg">
+            <img src="@/assets/images/logoo.png">
             <codeEdu></codeEdu>
           </div>
 

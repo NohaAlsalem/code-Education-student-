@@ -104,7 +104,7 @@
 
                                                                     <tbody>
                                                                         <tr v-for="category in categry_No_Tech"
-                                                                            :key="category.id" >
+                                                                            :key="category.class" >
                                                                             <td >{{ category.class }}</td>
                                                                             <td>
                                                                                 <p>{{ category.subject }}</p>
@@ -113,10 +113,10 @@
                                                                             <td>{{ category.teacher_name }}</td>
                                                                             <td> <button v-if="category.teacher_name"
                                                                                     type="button" class="btn"
-                                                                                    @click="addformdata(category.id,teacher.id),AddTeacher2class(teacher.id)" data-bs-dismiss="modal">Edit</button>
+                                                                                    @click="addformdata(teacher.id,category.class),AddTeacher2class()" data-bs-dismiss="modal">Edit</button>
                                                                                 <button v-else="category.teacher_name"
                                                                                     type="button" class="btn"
-                                                                                    @click="addformdata(category.id,teacher.id),AddTeacher2class(teacher.id)" data-bs-dismiss="modal">Add</button>
+                                                                                    @click="addformdata(teacher.id,category.class),AddTeacher2class()" data-bs-dismiss="modal">Add</button>
                                                                             </td>
                                                                         </tr>
 
@@ -196,9 +196,10 @@ export default {
         this.category_no_Teachers();
     },
     methods: {
-        addformdata(categoryId,teacherId){
-            this.formData1.category_id=categoryId;
+        addformdata(teacherId,categoryId){
+           
             this.formData1.teacher_id=teacherId;
+            this.formData1.category_id=categoryId;
 
         },
 
@@ -263,6 +264,7 @@ export default {
         },
 
         AddTeacher2class() {
+            console.log(this.formData1)
             axios.post(ADMIN_URL + 'add-teacher2category', this.formData1, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -278,7 +280,7 @@ export default {
                     this.error = error;
                 });
         },
-        EditTeacher2class() { },
+       
         DeleteTeacher(teacherId) {
             axios.delete(ADMIN_URL + `teacher/${teacherId}`, {
                 headers: {

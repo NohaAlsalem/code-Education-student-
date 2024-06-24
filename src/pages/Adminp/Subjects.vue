@@ -5,36 +5,37 @@
             <div class="row">
                 <div class="col-8 ">
                     <div class="card m-4 mt-0
-                    " style="height:100vh;">
+                    " style="height:100vh;" v-for="subject in Subjects">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col">
                                     <div class="card-title d-flex m-0">
+                                        <h6 class="me-2">number of class:</h6>
+                                        <p>{{ subject.class }}</p>
+                                    </div>
+                                    <div class="card-title d-flex m-0">
                                         <h6 class="me-2">Subject:</h6>
-                                        <p>{{ Subject }}</p>
+                                        <p>{{ subject.subject }}</p>
                                     </div>
+
                                     <div class="card-title d-flex m-0">
-                                        <h6 class="me-2">number of classes:</h6>
-                                        <p>{{ NumberClass }}</p>
-                                    </div>
-                                    <div class="card-title d-flex m-0">
-                                        <h6 class="me-2">number of student in class:</h6>
-                                        <p>{{ NumberStudent }}</p>
+                                        <h6 class="me-2">Student in class:</h6>
+                                        <!-- <p>{{ NumberStudent }}</p> -->
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="card-title d-flex m-0">
-                                        <h6 class="me-2">test degree:</h6>
-                                        <p>{{ TestDegre }}</p>
+                                        <h6 class="me-2">Teacher Name:</h6>
+                                        <p>{{ subject.teacher_name }}</p>
                                     </div>
                                     <div class="card-title d-flex m-0">
-                                        <h6 class="me-2">student attendance degree:</h6>
-                                        <p>{{ AttendDegree }}</p>
+                                        <h6 class="me-2">Number of students:</h6>
+                                        <p>{{ subject.number_of_students }}</p>
                                     </div>
-                                    <div class="card-title d-flex m-0">
+                                    <!-- <div class="card-title d-flex m-0">
                                         <h6 class="me-2">final exam degree:</h6>
                                         <p>{{ FinalDegre }}</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -42,10 +43,11 @@
                             <table class="table table-borderless m-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Class</th>
-                                        <th scope="col">Number of sets</th>
-                                        <th scope="col">Number of student</th>
-                                        <th scope="col">Teacher name</th>
+                                        <th scope="col">student_id</th>
+                                        <th scope="col">student_name</th>
+                                        <th scope="col">student_email</th>
+                                        <th scope="col">phone_number</th>
+                                        <th scope="col">Rate</th>
 
                                     </tr>
 
@@ -53,47 +55,50 @@
 
                                 <tbody>
 
-                                    <tr>
-                                        <td scope="row">gjnk</td>
+                                    <tr v-for="student in subject.students" :key="student.student_id">
+                                        <td scope="row">{{ student.student_id }}</td>
 
 
                                         <td>
-                                            <p>not Solved</p>
+                                            <p>{{ student.student_name }}</p>
                                         </td>
-                                        <td>dd</td>
+                                        <td>{{ student.student_email }}</td>
 
-                                        <td>gokd</td>
+                                        <td>{{ student.phone_number }}</td>
+                                        <td>{{ student.rate }}</td>
                                     </tr>
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="col-4">
-                    <div class="card p-4" >
-                       <p class="mb-4">
-                        you can add subjects and classes and select the degree of tests and final exam and student attendance.
-                       </p>
-                       <form>
-                        <p >Subject Name:</p>
-                        <input class="inp" v-model="SubjectName"/>
-                        <p >Number Of Classes:</p>
-                        <input class="inp" v-model="NumberClasses"/>
-                        <p >Number Of Sets:</p>
-                        <input class="inp" v-model="NumberSets">
-                        <p >Test Degree:</p>
-                        <input class="inp" v-model="TestDegree">
-                        <p >Student Attendance Degree:</p>
-                        <input class="inp" v-model="AttendanceDegree">
-                        <p >Final Exam Degree:</p>
-                        <input class="inp" v-model="FinalDegree">
-                        <div>
-                        <button class="btn">Add</button>
+
+                    <div class="card p-4">
+                        <p>add exel file</p>
+                            <input @change="handleFile1Upload()" type="file" ref="file1" class="form-control-file">
+                            <button @click="importStudents($event)" class="btn">Add</button>
                     </div>
-                       </form>
-                      
+                    <div class="card p-4">
+                        <p class="mb-4">
+                            you can add subjects and classes and select the degree of tests and final exam and student
+                            attendance.
+                        </p>
+                        <form>
+                            <p>Subject Name:</p>
+                            <input class="inp" v-model="SubjectName" />
+                            <p>Number Of Classes:</p>
+                            <input class="inp" v-model="NumberClasses" />
+                            <p>Year:</p>
+                            <input class="inp" v-model="year">
+                            <p>add exel file</p>
+                            <input @change="handleFileUpload()" type="file" ref="file" class="form-control-file">
+                            <button @click="AddStudents($event)" class="btn">Add</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -103,38 +108,92 @@
 
 <script>
 import NavBarA from './component/NavBarA.vue';
-
+import axios from 'axios';
+import { ADMIN_URL } from "@/assets/config";
 export default {
     components: {
         NavBarA
     },
     data() {
         return {
-            SubjectName:'',
-            NumberClasses:0,
-            NumberSets:0,
-            TestDegree:0,
-            AttendanceDegree:0,
-            FinalDegree:0,
-
-
-
-
-
-
-            //////////////////////
-            Subject: 'programming',
-            NumberClass: '20',
-            NumberStudent: 20,
-
-            TestDegre: '15',
-            AttendDegree: '5',
-            FinalDegre: '10',
-         
-
-
+            Subjects: [],
+            SubjectName: '',
+            year: 0,
+            NumberClasses: 0,
+            file: '',
 
         }
+    },
+
+    mounted() {
+        this.getSubjects();
+    },
+
+    methods: {
+        handleFile1Upload() {
+            this.file = this.$refs.file1.files[0];
+        },
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+        },
+        AddStudents(event) {
+        event.preventDefault();  // منع إعادة تحميل الصفحة
+        let formData = new FormData();
+        formData.append('classes', this.NumberClasses);
+        formData.append('year', this.year);
+        formData.append('file', this.file);
+    
+        axios.post(ADMIN_URL +'students/distribute', formData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        })
+            .then((response) => {
+
+            })
+            .catch((error) => {
+                console.log(error);
+                this.error = error;
+            });
+    },
+
+    importStudents(event) {
+        event.preventDefault();  // منع إعادة تحميل الصفحة
+        let formData = new FormData();
+       
+        formData.append('file', this.file);
+    
+        axios.post(ADMIN_URL +'students/import', formData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        })
+            .then((response) => {
+
+            })
+            .catch((error) => {
+                console.log(error);
+                this.error = error;
+            });
+    },
+        getSubjects() {
+            axios.get(ADMIN_URL + 'categories-with-subjects', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                // console.log(response.data);
+                this.Subjects = response.data.data;
+
+
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
+      
+
+
     }
 }
 </script>
@@ -151,12 +210,14 @@ h6 {
     font-weight: bold;
     margin: 0;
 }
-.inp{
+
+.inp {
     width: 100%;
     border-radius: 5px;
     border: none;
     margin-bottom: 10px;
 }
+
 .card {
     background: var(--WhiteColor);
     padding: 0;
@@ -177,6 +238,4 @@ h6 {
     border: 0;
     color: white;
 }
-
-
 </style>

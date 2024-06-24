@@ -4,7 +4,7 @@
   <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <div class="d-flex">
-                    <img src="@/assets/images/logo.png" alt="Logo" width="40" height="40"
+                    <img src="@/assets/images/logoo.png" alt="Logo" width="40" height="40"
                         class="d-inline-block align-text-top ps-0 ms-0">
                         <codeEdu class="mt-1"></codeEdu>
                 </div>
@@ -14,7 +14,7 @@
 <!-- <TopBar></TopBar> -->
 
 <div class="landing text-center justify-content-cnter align-items-center">
-    <img  src="@/assets/images/logo.jpg" alt="Logo"  class="d-inline-block align-text-top">
+    <img  src="@/assets/images/logoo.png" alt="Logo"  class="d-inline-block align-text-top">
     <div>
     <h2 class="code d-inline pe-2 ">Code</h2>
     <h2 class="edu d-inline">Education</h2>
