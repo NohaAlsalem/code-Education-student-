@@ -55,12 +55,20 @@
             <div class="col-4">
                 <div class="input-group">
                     <input v-model="start_at" type="text" class="form-control" placeholder="dd/mm/yy">
-                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+                    <!-- <datepicker 
+      v-model="start_at" 
+      class="form-control" 
+      :format="datepickerFormat"
+      placeholder="dd/mm/yy" 
+      style="background: var(--WhiteColor); border: 1px solid var(--LightGreen); padding: 10px; margin-right: 20px;" 
+      @change="updateStartAt"
+    /> -->
+               
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="contest_time" type="text" class="form-control" placeholder="6:15">
+                    <input v-model="contest_time" type="text" class="form-control" placeholder="00:00:00">
                 </div>
             </div>
             <div class="col-4 ">
@@ -76,11 +84,12 @@
         </div>
 
         <div class="row">
-            <div class="col-4">
-                <p>Max-level</p>
-            </div>
+            
             <div class="col-4">
                 <p>Min-level</p>
+            </div>
+            <div class="col-4">
+                <p>Max-level</p>
             </div>
             <div class="col-4">
                 <p>Scoure</p>
@@ -90,15 +99,16 @@
         <div class="row mt-0">
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="max_level" type="text" class="form-control" placeholder="dd/mm/yy">
-                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
+                    <input v-model="min_level" type="text" class="form-control" placeholder="min">
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="min_level" type="text" class="form-control" placeholder="6:15">
+                    <input v-model="max_level" type="text" class="form-control" placeholder="max">
+                    <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
                 </div>
             </div>
+         
             <div class="col-4 ">
                 <div class="input-group">
                     <input v-model="scoure" type="text" class="form-control" placeholder="Enter password">
@@ -154,42 +164,54 @@
 
     </div>
 </template>
-
 <script>
+import Datepicker from 'vue3-datepicker';
 import NavBar from '@/components/NavBar.vue';
 import axios from 'axios';
 import { BASE_URL } from "@/assets/config";
+import moment from 'moment';
 export default {
     components: {
-        NavBar
+        NavBar,
+        Datepicker,
     },
     data() {
         return {
             token: localStorage.getItem('token'),
+      startAtDisplay: '', // The date in "dd/mm/yy" format
+      datepickerFormat: 'DD/MM/YY',
             selectedStudents: [],
             name: '',
             description: '',
             password: '',
             duration: 2,
-            start_at: null,
+            start_at: '',
             contest_time: '',
-            min_level: 5,
-            max_level: 8,
-            students: [1, 2],
+            min_level: null,
+            max_level: null,
+            students: [],
             houre: 2,
             scoure: 0,
-            // name:localStorage.getItem('nameContest') || '',
-
-        }
+        };
     },
     mounted() {
         this.loadFormData();
+        this.clearFormData();
     },
     watch: {
-        formData: {
-            handler(newFormData) {
-                localStorage.setItem("formData", JSON.stringify(newFormData));
-            },
+        // Watch all the relevant data properties
+        name: 'saveFormData',
+        description: 'saveFormData',
+        password: 'saveFormData',
+        duration: 'saveFormData',
+        start_at: 'saveFormData',
+        contest_time: 'saveFormData',
+        min_level: 'saveFormData',
+        max_level: 'saveFormData',
+        houre: 'saveFormData',
+        scoure: 'saveFormData',
+        selectedStudents: {
+            handler: 'saveFormData',
             deep: true,
         },
     },
@@ -197,26 +219,51 @@ export default {
         const students = this.$route.query.students;
         if (students) {
             this.selectedStudents = JSON.parse(students);
-            //   this.formData.students=for (let index = 0; index < array.length; index++) {
-            //     const element = array[index];
-
-            //   }
         }
     },
     methods: {
+        updateStartAt(date) {
+      this.startAtDisplay = date;
+      this.start_at = moment(date, 'DD/MM/YY').format('YYYY-MM-DD');
+    },
         loadFormData() {
             const savedFormData = localStorage.getItem("formData");
             if (savedFormData) {
-                this.formData = JSON.parse(savedFormData);
+                const parsedData = JSON.parse(savedFormData);
+                this.name = parsedData.name || '';
+                this.description = parsedData.description || '';
+                this.password = parsedData.password || '';
+                this.duration = parsedData.duration ;
+                this.start_at = parsedData.start_at ;
+                // this.start_at = parsedData.start_at ? new Date(parsedData.start_at) : null;
+                this.contest_time = parsedData.contest_time || '';
+                this.min_level = parsedData.min_level;
+                this.max_level = parsedData.max_level;
+                this.houre = parsedData.houre ;
+                this.scoure = parsedData.scoure ;
+                this.selectedStudents = parsedData.selectedStudents || [];
             }
         },
         saveFormData() {
-            localStorage.setItem("formData", JSON.stringify(this.formData));
+            const formData = {
+                name: this.name,
+                description: this.description,
+                password: this.password,
+                duration: this.duration,
+                start_at: this.start_at,
+                // start_at: this.start_at ? this.start_at.toISOString() : '',
+                contest_time: this.contest_time,
+                min_level: this.min_level,
+                max_level: this.max_level,
+                houre: this.houre,
+                scoure: this.scoure,
+                selectedStudents: this.selectedStudents,
+            };
+            localStorage.setItem("formData", JSON.stringify(formData));
         },
         clearFormData() {
             localStorage.removeItem("formData");
         },
-
         navigateToStudents() {
             this.saveFormData();
             this.$router.push({
@@ -224,8 +271,16 @@ export default {
                 params: { id: this.$route.params.id },
             });
         },
-
-
+        beforeRouteLeave(to, from, next) {
+            // Save form data before leaving the route
+            this.saveFormData();
+            next();
+        },
+        beforeRouteUpdate(to, from, next) {
+            // Load form data when the route is updated (e.g., coming back from a child route)
+            this.loadFormData();
+            next();
+        },
 
         createContest() {
             let formData = new FormData();
@@ -233,45 +288,40 @@ export default {
             formData.append('description', this.description);
             formData.append('password', this.password);
             formData.append('duration', this.duration);
-            formData.append('start_at', this.start_at);
+            formData.append('start_at', this.start_at ? this.start_at : '');
+            // formData.append('start_at', this.start_at ? this.start_at.toISOString() : '');
             formData.append('contest_time', this.contest_time);
             formData.append('min_level', this.min_level);
             formData.append('max_level', this.max_level);
             formData.append('houre', this.houre);
             formData.append('scoure', this.scoure);
-         
 
             this.selectedStudents.forEach((student, index) => {
                 index = index++;
                 formData.append(`students[${index}]`, student.id);
             });
-            console.log(formData.students);
             axios.post(BASE_URL + 'contests/create', formData, {
                 headers: {
                     Authorization: `Bearer ${this.token}`,
                 }
             })
                 .then((response) => {
-
-
                     this.$router.push('/contests');
-                    this.mesaage = response.data.mesaage;
-                    console.log(this.token + "lknkj");
-                    // <router-link to="/home"></router-link>
+                    this.message = response.data.message;
                 })
                 .catch((error) => {
                     console.log(error);
                     this.error = error;
                 });
         },
-
     }
 }
 </script>
 
 <style scoped>
 p {
-    color: var(--GreenOpacity);
+    color: var(--GreenColor);
+    font-weight: bold;
 }
 
 h6 {
@@ -279,7 +329,8 @@ h6 {
 }
 
 .table th {
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
 }
 
 .table td {
@@ -295,7 +346,8 @@ h6 {
 }
 
 .input-group .form-control {
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
     border: 1px solid var(--LightGreen);
     padding: 10px;
     margin-right: 20px;
@@ -308,105 +360,3 @@ h6 {
     color: var(--LightGreen);
 }
 </style>
-
-<!-- 
-addOffice() {
-    let formData = new FormData();
-    formData.append('name', this.name);
-    formData.append('id_gov',this.id_gov);
-    formData.append('branch_id', this.branch_id);
-    formData.append('type_id', 2);
-    formData.append('star_id', this.star_id);
-    formData.append('location', this.location);
-    formData.append('discreption', this.discreption);
-    formData.append('phoneOne', this.phoneOne);
-    formData.append('phoneTwo', this.phoneTwo);
-    formData.append('code', this.code);
-    formData.append('amount', this.amount);
-    formData.append('email', this.email);
-    formData.append('password', this.password);
-    formData.append('status', this.status);
-    formData.append('contract', this.file2);
-    formData.append('image', this.file1);
-    formData.append('percent',this.percent)
-
-    axios.post('http://127.0.0.1:8000/api/requestJoin', formData)
-      .then(response => {
-        console.log(response + "lknkj")
-        // handle successful response from server
-      })
-      .catch(error => {
-        console.log(error)
-        // handle error response from server
-      });
-  }, -->
-
-
-
-<!-- <table class="table  table-bordered mt-4">
-    <thead>
-        <tr>
-            <th scope="col">
-                <h6>
-                    Problem list
-                </h6>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-
-                <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                    <p>
-                        Matrix Similarity After Cyclic Shifts
-                    </p>
-                </router-link>
-            </td>
-          
-        </tr>
-        <tr>
-            <td>
-
-                <router-link to="/problems" style="text-decoration: none; color: inherit;">
-                    <p>
-                        Count Beautiful Substring |
-                    </p>
-                </router-link>
-            </td>
-        </tr>
-        <tr>
-            <td>
-
-                <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                    <p>
-                        Make Lexicographically Smallest Array by Swapping Elements
-                    </p>
-                </router-link>
-            </td>
-        </tr>
-        <tr>
-            <td>
-
-                <router-link to="/contests" style="text-decoration: none; color: inherit;">
-                    <p> Count Beautiful Substring ||
-                    </p>
-                </router-link>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>
-                    Make Lexicographically Smallest Array by Swapping Elements
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">
-                <p>
-                    + Add More
-                </p>
-            </td>
-        </tr>
-    </tbody>
-</table> -->

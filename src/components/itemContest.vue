@@ -23,7 +23,7 @@
                                 </h5>
                                 <div class="pt-2 d-flex">
                                     <p>
-                                        date exam:</p>
+                                        date start contest:</p>
                                     <h6 class="text-black pt-1 ps-1">
                                         {{ contest.start_at }}
                                     </h6>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="pt-0 d-flex">
                                     <p>
-                                        time of exam:</p>
+                                        time of contest:</p>
                                     <p class="text-black">
                                         {{ contest.contest_time }}
                                     </p>

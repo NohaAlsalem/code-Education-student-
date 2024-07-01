@@ -11,6 +11,7 @@
                         <div class="row" @click="toggleCollapse(solution.id)">
                             <div class="i" :data-bs-toggle="'collapse'" :data-bs-target="'#collapse' + solution.id"
                                 aria-expanded="false" :aria-controls="'collapse' + solution.id">
+                                <div class="d-flex">
                                 <div class="col">
                                     <p>{{ solution.name }}</p>
                                 </div>
@@ -23,11 +24,16 @@
                                     </p>
                                 </div>
                             </div>
+                            </div>
                         </div>
                         <div :class="['collapse', { show: isActive(solution.id) }]" :id="'collapse' + solution.id"
                             style="justify-self: start; text-align: left;">
 
+
+                      
+
                             <div class="row mb-3 mt-2">
+                                
                                 <div class="col d-flex">
                                     <h6 style="color: var(--GreenColor);">
                                         {{ solution.name }}:
@@ -46,15 +52,18 @@
                                     </h6>
                                 </div>
                             </div>
+
+
                             <div class="backg p-4">
                                 <div class="card-text">
                                     <pre ref="codeContainer"><code>{{ solve.solve }}</code></pre>
-                                </div>                      
+                                </div>
                             </div>
-
-                            <h6 style="color: var(--GreenColor);">
+<div v-if="ll >= 1">
+                            <h6 style="color: var(--GreenColor);" >
                                 Tests :
                             </h6>
+                        </div>
                             <div v-for="(testcase, index) in testcases" :key="index">
                                 <h6 style="color: var(--GreenColor); margin-top: 20px;">
                                     Test {{ index + 1 }} :
@@ -103,6 +112,7 @@ export default {
             solve: {},
             testcases: [],
             activeSolutionId: null,
+            ll:0,
         }
     },
     watch: {
@@ -113,11 +123,11 @@ export default {
     mounted() {
         this.highlightCode();
         this.getSolutions(this.problemId);
-       
+this.ll=this.testcases.length;
     },
     updated() {
-    this.highlightCode();
-  },
+        this.highlightCode();
+    },
 
     methods: {
         highlightCode() {
@@ -180,6 +190,10 @@ export default {
 </script>
 
 <style scoped>
+h6{
+    margin: 0;
+    padding: 0;
+}
 .card-body {
     border: 1px solid var(--GreenOpacity);
     height: 40%;

@@ -20,8 +20,8 @@
     <h2 class="edu d-inline">Education</h2>
 </div>
 
-<div class="spinner-border text-success" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div class="spinner-border text-success" role="status" style="color: var(--GreenColor);">
+  <span class="visually-hidden" style="color: var(--GreenColor);">Loading...</span>
 </div>
 </div>
     </div>

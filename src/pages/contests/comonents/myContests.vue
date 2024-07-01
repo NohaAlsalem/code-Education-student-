@@ -88,6 +88,7 @@ methods:{
 <style  scoped>
 .card {
     border: none;
+    /* background: var(--WhiteColor);  */
 }
 
 .card .img-fluid {

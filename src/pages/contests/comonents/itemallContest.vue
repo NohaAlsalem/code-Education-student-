@@ -19,7 +19,7 @@
                                     <div class="col-md-8 ps-3">
                                         <h5>{{ contest.name }}</h5>
                                         <div class="pt-2 d-flex">
-                                            <p>date exam:</p>
+                                            <p>date start Contest:</p>
                                             <h6 class="text-black pt-1 ps-1">{{ contest.start_at }}</h6>
                                         </div>
                                     </div>
@@ -177,6 +177,7 @@ small {
 
 .card {
     border: none;
+    /* background: var(--WhiteColor);  */
 }
 
 .card .img-fluid {

@@ -103,7 +103,7 @@
 
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <div style="justify-content: end; text-align: end;">
+                                        <!-- <div style="justify-content: end; text-align: end;">
                                             <div class="row m-0 p-0" style="justify-items: end;">
                                                 <div class="col-8"></div>
                                                 <p class="col-2">
@@ -116,7 +116,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <table class="table  table-bordered mt-4">
                         <thead>
@@ -140,7 +140,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="material in materials" :key="material.id">
-                                <td style="max-width: 40%;">{{ material.name }}</td>
+                                <td style="max-width: 40%;">{{ material.subject_name }}</td>
 
                                 <td>{{ material.degree }}</td>
                                 <td  style="max-width: 40%;" >

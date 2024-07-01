@@ -49,15 +49,18 @@
 
         </div>
 
-        <div class="txt d-flex ">
+        <!-- <div class="txt d-flex ">
           <p class="pt-2"></p>
           <routerLink to="/signup" class="txt-h pt-0  me-4 ms-auto">
             <font-awesome-icon icon="fa-solid fa-bell" class="i" />
           </routerLink>
 
-        </div>
+        </div> -->
+        <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
+
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -65,17 +68,21 @@
 
 import TopBar from '@/components/TopBar.vue';
 import codeEdu from '@/components/codeEdu.vue';
+import Alert from '@/components/Alert.vue';
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 export default {
   components: {
     TopBar,
-    codeEdu
+    codeEdu,
+    Alert
   },
   data() {
     return {
-      error: null,
-      mesaage: '',
+      successMessage: "",
+      errorMessage: "",
+      alertType: "",
+      alertMessage: "",
       searchText: '',
       token: '',
       number_menu:1,
@@ -109,21 +116,45 @@ export default {
     },
     signIn() {
       //  if (this.isValidEmail && this.isValidPassword) {
-      axios.post('http://127.0.0.1:8000/api/login',this.formData)
+        axios.post('http://127.0.0.1:8000/api/login',this.formData)
+      // axios.post('http://192.168.225.182:8000/api/login',this.formData)
         .then((response) => {
           this.token = response.data.token;
           console.log(response.data.token)
          
           localStorage.setItem('token', this.token);
-          this.$router.push('/teachersA');
-          this.mesaage = response.data.mesaage;
+          this.$router.push('/problems');
+          // if(response.data.role=='student'){
+          // this.$router.push('/problems');
+          // }
+          // else if(response.data.role=='adminstrator'){
+          // this.$router.push('/teachersA');
+          // }
+         
+          this.successMessage = response.data.message;
+          this.alertType = "success";
+          this.alertMessage = response.data.message;
+          this.getTests();
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
         
           // <router-link to="/home"></router-link>
         })
         .catch((error) => {
           console.log(error);
+          this.errorMessage = "Error deleting test: " + error.message;
+          this.alertType = "error";
+          this.alertMessage = "Error deleting test: " + error.message;
           this.error = error;
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
         });
+    },
+    clearAlert() {
+      this.alertType = "";
+      this.alertMessage = "";
     },
   }
 }
@@ -132,7 +163,7 @@ export default {
 <style scoped>
 .r {
   height: 100vh;
-  background: var(--WhiteColor);
+  background: #e7dff9;
 
 }
 

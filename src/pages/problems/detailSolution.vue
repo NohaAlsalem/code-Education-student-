@@ -1,5 +1,6 @@
 <template>
     <div class="screen w-100 h-100">
+        <!-- dont need -->
         <div class="row">
             <div class="col-md-6">
                 <div class="container  col-md-12" style="margin-top: 10px; margin-bottom: 10px">
@@ -27,9 +28,7 @@
                             <div class="form-check mt-0">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
                                     id="flexRadioDefault1">
-                                <!-- <label class="form-check-label" for="flexRadioDefault1">
-   privet
-  </label> -->
+                          
                                 <p>int x=10</p>
                             </div>
                             <div class="form-check">

@@ -19,7 +19,7 @@
           <pre v-html="highlightedCode"></pre>
         </div>
         <div class="card-footer text-muted " style="justify-content: end;display: flex;">
-          <button class="bttn m-1 mr-4" style="background: var( --WhiteColor); color: var(--GreenColor); padding: 1px 20px;" @click="run">Run</button>
+          <button class="bttn m-1 mr-4" style="background: #e7dff9;; color: var(--GreenColor);font-weight: bold; padding: 1px 20px;" @click="run">Run</button>
           <button class="bttn m-1" @click="Solve(this.problemId)">Submit</button>
         
 
@@ -71,7 +71,7 @@
       },
      
       run() {
-      axios.post('http://127.0.0.1:8000/api/run',this.formData1,{ headers: {
+      axios.post(BASE_URL+'run',this.formData1,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }})
         .then((response) => {
@@ -99,7 +99,7 @@
     },
 
       Solve(problemId) {
-      axios.post( BASE_URL + `problems/solve/${problemId}`,this.formData,{ headers: {
+      axios.post( BASE_URL + `assessment/solve/${problemId}`,this.formData,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }})
         .then((response) => {
@@ -138,13 +138,17 @@
     border: 1px solid var(--GreenOpacity);
   }
   .drop{
-    background: var(--darkwhite);
+    background: var(--GreenColor);
+    /* background: var(--darkwhite); */
     border: none;
-    color: var(--GreenColor);
+    color: #ffffff;
+    /* color: var(--GreenColor); */
     border-radius: 5px;
   }
   .opt{
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    color: var(--GreenColor);
+    /* background: var(--WhiteColor); */
   }
   .card-body {
     border: 1px solid var(--GreenOpacity);

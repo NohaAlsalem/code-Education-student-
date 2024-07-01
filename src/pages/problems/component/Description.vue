@@ -1,7 +1,7 @@
 <template>
   <div class="card-body" style="height:100vh; overflow-y: auto">
-    <h5 class="card-title">{{ problem.name }}</h5>
-    <h6 class="card-title">{{ problem.diffculty }}</h6>
+    <h5 class="card-title"> name:{{ problem.name }}</h5>
+    <h6 class="card-title">diffculty:{{ problem.diffculty }}</h6>
     <p class="card-text">
 {{  problem.description }}
     </p>
@@ -23,9 +23,7 @@
 
  
 
-
-
-    <div class="ex mt-4">
+    <div class="ex mt-4" v-if="test_case">
       <h6 class="card-title">Examble1</h6>
       <div class="d-flex">
         <p class="title">Input:</p>

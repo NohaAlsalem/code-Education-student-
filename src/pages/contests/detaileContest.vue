@@ -9,14 +9,9 @@
           <h6 class="card-title m-3 mt-5 ">Contest Description:
           </h6>
         </div>
-        <div class="col-2"></div>
+        <!-- <div class="col-2"></div> -->
         <div class="col-4">
-          <!-- <div class="d-flex">
-            <h6 class="card-title m-3">you can start contest:</h6>
-            <button type="button" class="btn   m-2 fw-b">
-              Start Contest
-            </button>
-          </div> -->
+
           <div class="backg">
             <div class="row">
               <div class="col-6">
@@ -27,12 +22,12 @@
               </div>
               <div class="col-6">
                 <p>{{ contest.start_at }}</p>
-                <p>{{ contest.contest_time+'' }}</p>
+                <p>{{ contest.contest_time + '' }}</p>
                 <p>{{ contest.id }}</p>
               </div>
             </div>
 
-     
+
           </div>
         </div>
       </div>
@@ -57,12 +52,19 @@
             <tbody>
               <tr v-for="problem in contest.problems" :key="problem.id">
                 <td>
-                  <router-link :to="{ name: 'detailProblem', params: { ProblemId: problem.id } }" style="  text-decoration: none;
+                  <router-link :to="{
+            name: 'detailProblemCon',
+            params: { ProblemId: problem.id },
+            query: { ContestId: contest.id }
+          }" style="text-decoration: none; outline: none;">
+                   
+
+                    <!-- <router-link :to="{ name: 'detailProblem', params: { ProblemId: problem.id } }" style="  text-decoration: none;
   outline: none;
-">
+"> -->
                     <p>
                       {{ problem.name }}
-                      <!-- Matrix Similarity After Cyclic Shifts -->
+
                     </p>
                   </router-link>
                 </td>
@@ -86,15 +88,14 @@
             <tbody>
               <tr v-for="student in students" :key="student.id">
                 <td>
-                  <div class="col">
-                    <p>{{ student.name }}</p>
+                  <div class="d-flex">
+                    <div class="col" style="margin: 0;padding: 0;">
+                      <p>{{ student.name }}</p>
+                    </div>
+                    <div class="col mt-0" style="text-align: end; margin: 0;padding: 0;">
+                      <p>{{ student.rank }}</p>
+                    </div>
                   </div>
-                  <div class="col mt-0" style="text-align: end;">
-                    <p>{{ student.rank }}</p>
-                  </div>
-
-                 
-
                 </td>
 
               </tr>
@@ -133,7 +134,7 @@ export default {
 
   methods: {
     getcontest(ContestId) {
-      axios.get( BASE_URL +`contests/${ContestId}`, {
+      axios.get(BASE_URL + `contests/${ContestId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         }

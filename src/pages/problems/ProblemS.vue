@@ -28,18 +28,11 @@
                                                 <a class="dropdown-item" @click="submitDifficulty('Easy')">Easy</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" @click="submitDifficulty('')">None</a>
+                                                <a class="dropdown-item" @click="submitDifficulty('')" style="font-weight: bold;">None</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- <div class="btn-group">
-                                        <select class="btn dropdown-toggle" id="lnag" name="lang"
-                                            v-model="formData.diffculty">
-                                            <option class="opt ">Difficulty</option>
-                                            <option class="opt ">Medium</option>
-                                            <option class="opt ">Easy</option>
-                                        </select> 
-                                    </div> -->
+                                   
                                 </div>
 
 
@@ -55,17 +48,11 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" @click="submitTag('')">None</a>
+                                                <a class="dropdown-item" @click="submitTag('')" style="font-weight: bold;">None</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- <div class="btn-group">
-                                        <select class="btn  dropdown-toggle" id="lnag" name="lang"
-                                            v-model="formData.tag">
-                                            <option class="opt " v-for=" tag in tags">{{ tag.name }}</option>
-                                        </select>
-
-                                    </div> -->
+                               
                                 </div>
                                 <div class="p-2">
                                     <div class="btn-group">
@@ -82,40 +69,23 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- <div class="btn-group">
-
-                                        <select class="btn  dropdown-toggle" id="lnag" name="lang"
-                                            v-model="formData.sort">
-                                            <option class="opt">AES</option>
-                                            <option class="opt">DES</option>
-
-                                        </select>
-                                   
-                                    </div> -->
+                                 
                                 </div>
                             </div>
                         </div>
 
                         <div class="col ms-0">
                             <div class="input-group">
-                                <input type="text" class="form-control search-input" placeholder="Search questions"
+                                <input type="text" class="form-control search-input" placeholder="Search to problem"
                                     aria-label="Search" aria-describedby="basic-addon1" v-model="searchText"
                                     @input="onSearchInput" />
-                                <div class="search-icon">
+                                <!-- <div class="search-icon">
                                     <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
-                        <!-- <div class="col ms-0">
-                            <div class="input-group">
-                                <input v-model="formData.name" type="text" class="form-control"
-                                    placeholder="Search questions" aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2">
-                            </div>
-                            <font-awesome-icon :icon="['fas', 'magnifying-glass']" @click="search" />
-                        </div>
-                         -->
+        
                         <div class="col mt-5"></div>
 
                     </div>
@@ -207,7 +177,7 @@ export default {
 
 
         getTags() {
-            axios.get('http://127.0.0.1:8000/api/student/problems/tags', {
+            axios.get(BASE_URL+'problems/tags', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -246,7 +216,7 @@ export default {
                 sort: this.selectedSort,
                 name: this.searchText,
                 tag: this.selectedTag,},
-            axios.post('http://127.0.0.1:8000/api/student/problems/fillter', this.formData, {
+            axios.post(BASE_URL+'problems/fillter', this.formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -272,19 +242,22 @@ export default {
 <style scoped>
 .btn-group .btn {
     margin-top: 3rem;
-    background: var(--darkwhite);
+    /* background: #e7dff9; */
+    background: var(--GreenColor);
     border: none;
-    color: var(--GreenColor);
+    color: #ffffff;
+    /* color: var(--GreenColor); */
 }
 
 .input-group .form-control {
     margin-top: 3.5rem;
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
     border: 1px solid var(--LightGreen);
 }
 
 .input-group .form-control::placeholder {
-    color: var(--LightGreen)
+    color: var(--GreenColor)
 }
 
 .Divider {

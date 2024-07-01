@@ -5,14 +5,8 @@
           <h6 class="custom-button m-2">Language Information:</h6>
           <select class="drop" id="lnag" name="lang" v-model="formData.lang" placeholder="Lnguage" autocomplete="country-name" >
             <option class="opt" value="2">Java</option>
-            <option class="opt" value="1">C++</option>
-                  
+            <option class="opt" value="1">C++</option>     
                 </select>
-
-             
-             
-
-
         </div>
         <div class="card-body">
           <textarea class="form-control" id="javaCode" rows="10" v-model="formData.code" @input="highlightCode"></textarea>
@@ -20,9 +14,7 @@
         </div>
         <div class="card-footer text-muted " style="justify-content: end;display: flex;">
           <button class="bttn m-1 mr-4" style="background: var( --WhiteColor); color: var(--GreenColor); padding: 1px 20px;" @click="run">Run</button>
-          <button class="bttn m-1" @click="Solve(this.problemId)">Submit</button>
-        
-
+          <button class="bttn m-1" @click="Solve(this.contestId,this.problemId)">Submit</button>
         </div>
         <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
         
@@ -40,8 +32,10 @@
     components:{
       Alert
     },
+    // props: ['ProblemId', 'ContestId'],
     props:{
       problemId:Number,
+      contestId:Number,
       
     },
     data() {
@@ -56,10 +50,7 @@
         code:'',
         lang:1,
            },
-           formData1:{
-        input:'',
-        code:1,
-           }
+         
       }
     },
 
@@ -70,40 +61,15 @@
         this.dropdownOpen = !this.dropdownOpen;
       },
      
-      run() {
-      axios.post('http://127.0.0.1:8000/api/run',this.formData1,{ headers: {
-                     Authorization: `Bearer ${ localStorage.getItem('token')}`,
-                 }})
-        .then((response) => {
-        console.log(response);
-        this.successMessage = response.data.message;
-          this.alertType = "success";
-          this.alertMessage = response.data.message;
-        
-          setTimeout(() => {
-            this.clearAlert();
-          }, 1000);
-          // <router-link to="/home"></router-link>
-        })
-        .catch((error) => {
-          console.log(error);
-          this.error = error;
-          this.errorMessage = "Error submit test: " + error.message;
-          this.alertType = "error";
-          this.alertMessage = "Error submit test: " + error.message;
-          this.error = error;
-          setTimeout(() => {
-            this.clearAlert();
-          }, 1000);
-        });
-    },
+    
 
-      Solve(problemId) {
-      axios.post( BASE_URL + `problems/solve/${problemId}`,this.formData,{ headers: {
+      Solve(contestId,problemId) {
+        console.log(contestId +'id'+problemId+'ii'+'');
+      axios.post( BASE_URL + `contests/${contestId}/solve/${problemId}`,this.formData,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }})
         .then((response) => {
-        console.log(response);
+      
         this.successMessage = response.data.message;
           this.alertType = "success";
           this.alertMessage = response.data.message;
@@ -138,7 +104,8 @@
     border: 1px solid var(--GreenOpacity);
   }
   .drop{
-    background: var(--darkwhite);
+    background: #e7dff9;
+    /* background: var(--darkwhite); */
     border: none;
     color: var(--GreenColor);
     border-radius: 5px;

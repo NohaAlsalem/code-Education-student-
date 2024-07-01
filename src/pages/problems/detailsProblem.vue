@@ -20,16 +20,14 @@
                         <Description  v-if="description" :problem="this.problem" :test_case="this.testCase"> </Description>
                         <Solution v-else :problemId="this.problem.id"></Solution>
                     </div>
-                    <div v-if="description" class="choose mt-4">
+                    <!-- <div v-if="description" class="choose mt-4">
                         <h6>2.Choose the correct answer</h6>
                         <p>1-What is the correct way to declare a variable in java?</p>
                         <div class="radios ">
                             <div class="form-check mt-0">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
                                     id="flexRadioDefault1">
-                                <!-- <label class="form-check-label" for="flexRadioDefault1">
-   privet
-  </label> -->
+                        
                                 <p>int x=10</p>
                             </div>
                             <div class="form-check">
@@ -57,9 +55,7 @@
                             <div class="form-check mt-0">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault1"
                                     id="flexRadioDefault1">
-                                <!-- <label class="form-check-label" for="flexRadioDefault1">
-   privet
-  </label> -->
+                        
                                 <p>int x=10</p>
                             </div>
                             <div class="form-check">
@@ -84,7 +80,8 @@
                         </div>
                         <button class="bttn" style="color: aliceblue">Finish Exam</button>
                         <p></p>
-                    </div>
+                    </div> -->
+
                 </div>
             </div>
 
@@ -171,6 +168,7 @@ p {
 
 .screen {
     padding: 20px 40px;
+    background: #e7dff9;
     /* background: var(--WhiteColor); */
     height: 100vh;
     /* height: calc(100vh-72px); */

@@ -75,21 +75,21 @@ export default {
 
 </script>
 
-<style >
-:root {
-    --WhiteColor: #B27C66;
-    --darkwhite: #B27C66;
+<style scoped>
+/* :root {
+    --WhiteColor: #FAF3DD;
+    --darkwhite: #FAF3DD;
     --LightGreen: #9984D4;
     --GreenOpacity: #CAA8F5;
     --GreenColor: #592E83;
     --borderColor:#230C33;
-    /* --WhiteColor: #FAF3DD;
+} */
+ /* --WhiteColor: #FAF3DD;
     --darkwhite: #C8D5B9;
     --LightGreen: #8FC0A9;
     --GreenOpacity: #68B0AB;
     --GreenColor: #4A7C59;
     --borderColor:#707070; */
-}
 .i{
  
  color: var(--GreenColor);

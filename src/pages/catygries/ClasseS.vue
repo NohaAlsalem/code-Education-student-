@@ -22,9 +22,21 @@
 
 
                     <div class="backg me-5 mb-2" v-for="asse in assessments" :key="asse.id">
+                        <router-link :to="{
+            name: 'detailAssesment',
+            params: { Problemid: asse.id },
+         
+          }" style="text-decoration: none; outline: none;">
+                   
                         <div class="row">
 
-                            <div class="col me-5"> test: {{ asse.id }}</div>
+                            <div class="col me-5"> 
+
+                                <div class="d-flex mt-1">
+                                    <h6 class="mt-1 me-2">test:</h6>
+                                    {{ asse.id }}
+                                </div>
+                            </div>
                             <div class="col ms-5">
                             <div class="d-flex mt-1">
                                     <h6 class="mt-1 me-2">Material:</h6>
@@ -33,7 +45,11 @@
                             {{ asse.name }}</div>
                         </div>
                             <div class="w-100"></div>
-                            <div class="col mt-1 me-5">class: {{ asse.category_id }}</div>
+                            <div class="col mt-1 me-5"><div class="d-flex mt-1">
+                                    <h6 class="mt-1 me-2">class:</h6>
+                                    {{ asse.category_id }}
+                                </div></div>
+                            <!-- <div class="col mt-1 me-5">class: {{ asse.category_id }}</div> -->
                             <div class="col ms-5">
                                 <div class="d-flex mt-1">
                                     <h6 class="mt-1 me-2">Techer:</h6>
@@ -41,6 +57,7 @@
                                 </div>
                             </div>
                         </div>
+                        </router-link>
                     </div>
                 </div>
 
@@ -54,8 +71,10 @@
                         <div class="backg mb-2" v-for="clas in myclasses" :key="clas.id">
                             <!-- this -->
                             <div class="row mb-4" @click="getMyTests(clas.id)">
-                                <div class="col me-5">{{ clas.name }}</div>
-                                <div class="col ms-5">{{ clas.class }}</div>
+                                <div class="col me-5">
+                                    <h6>{{ clas.name }}</h6></div>
+                                <div class="col ms-5">
+                                    <h6>{{ clas.class }}</h6></div>
                             </div>
                             <!-- end this -->
                             <div>
@@ -87,17 +106,17 @@
                                             <select class="drop ms-2" id="lnag" name="lang"
                                                 v-model="formData.old_category" placeholder="Lnguage"
                                                 autocomplete="country-name">
-                                                <option class="opt ">1</option>
-                                                <option class="opt ">2</option>
+                                                <option class="opt " v-for="clas in allclasses" :key="clas.id" :value="clas.id">{{ clas.category_name }}</option>
+                                                <!-- <option class="opt ">2</option> -->
                                             </select>
                                         </div>
                                         <div class="d-flex mt-2">
                                             <p>Choose the destination class number :</p>
-                                            <select class="drop ms-2" id="lnag" name="lang"
+                                            <select class="drop ms-2" id="lnag" name="lang" 
                                                 v-model="formData.new_category" placeholder="Lnguage"
                                                 autocomplete="country-name">
-                                                <option class="opt ">1</option>
-                                                <option class="opt ">2</option>
+                                                <option class="opt " v-for="clas in allclasses" :key="clas.id" :value="clas.id">{{ clas.category_name }}</option>
+                                                <!-- <option class="opt ">2</option> -->
                                             </select>
                                         </div>
                                         <div style="justify-content: center; justify-items: center;">
@@ -105,7 +124,7 @@
                                                 @click="changeClass">Change</button>
                                         </div>
                                     </div>
-                                   
+                                
                                 </div>
                             </div>
                         </div>
@@ -114,16 +133,19 @@
                 </div>
             </div>
         </div>
+        <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
     </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import Alert from '@/components/Alert.vue';
 import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
-        NavBar
+        NavBar,
+        Alert,
     },
     data() {
         return {
@@ -134,16 +156,22 @@ export default {
             numberc: 1,
             myclasses: [],
             assessments: [],
+            allclasses:[],
             formData: {
                 new_category: 1,
                 old_category: 1,
                 reason: '',
-            }
+            },
+            successMessage: "",
+      errorMessage: "",
+      alertType: "",
+      alertMessage: "",
         }
     },
     mounted() {
         this.getMyClasses();
         this.getMyTests(1);
+        this.getAllClasses();
     },
     methods: {
         getMyClasses() {
@@ -160,7 +188,20 @@ export default {
                 this.errMessage = 'error retrieving data'
             })
         },
-
+        getAllClasses() {
+            axios.get(BASE_URL + 'categories/all', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then((response) => {
+                console.log(response.data.categories);
+                this.allclasses = response.data.data;
+                console
+            }).catch((error) => {
+                console.log(error)
+                this.errMessage = 'error retrieving data'
+            })
+        },
         getMyTests(idtodetail) {
             axios.get(BASE_URL + `categories/${idtodetail}`, {
                 headers: {
@@ -175,24 +216,44 @@ export default {
                 console
             }).catch((error) => {
                 console.log(error)
-                this.errMessage = 'error retrieving data'
+                this.errMessage = 'error retrieving data';
+                
             })
         },
         changeClass() {
+            
             axios.post(BASE_URL + 'categories/change', this.formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             })
                 .then((response) => {
-                    console.log(response)
+                    console.log(response);
+                    this.successMessage = response.data.message;
+          this.alertType = "success";
+          this.alertMessage = response.data.message;
+     
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
                     // <router-link to="/home"></router-link>
                 })
                 .catch((error) => {
                     console.log(error);
                     this.error = error;
+                    this.errorMessage = "Error change request: " + error.message;
+          this.alertType = "error";
+          this.alertMessage = "Error change request: " + error.message;
+          this.error = error;
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
                 });
-        }
+        },
+        clearAlert() {
+      this.alertType = "";
+      this.alertMessage = "";
+    },
     },
 }
 </script>
@@ -204,29 +265,33 @@ p {
 
 h6 {
     color: var(--GreenColor);
+    font-weight: bold;
 }
 
 .modal .modal-dialog .modal-content {
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
     border: 1px solid var(--borderColor);
 }
 
 .backg {
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
     padding: 10px;
     border-radius: 10px;
 }
 
 .drop {
-    background: var(--darkwhite);
+    background: var(--GreenColor);
     border: none;
-    color: var(--GreenColor);
+    color:#e7dff9;
     border-radius: 5px;
 
 }
 
 .opt {
-    background: var(--WhiteColor);
+    background:  var(--GreenColor);
+    /* background: var(--WhiteColor); */
 }
 
 .modal-body p {

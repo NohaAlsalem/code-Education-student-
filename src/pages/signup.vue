@@ -96,7 +96,7 @@ export default {
       methods: {
         Register() {
               //  if (this.isValidEmail && this.isValidPassword) {
-              axios.post('http://127.0.0.1:8000/api/student/register', this.formData)
+              axios.post('http://192.168.225.182:8000/api/register', this.formData)
                   .then((response) => {
                  
                   this.token = response.data.token;
