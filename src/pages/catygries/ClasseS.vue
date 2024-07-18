@@ -21,8 +21,9 @@
                     </div>
 
 
-                    <div class="backg me-5 mb-2" v-for="asse in assessments" :key="asse.id">
-                        <router-link :to="{
+                    <div class="backg me-5 mb-2" v-for="asse in assessments" :key="asse.id" v-if="assessments.length >=1">
+                        <router-link 
+                        :to="{
             name: 'detailAssesment',
             params: { Problemid: asse.id },
          
@@ -58,6 +59,10 @@
                             </div>
                         </div>
                         </router-link>
+                    </div>
+                    <div v-else style="text-align: center;margin-top: 50px;">
+                        <h6>
+                        choose class to show your assessments</h6>
                     </div>
                 </div>
 
@@ -170,7 +175,7 @@ export default {
     },
     mounted() {
         this.getMyClasses();
-        this.getMyTests(1);
+        // this.getMyTests(1);
         this.getAllClasses();
     },
     methods: {
@@ -215,6 +220,7 @@ export default {
                 console.log(this.assessments);
                 console
             }).catch((error) => {
+                
                 console.log(error)
                 this.errMessage = 'error retrieving data';
                 

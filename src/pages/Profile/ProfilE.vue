@@ -23,7 +23,7 @@
                                 </div>
 
                                 <button type="button" class="btn"
-                                    style="width: 100%;background: var(--darkwhite); color: var(--GreenColor); font-weight: bold">{{ student.email }}</button>
+                                    style="width: 100%;background: #e7dff9; color: var(--GreenColor); font-weight: bold">{{ student.email }}</button>
                                 <div class="Divider mb-1"></div>
                                 <h6 style="color: var(--GreenColor);font-weight: 700;">Community Stats</h6>
                                 <div class="d-flex">
@@ -158,11 +158,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <QrGenerator :namee="student.email"></QrGenerator>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
         </div>
 
     </div>
@@ -170,13 +173,14 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
-import PieChart from './PieChart.vue';
+import QrGenerator from '@/components/QrGenerator';
+
 import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default {
     components: {
         NavBar,
-        PieChart
+       QrGenerator
     },
     data() {
         return {
@@ -223,8 +227,9 @@ export default {
 <style scoped>
 .screen {
     padding: 40px 40px;
-    background: var(--WhiteColor);
+    background: #e7dff9;
     height: 100vh;
+    max-height: auto;
     /* height: calc(100vh-72px); */
 }
 /* .form-check .form-check-input []{

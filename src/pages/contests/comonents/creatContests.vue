@@ -63,7 +63,7 @@
       style="background: var(--WhiteColor); border: 1px solid var(--LightGreen); padding: 10px; margin-right: 20px;" 
       @change="updateStartAt"
     /> -->
-               
+
                 </div>
             </div>
             <div class="col-4">
@@ -84,7 +84,7 @@
         </div>
 
         <div class="row">
-            
+
             <div class="col-4">
                 <p>Min-level</p>
             </div>
@@ -92,7 +92,7 @@
                 <p>Max-level</p>
             </div>
             <div class="col-4">
-                <p>Scoure</p>
+                <!-- <p>Scoure</p> -->
             </div>
         </div>
 
@@ -108,11 +108,11 @@
                     <!-- <div class="absolute inset-y-0 right-0 pr-3 pt-2">icon</div> -->
                 </div>
             </div>
-         
+
             <div class="col-4 ">
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <input v-model="scoure" type="text" class="form-control" placeholder="Enter password">
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -161,7 +161,7 @@
             </tbody>
         </table>
 
-
+        <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
     </div>
 </template>
 <script>
@@ -169,17 +169,22 @@ import Datepicker from 'vue3-datepicker';
 import NavBar from '@/components/NavBar.vue';
 import axios from 'axios';
 import { BASE_URL } from "@/assets/config";
+import Alert from '@/components/Alert.vue';
 import moment from 'moment';
 export default {
     components: {
         NavBar,
         Datepicker,
+        Alert
     },
     data() {
         return {
             token: localStorage.getItem('token'),
-      startAtDisplay: '', // The date in "dd/mm/yy" format
-      datepickerFormat: 'DD/MM/YY',
+            startAtDisplay: '', // The date in "dd/mm/yy" format
+            datepickerFormat: 'DD/MM/YY',
+            successMessage: "",
+            errorMessage: "",
+            alertType: "",
             selectedStudents: [],
             name: '',
             description: '',
@@ -223,9 +228,9 @@ export default {
     },
     methods: {
         updateStartAt(date) {
-      this.startAtDisplay = date;
-      this.start_at = moment(date, 'DD/MM/YY').format('YYYY-MM-DD');
-    },
+            this.startAtDisplay = date;
+            this.start_at = moment(date, 'DD/MM/YY').format('YYYY-MM-DD');
+        },
         loadFormData() {
             const savedFormData = localStorage.getItem("formData");
             if (savedFormData) {
@@ -233,14 +238,14 @@ export default {
                 this.name = parsedData.name || '';
                 this.description = parsedData.description || '';
                 this.password = parsedData.password || '';
-                this.duration = parsedData.duration ;
-                this.start_at = parsedData.start_at ;
+                this.duration = parsedData.duration;
+                this.start_at = parsedData.start_at;
                 // this.start_at = parsedData.start_at ? new Date(parsedData.start_at) : null;
                 this.contest_time = parsedData.contest_time || '';
                 this.min_level = parsedData.min_level;
                 this.max_level = parsedData.max_level;
-                this.houre = parsedData.houre ;
-                this.scoure = parsedData.scoure ;
+                this.houre = parsedData.houre;
+                this.scoure = parsedData.scoure;
                 this.selectedStudents = parsedData.selectedStudents || [];
             }
         },
@@ -294,7 +299,7 @@ export default {
             formData.append('min_level', this.min_level);
             formData.append('max_level', this.max_level);
             formData.append('houre', this.houre);
-            formData.append('scoure', this.scoure);
+            // formData.append('scoure', this.scoure);
 
             this.selectedStudents.forEach((student, index) => {
                 index = index++;
@@ -306,13 +311,23 @@ export default {
                 }
             })
                 .then((response) => {
-                    this.$router.push('/contests');
+                    this.$router.push('/problems');
+                    this.successMessage = response.data.message;
+                    this.alertType = "success";
+                    this.alertMessage = response.data.message;
                     this.message = response.data.message;
                 })
                 .catch((error) => {
+                    this.errorMessage = "Error not creat contest: " + error.message;
+                    this.alertType = "error";
+                    this.alertMessage = "Error not creat contest: " + error.message;
                     console.log(error);
                     this.error = error;
                 });
+        },
+        clearAlert() {
+            this.alertType = "";
+            this.alertMessage = "";
         },
     }
 }

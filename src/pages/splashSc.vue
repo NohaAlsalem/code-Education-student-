@@ -56,4 +56,8 @@ min-height: calc(100vh-72px);
 .edu{
   color: var(--GreenOpacity);
 }
+
+/* .spinner-border-custom {
+    border-color: var(--GreenColor) transparent var(--GreenColor) transparent;
+  } */
 </style>

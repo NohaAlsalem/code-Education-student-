@@ -42,7 +42,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import MyContests from './comonents/myContests.vue';
-import allConetsts from './allContests.vue';
+import allConetsts from './comonents/allContests.vue';
 import creatContests from './comonents/creatContests.vue';
 
 export default {
@@ -103,21 +103,22 @@ h4 {
 }
 
 .screen {
-    padding:40px 80px;
-
-
-
+    padding: 40px 80px;
     background: #e7dff9;
-    /* background: var(--WhiteC); */
     height: 100vh;
-    /* height: calc(100vh-72px); */
 }
 .sub_screen {
     height: 100%;
-    border: 1px solid var(--WhiteColor);
+    min-height: 80vh;
+    border: 1px solid var(--GreenColor);
     border-radius: 5px;
     background: white;
     padding: 20px;
+    /* height: 100%;
+    border: 1px solid var(--WhiteColor);
+    border-radius: 5px;
+    background: white;
+    padding: 20px; */
 }
 
 .choosed {

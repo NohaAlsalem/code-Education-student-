@@ -1,32 +1,32 @@
 <template>
     <div class="card-body" style="height:100vh; overflow-y: auto">
         
-                        <div class="row" >
+                        <!-- <div class="row" >
                             <div class="i" >
                                 <div class="col">
-                                    <p> your Mark: {{ solution.exam_mark }}</p>
+                                    <p> your Mark: {{ solution.mark }}</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div >
 
-                            <div class="row mb-3 mt-2">
+                            <!-- <div class="row mb-3 mt-2">
                                 <div class="col d-flex">
                                     <h6 style="color: var(--GreenColor);">
-                                        {{ solution.code1 }}:
+                                        {{ solution }}
                                     </h6>
                                 </div>
                                
-                            </div>
+                            </div> -->
                             <div class="backg p-4">
                                 <div class="card-text">
-                                    <pre ref="codeContainer"><code>{{ solution.code1 }}</code></pre>
+                                    <pre ref="codeContainer"><code>{{ solution }}</code></pre>
                                 </div>                      
                             </div>
 
-                            <h6  style="color: var(--GreenColor);">
+                            <!-- <h6  style="color: var(--GreenColor);">
                                 answers :
-                            </h6>
+                            </h6> -->
                             <div v-for="(answer, index) in answers" :key="index">
                                 <h6 style="color: var(--GreenColor); margin-top: 20px;">
                                     Test {{ index + 1 }} :
@@ -64,8 +64,6 @@ export default {
             solution: {},
             answers:[],
             solve: {},
-           
-           
             activeSolutionId: null,
         }
     },
@@ -110,8 +108,8 @@ export default {
             return this.activeSolutionId === solutionId;
         },
 
-        getSolutions(problemId) {
-            axios.get(BASE_URL + `exams/${problemId}/show-solve`, {
+         getSolutions(problemId) {
+            axios.get(BASE_URL + `assessment/show-solve/${problemId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -146,7 +144,7 @@ p {
 }
 
 .backg {
-    background: var(--WhiteColor);
+    background: #e7dff9;
     padding: 5px;
     border-radius: 10px;
     border: 1px solid var(--borderColor);

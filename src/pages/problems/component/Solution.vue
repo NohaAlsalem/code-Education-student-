@@ -210,7 +210,7 @@ p {
 }
 
 .backg {
-    background: var(--WhiteColor);
+    background: #e7dff9;
     padding: 5px;
     border-radius: 10px;
     border: 1px solid var(--borderColor);

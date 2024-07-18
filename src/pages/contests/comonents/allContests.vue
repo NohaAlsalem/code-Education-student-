@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import itemallContest from './comonents/itemallContest.vue';
+import itemallContest from '../../../components/itemallContest.vue';
 import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
 export default{
@@ -56,6 +56,11 @@ getMycontests() {
 <style  scoped>
 .card {
 border: none;
+height: 100%;
+    border: 1px solid var(--GreenColor);
+    border-radius: 5px;
+    background: white;
+    padding: 20px;
 }
 
 .card .img-fluid {

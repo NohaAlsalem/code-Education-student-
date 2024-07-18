@@ -12,7 +12,7 @@
                                 <!-- <div class="card mb-3" style="max-width:540px;">  -->
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
+                                        <img src="../../assets/images/C.png"
                                             class="img-fluid rounded" alt="...">
                                     </div>
                                     <div class="col-md-8 ps-3">

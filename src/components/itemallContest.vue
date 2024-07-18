@@ -7,13 +7,13 @@
             <div class="row mt-0">
                 <div class="col-8"> <!-- start Card -->
 
-                    <router-link :to="{ name: 'detaileContest', params: { ContestId: contest.id } }"
-                        style="text-decoration: none; outline: none;">
+                    <!-- <router-link :to="{ name: 'detaileContest', params: { ContestId: contest.id } }"
+                        style="text-decoration: none; outline: none;"> -->
                         <div class="container d-flex mt-4 p-4 pb-1 pt-0">
                             <div class="card">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
+                                        <img src="../assets/images/Capture.png"
                                             class="img-fluid rounded" style="max-width: 100%;" alt="...">
                                     </div>
                                     <div class="col-md-8 ps-3">
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                    </router-link>
+                    <!-- </router-link> -->
 
                 </div>
 
@@ -90,14 +90,15 @@
 
             <!-- end i need it -->
         </div>
-
+        <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
     </div>
 </template>
 
 <script>
-import itemContest from '@/components/itemContest.vue';
+// import itemContest from '@/components/itemContest.vue';
 import { BASE_URL } from "@/assets/config";
 import axios from 'axios';
+import Alert from '@/components/Alert.vue';
 export default {
     props: {
         contest: {
@@ -106,10 +107,14 @@ export default {
         }
     },
     components: {
-        itemContest,
+        // itemContest,
+        Alert,
     },
     data() {
         return {
+            successMessage: "",
+      errorMessage: "",
+      alertType: "",
             NameContest: 'Cntests Programing 1',
             EndOfContest: 'end',
            
@@ -137,15 +142,27 @@ export default {
                 }
             })
                 .then((response) => {
+                 
+                    this.successMessage = response.data.message;
+          this.alertType = "success";
+          this.alertMessage = response.data.message;
                     console.log(response);
-                    console.log(this.password)
+                    console.log(this.password);
+                    this.$router.push({ name: 'detaileContest', params: { ContestId: contestId } });
                     // <router-link to="/home"></router-link>
                 })
                 .catch((error) => {
+                    this.errorMessage = "Error on join: " + error.message;
+          this.alertType = "error";
+          this.alertMessage = "Error on join: " + error.message;
                     console.log(error);
                     this.error = error;
                 });
         },
+        clearAlert() {
+      this.alertType = "";
+      this.alertMessage = "";
+    },
 
 
     }
@@ -171,7 +188,8 @@ small {
 }
 
 .input-group .form-control {
-    background: var(--WhiteColor);
+    background: #e7dff9;
+    /* background: var(--WhiteColor); */
     border: 1px solid var(--LightGreen);
 }
 

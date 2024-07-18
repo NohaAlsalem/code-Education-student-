@@ -22,7 +22,7 @@
               </div>
               <div class="col-6">
                 <p>{{ contest.start_at }}</p>
-                <p>{{ contest.contest_time + '' }}</p>
+                <p>{{ contest.contest_time}}</p>
                 <p>{{ contest.id }}</p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export default {
 
 <style scoped>
 .backg {
-  background: var(--WhiteColor);
+  background: #e7dff9;
   border: 1px solid var(--borderColor);
   border-radius: 5px;
   padding: 10px;
@@ -185,7 +185,7 @@ h6 {
 }
 
 .table th {
-  background: var(--darkwhite);
+  background: #e7dff9;
 
 }
 

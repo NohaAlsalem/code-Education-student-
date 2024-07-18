@@ -18,7 +18,7 @@
                             </button>
                         </div>
                         <Description  v-if="description" :problem="this.problem" :test_case="this.testCase"> </Description>
-                        <Solution v-else :problemId="this.problem.id"></Solution>
+                        <showSolution v-else :problemId="assessment"></showSolution>
                     </div>
                   
 
@@ -38,6 +38,7 @@
 import Description from "../problems/component/Description.vue";
 import Solution from "../problems/component/Solution.vue";
 import solveAssesment from "./solveAssesment.vue";
+import showSolution from"./showSolution.vue";
 // import solveAssesment "";
 // import inputcode from "./component/inputcode.vue";
 
@@ -48,7 +49,8 @@ export default {
     components: {
         Description,
         Solution,
-        solveAssesment
+        solveAssesment,
+        showSolution
        
     },
     mounted(){

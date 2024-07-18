@@ -18,10 +18,9 @@
               </button>
             </div>
             <Description v-if="description" :problem="this.problem" :test_case="this.testCase"> </Description>
-            <SolutionExam v-else :problemId="this.Exam.id"></SolutionExam>
-
+            <SolutionExam v-else :problemId="this.Exam.id" ></SolutionExam>
           </div>
-          <true_false_q :questions="this.questions" :examId="this.Exam.id"></true_false_q>
+          <true_false_q :questions="this.questions" :examId="this.Exam.id" :mark="this.the_mark"></true_false_q>
 
           <!-- <div v-if="description" class="choose mt-4">
                       <h6>2.Choose the correct answer</h6>
@@ -89,15 +88,17 @@
 
 
       <div class="col-md-6">
-        <inputcode :problemId="this.problem.id"></inputcode>
+        <solve_Exam :problemId="this.Exam.id" @mark="getMark"></solve_Exam>
       </div>
      
     </div>
+    
   </div>
 </template>
 
 <script>
 import Description from "../problems/component/Description.vue";
+import solve_Exam from "./solve_Exam.vue"
 // import Solution from "../problems/component/Solution.vue";
 import SolutionExam from './SolutionExam.vue';
 import inputcode from "../problems/component/inputcode.vue";
@@ -112,11 +113,13 @@ export default {
     SolutionExam,
     inputcode,
     true_false_q,
+    solve_Exam
   },
   mounted() {
     const examId = this.$route.params.examId;
     console.log(examId);
     this.getProblem(examId);
+    // console.log('maaaaaaark detaileeeeeee'+this.the_mark)
   },
   data() {
     return {
@@ -129,10 +132,15 @@ export default {
       problem: {},
       testCase: {},
       questions: [],
+      the_mark:0.0,
 
     };
   },
   methods: {
+    getMark(mm){
+this.the_mark=mm;
+console.log(this.the_mark+'marrrrrrrrrrrrrrrrrrrrrrrrrrrrrk')
+    },
     selectButton(buttonNumber) {
       this.selectedButton = buttonNumber;
       if (this.selectedButton === 1) {

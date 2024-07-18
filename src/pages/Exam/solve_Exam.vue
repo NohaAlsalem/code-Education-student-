@@ -6,32 +6,22 @@
           <select class="drop" id="lnag" name="lang" v-model="formData.lang" placeholder="Lnguage" autocomplete="country-name" >
             <option class="opt" value="2">Java</option>
             <option class="opt" value="1">C++</option>
-                  
                 </select>
         </div>
         <div class="card-body">
-          <textarea class="form-control" id="javaCode" rows="20" v-model="formData.code" @input="highlightCode"></textarea>
-          <!-- <p v-if="errorDetails.length > 0" style="color: brown;">{{ this.errorDetails }}</p> -->
-         <p>terminal</p>
-          <div class="bckg">
-            <span v-if="this.approved">approved:{{ this.approved }}</span>
-          <span v-if="this.alertMessage"> message:{{ this.alertMessage }}</span>
-       
-         </div>
-      
-          <!-- <pre v-html="highlightedCode"></pre> -->
+          <textarea class="form-control" id="javaCode" rows="10" v-model="formData.code" @input="highlightCode"></textarea>
+          <pre v-html="highlightedCode"></pre>
         </div>
-       
         <div class="card-footer text-muted " style="justify-content: end;display: flex;">
           <!-- <button class="bttn m-1 mr-4" style="background: var( --WhiteColor); color: var(--GreenColor); padding: 1px 20px;" @click="run">Run</button> -->
           <button class="bttn m-1" @click="Solve(this.problemId)">Submit</button>
         
 
         </div>
-        
+        <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" />
         
       </div>
-      <Alert :type="alertType" :message="alertMessage" @clear="clearAlert" style="align-content: center;"/>
+
     </div>
   </template>
   
@@ -51,16 +41,11 @@
     data() {
       return {
       
-      //   highlightedCode: '',
-      //   successMessage: "",
-      // errorMessage: "",
+        highlightedCode: '',
+        successMessage: "",
+      errorMessage: "",
       alertType: "",
       alertMessage: "",
-      successMessage: "",
-      errorMessage: "",
-      errorDetails: [],
-   approved:'',
-     
        formData:{
         code:'',
         lang:1,
@@ -68,48 +53,49 @@
            formData1:{
         input:'',
         code:1,
-           }
+           },
+           mark:0,
       }
     },
 
     methods: {
-
+        sendMarkToparent(){
+            this.$emit("mark",this.mark);
+        },
 
         toggleDropdown() {
         this.dropdownOpen = !this.dropdownOpen;
       },
      
-   
+    
       Solve(problemId) {
-      axios.post( BASE_URL + `problems/solve/${problemId}`,this.formData,{ headers: {
+      axios.post( BASE_URL + `exams/${problemId}/submit`,this.formData,{ headers: {
                      Authorization: `Bearer ${ localStorage.getItem('token')}`,
                  }})
         .then((response) => {
-        console.log(response);
+            this.mark=response.data.mark;
+
+        console.log(this.mark+'fvdddddddddddddddddddd');
+        this.$emit("mark",response.data.mark);
         this.successMessage = response.data.message;
           this.alertType = "success";
           this.alertMessage = response.data.message;
-        this.approved=response.data.approved;
-          // setTimeout(() => {
-          //   this.clearAlert();
-          // }, 1000);
+        // this.sendMarkToparent();
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
           // <router-link to="/home"></router-link>
         })
         .catch((error) => {
           console.log(error);
-   
-            // this.errorMessage = error.response.data.message;
-            // this.errorDetails = error.response.data.approved;
-     
-            // this.errorMessage = "Error submit test: " + error.response.data.message;
-            // this.errorDetails = [];
-       
+          this.error = error;
+          this.errorMessage = "Error submit test: " + error.message;
           this.alertType = "error";
-          this.alertMessage =  error.response.data.message;
-   this.approved=error.response.data.approved;
-          // setTimeout(() => {
-          //   this.clearAlert();
-          // }, 1000);
+          this.alertMessage = "Error submit test: " + error.message;
+          this.error = error;
+          setTimeout(() => {
+            this.clearAlert();
+          }, 1000);
         });
     },
     clearAlert() {
@@ -124,19 +110,14 @@
   .card{
     border: 1px solid var(--GreenOpacity);
   }
-  .bckg{
-     background: #e7dff9;
-     max-height: max-content;
-     /* height:4rem; */
-  }
   .drop{
-    background: #e7dff9;
+    background: var(--darkwhite);
     border: none;
     color: var(--GreenColor);
     border-radius: 5px;
   }
   .opt{
-    background: #e7dff9;
+    background: var(--WhiteColor);
   }
   .card-body {
     border: 1px solid var(--GreenOpacity);

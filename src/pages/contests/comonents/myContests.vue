@@ -70,7 +70,7 @@ data(){
 methods:{
     
     getMycontests() {
-       axios.get( BASE_URL + 'contests',{ headers: {
+       axios.get( BASE_URL + 'contests/my',{ headers: {
                      Authorization: `Bearer ${localStorage.getItem('token')}`,
                  }}).then((response) => {
                     console.log(this.token);

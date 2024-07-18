@@ -22,8 +22,9 @@
               <th scope="row">{{ problem.id }}</th>
 
               <td><router-link :to="{ name: 'detailProblem', params: { ProblemId: problem.id } }" class="text-primary fw-bold">{{ problem.name }}</router-link></td>
-              <td ><p v-if="problem.active==0">not Solved</p>
-                <p v-else> Solved</p></td>
+              <td ><p v-if="problem.status">{{ problem.status }}</p>
+                <p v-else> Solved</p>
+              </td>
               <td>{{ problem.diffculty }}</td>
               <td class="fw-bold">{{ problem.level }}</td>
               <td>{{ problem.solutions }}</td>
